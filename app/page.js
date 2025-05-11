@@ -3,10 +3,7 @@
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import { useRef } from 'react';
-
-
-//hamburger menu
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //reviews slider
 const reviews = [
@@ -42,9 +39,32 @@ const reviews = [
     },
 ];
 
+function formatDate(show) {
+    const [year, month, day] = show.date.split("-");
+    const localDate = new Date(Number(year), Number(month) - 1, Number(day));
+    const datePart = localDate.toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
+
+    return show.time ? `${datePart} - ${show.time}` : datePart;
+}
+
 
 
 export default function Home() {
+
+    //api for dynamically linking show info from AirTable
+    const [shows, setShows] = useState([]);
+
+    useEffect(() => {
+        fetch("/api/shows")
+            .then((res) => res.json())
+            .then((data) => setShows(data))
+            .catch((err) => console.error("Failed to load shows:", err));
+    }, []);
+
 
     //hamburger menu
     const [menuOpen, setMenuOpen] = useState(false);
@@ -226,30 +246,40 @@ export default function Home() {
                         ⭐ = Performances with Full Band
                     </p>
 
-                    <div className="space-y-6">
-                        {[
-                            { date: "MAY 6th", venue: "CAA Theatre", location: "Toronto ON", link: "#", fullBand: true },
-                            { date: "MAY 7", venue: "CAA Theatre", location: "Toronto ON", link: "#", fullBand: true },
-                            { date: "MAY 10 - 2PM", venue: "CAA Theatre", location: "Toronto ON", link: "#", fullBand: true },
-                            { date: "MAY 10 - 8PM", venue: "CAA Theatre", location: "Toronto ON", link: "#", fullBand: true },
-                        ].map((show, index) => (
-                            <div key={index} className="flex flex-col md:flex-row md:items-center justify-between border-t border-white py-4">
-                                <div className="text-lg font-bold md:w-1/4 mb-2 md:mb-0">{show.date}</div>
-                                <div className="text-center md:text-left md:w-1/2">
+                    <div className="space-y-3">
+                        {shows.map((show, index) => (
+                            <div
+                                key={index}
+                                className="flex flex-col items-center md:flex-row md:items-center md:justify-between border-t border-white py-6 text-center md:text-left space-y-2 md:space-y-0"
+                            >
+                                <div className="text-lg font-bold text-center md:text-left w-full md:w-1/4 mb-2 md:mb-0">
+                                    {formatDate(show)}
+                                    {/*show.time ? ` - ${show.time}` : ""*/}
+                                </div>
+
+                                <div className="w-full md:w-1/2 flex flex-col items-center text-center">
                                     <div className="uppercase font-semibold">{show.venue}</div>
                                     <div>{show.location}</div>
                                 </div>
-                                <div className="flex items-center gap-4 md:w-1/4 justify-end">
+
+                                <div className="w-full md:w-1/4 flex flex-col md:flex-row justify-center md:justify-end items-center gap-2 md:gap-4">
                                     <a
-                                        href={show.link}
-                                        className="border border-white px-4 py-2 rounded-full hover:bg-white hover:text-black transition text-sm font-semibold"
+                                        href={show.link?.startsWith("http") ? show.link : `https://${show.link}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="border border-white px-4 py-2 h-[42px] flex items-center justify-center rounded-full hover:bg-white hover:text-black transition text-sm font-semibold text-center"
                                     >
                                         GET TICKETS →
                                     </a>
-                                    {show.fullBand && <span className="text-yellow-400 text-xl">⭐</span>}
+                                    <span className="text-yellow-400 text-xl w-6 h-[42px] flex items-center justify-center">
+                                         {show.fullBand ? "⭐" : ""}
+                                     </span>
                                 </div>
+
+
                             </div>
                         ))}
+
                     </div>
                 </div>
             </section>
@@ -315,10 +345,8 @@ export default function Home() {
                         </button>
                     </form>
                 </div>
+
             </section>
-
-
-
 
 
             <footer className="bg-black text-white px-6 py-8">
