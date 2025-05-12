@@ -11,31 +11,42 @@ const reviews = [
         quote: "Nothing short of a storytelling masterpiece",
         source: "Edmonton Sun",
         logo: "/images/edmonton-sun-logo.jpg",
+        characterImage: "/images/characters/rock.jpg",
     },
     {
         quote: "So virtuosic it had me on my feet",
         source: "Georgia Straight",
         logo: "/images/Georgia-Straight-Logo.jpg",
+        characterImage: "/images/characters/jazz.jpg",
+
     },
     {
         quote: "A captivating entertainer",
         source: "VUE Weekly",
         logo: "/images/Vue_Weekly_Logo.jpg",
+        characterImage: "/images/characters/country.jpg",
+
     },
     {
         quote: "6 Guitars is note perfect",
         source: "Ottawa Citizen",
         logo: "/images/ottowa-citizen-logo.jpg",
+        characterImage: "/images/characters/folk.jpg",
+
     },
     {
         quote: "Superb, funny, & flat out stunning",
         source: "Winnipeg Free Press",
         logo: "/images/winnipeg-free-press-logo.jpg",
+        characterImage: "/images/characters/classical.jpg",
+
     },
     {
         quote: "A stunning performance",
         source: "Austin Post",
         logo: "/images/austin-post-logo.jpg",
+        characterImage: "/images/characters/blues.jpg",
+
     },
 ];
 
@@ -69,6 +80,9 @@ export default function Home() {
     //hamburger menu
     const [menuOpen, setMenuOpen] = useState(false);
 
+    //"Watch the Trailer" opens a YouTube video in a modal/lightbox, rather than embedding it directly on the page.
+    const [showTrailer, setShowTrailer] = useState(false);
+
     //reviews slider
     const [sliderInstanceRef, slider] = useKeenSlider({
         loop: true,
@@ -80,11 +94,12 @@ export default function Home() {
             '(min-width: 768px)': {
                 slides: {
                     perView: 3,
-                    spacing: 16,
+                    spacing: 26,
                 },
             },
         },
     });
+
 
 
 
@@ -149,61 +164,111 @@ export default function Home() {
 
 
             {/*About*/}
-            <section id="about" className="bg-gray-900 text-white px-6 py-16">
-                <div className="max-w-3xl mx-auto text-center">
-                    <h2 className="text-4xl font-bold mb-6">About the Show</h2>
-                    <p className="text-lg mb-4">
-                        A two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
-                    </p>
-                    <p className="text-lg mb-6">
-                        Chase Padgett embodies 6 different guitar-playing characters, each representing their own genre of music: <br />
-                        <span className="italic">Blues, Jazz, Rock, Classical, Folk, & Country</span>.
-                    </p>
+            <section id="about" className="flex flex-col md:flex-row text-white bg-black">
+                {/* Image - Full bleed on the left */}
+                <div className="w-1/3 h-full relative ml-30"> {/* Adjust ml-10 as needed */}
+                    <img
+                        src="/images/about/chase.jpg"
+                        alt="Chase Padgett"
+                        className="w-full h-full object-cover object-left"
+                    />
+                </div>
 
-                    <div className="aspect-w-16 aspect-h-9 max-w-3xl mx-auto">
-                        <iframe
-                            src="https://www.youtube.com/embed/7f7KWksfxAc"
-                            title="6 Guitars Trailer"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="w-full h-64 md:h-96 rounded-xl"
-                        ></iframe>
+
+                {/* Text Content */}
+                <div className="w-full md:w-2/3 px-6 py-16 flex flex-col justify-left">
+                    <div className="max-w-10xl mx-auto text-left md:text-left">
+                        <h2 className="text-8xl font-bold mb-6">
+                            <div className="flex flex-wrap justify-left gap-4">
+
+                                <span
+                                    className="[font-family:var(--font-rock)] text-[#D2153D] relative top-2">
+                                        R o c k
+                                </span>
+                                <span className="[font-family:var(--font-classical)] text-[#BD5217]">Classical</span>
+
+
+                                <span className="[font-family:var(--font-jazz)] text-[#BB6DEB]">Jazz</span>
+
+                            </div>
+                            <div className="flex flex-wrap justify-left gap-4 mt-2">
+                                <span className="[font-family:var(--font-blues)] text-[#0562D7] italic">Blues</span>
+                                <span className="[font-family:var(--font-folk)] text-[#E09608]">Folk</span>
+                                <span className="[font-family:var(--font-country)] text-[#10AD43]">Country</span>
+                            </div>
+                        </h2>
+
+
+
+                        <p className="text-lg mb-4">
+                            A two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
+                        </p>
+                        <p className="text-lg mb-6">
+                            Chase Padgett brings 6 guitar-playing characters to life — each with their own voice, personality, and musical style.
+                        </p>
+
+                        <button
+                            onClick={() => setShowTrailer(true)}
+                            className="mt-6 text-yellow-400 hover:text-yellow-300 underline text-lg font-semibold transition"
+                        >
+                            ▶️ Watch the Trailer
+                        </button>
                     </div>
                 </div>
             </section>
 
 
 
+
+            {/* Reviews */}
+
+
             <section id="reviews" className="bg-black text-white px-6 py-16">
                 <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-bold mb-8">Crititc Reviews</h2>
+                    <h2 className="text-4xl font-bold mb-8">Critic Reviews</h2>
 
-                    <div className="relative max-w-[1500px] mx-auto">
-                        <div ref={sliderInstanceRef} className="keen-slider">
+                    <div className="relative w-full h-[600px] overflow-hidden">
+                        <div ref={sliderInstanceRef} className="keen-slider h-full">
                             {reviews.map((review, index) => (
-                                <div key={index} className="keen-slider__slide flex justify-center px-4">
-                                    <div className="p-6 bg-gray-800 border-l-4 border-yellow-400 rounded-md text-center flex flex-col items-center max-w-full w-full mx-auto">
+                                <div key={index} className="keen-slider__slide relative w-full h-full">
+                                    {/* Background character image with parallax zoom effect */}
+                                    <div
+                                        className="absolute inset-0 overflow-hidden z-0"
+                                        style={{ transform: 'scale(1.05)', animation: 'zoomIn 5s ease-out forwards' }}
+                                    >
                                         <img
-                                            src={review.logo}
-                                            alt={review.source}
-                                            className="h-40 md:h-40 mb-4 object-contain"
+                                            src={review.characterImage}
+                                            alt="Character"
+                                            className="w-full h-full object-cover opacity-20"
                                         />
-                                        <p className="italic text-xl md:text-2xl mb-2 max-w-2xl">"{review.quote}"</p>
+                                    </div>
+
+                                    {/* Review content overlay */}
+                                    <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center bg-black/1 rounded-xl max-w-2xl mx-auto">
+
+                                        <p className="italic text-xl md:text-2xl mb-2 pt-40">"{review.quote}"</p>
                                         <img
                                             src="/images/5 Stars.png"
                                             alt="5 stars"
-                                            className="h-8 md:h-10 mt-2 object-contain"
+                                            className="h-6 md:h-8 mt-2 object-contain"
                                         />
-                                        <p className="text-yellow-300 text-md mt-1">– {review.source}</p>
+
+                                        <p className="text-yellow-300 text-md mt-1">&ndash; {review.source}</p>
+                                        <img
+                                            src={review.logo}
+                                            alt={review.source}
+                                            className="h-24 mt-12 object-contain"
+                                        />
+
                                     </div>
                                 </div>
                             ))}
                         </div>
-
                         {/* Left Arrow */}
                         <button
                             onClick={() => slider.current?.prev()}
-                            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-r hover:bg-yellow-300 transition"
+                            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
+                            aria-label="Previous Slide"
                         >
                             ‹
                         </button>
@@ -211,13 +276,28 @@ export default function Home() {
                         {/* Right Arrow */}
                         <button
                             onClick={() => slider.current?.next()}
-                            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-l hover:bg-yellow-300 transition"
+                            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
+                            aria-label="Next Slide"
                         >
                             ›
                         </button>
                     </div>
                 </div>
+
+
             </section>
+
+            <style jsx>{`
+  @keyframes zoomIn {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.1);
+    }
+  }
+`}</style>
+
 
             <section id="Review video" className="bg-gray-900 text-white px-6 py-16">
 
@@ -239,6 +319,9 @@ export default function Home() {
 
 
 
+            {/*
+            TICKETS
+            */}
             <section id="tickets" className="bg-black text-white px-6 py-16">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-4">Upcoming Shows</h2>
