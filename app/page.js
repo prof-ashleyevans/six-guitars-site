@@ -4,6 +4,9 @@ import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import { useRef } from 'react';
 import { useEffect, useState } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 //reviews slider
 const reviews = [
@@ -74,6 +77,7 @@ export default function Home() {
             .then((res) => res.json())
             .then((data) => setShows(data))
             .catch((err) => console.error("Failed to load shows:", err));
+            AOS.init({ once: true });
     }, []);
 
 
@@ -163,10 +167,16 @@ export default function Home() {
             </main>
 
 
-            {/*About*/}
-            <section id="about" className="flex flex-col md:flex-row text-white bg-black">
-                {/* Image - Full bleed on the left */}
-                <div className="w-1/3 h-full relative ml-30"> {/* Adjust ml-10 as needed */}
+
+            {/* About Section */}
+            <section id="about" className="flex flex-col sm:flex-row text-white bg-black">
+                {/* Image */}
+                <div
+                    className="w-full sm:w-1/2 md:w-1/3 h-80 sm:h-auto relative"
+                    data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                >
                     <img
                         src="/images/about/chase.jpg"
                         alt="Chase Padgett"
@@ -174,48 +184,76 @@ export default function Home() {
                     />
                 </div>
 
-
                 {/* Text Content */}
-                <div className="w-full md:w-2/3 px-6 py-16 flex flex-col justify-left">
-                    <div className="max-w-10xl mx-auto text-left md:text-left">
-                        <h2 className="text-8xl font-bold mb-6">
-                            <div className="flex flex-wrap justify-left gap-4">
-
-                                <span
-                                    className="[font-family:var(--font-rock)] text-[#D2153D] relative top-2">
-                                        R o c k
-                                </span>
-                                <span className="[font-family:var(--font-classical)] text-[#BD5217]">Classical</span>
-
-
-                                <span className="[font-family:var(--font-jazz)] text-[#BB6DEB]">Jazz</span>
-
+                <div className="w-full sm:w-1/2 md:w-2/3 px-6 py-12 flex flex-col justify-right">
+                    <div className="max-w-4xl mx-auto text-left sm:text-left">
+                        <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+                                <span data-aos="fade-up" data-aos-delay="0" className="[font-family:var(--font-rock)] text-[#0562D7]">Blues</span>
                             </div>
-                            <div className="flex flex-wrap justify-left gap-4 mt-2">
-                                <span className="[font-family:var(--font-blues)] text-[#0562D7] italic">Blues</span>
-                                <span className="[font-family:var(--font-folk)] text-[#E09608]">Folk</span>
-                                <span className="[font-family:var(--font-country)] text-[#10AD43]">Country</span>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
+                                <span data-aos="fade-up" data-aos-delay="50" className="[font-family:var(--font-rock)] text-[#BD5217]">Classical</span>
+                            </div>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
+                                <span data-aos="fade-up" data-aos-delay="100" className="[font-family:var(--font-rock)] text-[#BB6DEB]">Jazz</span>
+                            </div>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
+                                <span data-aos="fade-up" data-aos-delay="150" className="[font-family:var(--font-rock)] text-[#D2153D]">Rock</span>
+                            </div>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
+                                <span data-aos="fade-up" data-aos-delay="200" className="[font-family:var(--font-rock)] text-[#E09608]">Folk</span>
+                            </div>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
+                                <span data-aos="fade-up" data-aos-delay="250" className="[font-family:var(--font-rock)] text-[#10AD43]">Country</span>
                             </div>
                         </h2>
 
-
-
                         <p className="text-lg mb-4">
-                            A two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
+                            6 Guitars is a two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
                         </p>
                         <p className="text-lg mb-6">
                             Chase Padgett brings 6 guitar-playing characters to life — each with their own voice, personality, and musical style.
                         </p>
 
-                        <button
-                            onClick={() => setShowTrailer(true)}
-                            className="mt-6 text-yellow-400 hover:text-yellow-300 underline text-lg font-semibold transition"
-                        >
-                            ▶️ Watch the Trailer
-                        </button>
+                        <div className="flex justify-center">
+                            <button
+                                onClick={() => setShowTrailer(true)}
+                                className="bg-yellow-400 text-black px-6 py-2 rounded-full text-lg font-semibold hover:bg-yellow-300 transition"
+                            >
+                                ▶️ Watch the Trailer
+                            </button>
+                        </div>
+                        {showTrailer && (
+                            <div
+                                className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                                onClick={() => setShowTrailer(false)}
+                            >
+                                <div
+                                    className="relative w-[90%] max-w-3xl aspect-video"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <button
+                                        className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
+                                        onClick={() => setShowTrailer(false)}
+                                    >
+                                        ×
+                                    </button>
+                                    <iframe
+                                        src="https://www.youtube.com/embed/7f7KWksfxAc?autoplay=1"
+                                        title="6 Guitars Trailer"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                        className="w-full h-full rounded-lg"
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+
                     </div>
                 </div>
             </section>
+
 
 
 
