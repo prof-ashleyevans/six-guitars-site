@@ -1,23 +1,29 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import {
-    Bebas_Neue,
-    Playfair_Display,
-    Sacramento,
-    Raleway,
-    Quicksand,
-    Roboto_Slab,
+    Freckle_Face,
+    //Bebas_Neue,
+    //Playfair_Display,
+    //Sacramento,
+    Pinyon_Script,
+    Italianno,
+    //Raleway,
+    Limelight,
+    //Quicksand,
+    Rancho,
+    Fredericka_the_Great,
+    //Roboto_Slab,
+
 } from "next/font/google";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-
-const rockFont = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-rock" });
-const classicalFont = Playfair_Display({ weight: "600", subsets: ["latin"], variable: "--font-classical" });
-const jazzFont = Sacramento({ weight: "400", subsets: ["latin"], variable: "--font-jazz" });
-const bluesFont = Raleway({ weight: "500", subsets: ["latin"], variable: "--font-blues" });
-const folkFont = Quicksand({ weight: "600", subsets: ["latin"], variable: "--font-folk" });
-const countryFont = Roboto_Slab({ weight: "500", subsets: ["latin"], variable: "--font-country" });
+const rockFont = Freckle_Face({ weight: "400", subsets: ["latin"], variable: "--font-rock" });
+const classicalFont = Pinyon_Script({ weight: "400", subsets: ["latin"], variable: "--font-classical" });
+const jazzFont = Italianno({ weight: "400", subsets: ["latin"], variable: "--font-jazz" });
+const bluesFont = Limelight({ weight: "400", subsets: ["latin"], variable: "--font-blues" });
+const folkFont = Rancho({ weight: "400", subsets: ["latin"], variable: "--font-folk" });
+const countryFont = Fredericka_the_Great({ weight: "400", subsets: ["latin"], variable: "--font-country" });
 
 export const metadata = {
     title: "6 Guitars",

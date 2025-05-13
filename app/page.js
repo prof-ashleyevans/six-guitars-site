@@ -7,6 +7,16 @@ import { useEffect, useState } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+//character images for home
+const characterImages = [
+    { src: "/images/characters/blues.jpg", alt: "Blues", animation: "animate-slideOut-0" },
+    { src: "/images/characters/jazz.jpg", alt: "Jazz", animation: "animate-slideOut-1" },
+    { src: "/images/characters/rock.jpg", alt: "Rock", animation: "animate-slideOut-2" },
+    { src: "/images/characters/classical.jpg", alt: "Classical", animation: "animate-slideOut-3" },
+    { src: "/images/characters/folk.jpg", alt: "Folk", animation: "animate-slideOut-4" },
+    { src: "/images/characters/country.jpg", alt: "Country", animation: "animate-slideOut-5" },
+];
+
 
 //reviews slider
 const reviews = [
@@ -71,48 +81,56 @@ export default function Home() {
 
     //api for dynamically linking show info from AirTable
     const [shows, setShows] = useState([]);
+    const [startAnimation, setStartAnimation] = useState(false);
+
 
     useEffect(() => {
         fetch("/api/shows")
             .then((res) => res.json())
             .then((data) => setShows(data))
             .catch((err) => console.error("Failed to load shows:", err));
-            AOS.init({ once: true });
+
+        AOS.init({ once: true });
+
+        const timer = setTimeout(() => {
+            setStartAnimation(true);
+        }, 1000); // wait for center fade (0.8s) before triggering characters
+
+        return () => clearTimeout(timer);
     }, []);
+
 
 
     //hamburger menu
     const [menuOpen, setMenuOpen] = useState(false);
 
-    //"Watch the Trailer" opens a YouTube video in a modal/lightbox, rather than embedding it directly on the page.
+    //"Watch the Trailer" / "Audience Reactions" opens a YouTube video in a modal/lightbox, rather than embedding it directly on the page.
     const [showTrailer, setShowTrailer] = useState(false);
+    const [showReactions, setShowReactions] = useState(false);
+
 
     //reviews slider
     const [sliderInstanceRef, slider] = useKeenSlider({
         loop: true,
         slides: {
             perView: 1,
-            spacing: 16,
+            spacing: 40,
         },
         breakpoints: {
             '(min-width: 768px)': {
                 slides: {
                     perView: 3,
-                    spacing: 26,
+                    spacing: 40,
                 },
             },
         },
     });
 
 
-
-
-
-
     return (
         <>
             {/*Header*/}
-            <header className="bg-black text-white px-6 py-4 flex items-center justify-between">
+            <header className= "text-white px-6 py-4 flex items-center justify-between" style={{ backgroundColor: "#1a1a1a" }}>
                 <div className="text-xl font-bold">6 Guitars</div>
 
                 {/* Hamburger Icon - shows only on mobile */}
@@ -148,7 +166,25 @@ export default function Home() {
                 </nav>
             )}
 
+            <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: "#1a1a1a" }}>
+                {/* Central image */}
+                <img
+                    src="/images/characters/chase.jpg"
+                    alt="Guitarist"
+                    className="z-10 relative w-148 h-148 object-cover aspect-square animate-fade-center"
+                />
 
+                {/* Sliding character images */}
+                {characterImages.map((char, i) => (
+                    <img
+                        key={i}
+                        src={char.src}
+                        alt={char.alt}
+                        className={`absolute w-132 h-132 object-cover aspect-square transition-transform duration-2000 ease-out z-0 ${startAnimation ? `${char.animation}` : 'hidden'} z-0`}
+                    />
+                ))}
+            </section>
+            {/*
             <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white px-4">
                 <div className="text-center max-w-2xl">
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
@@ -166,13 +202,13 @@ export default function Home() {
                 </div>
             </main>
 
-
+            */}
 
             {/* About Section */}
-            <section id="about" className="flex flex-col sm:flex-row text-white bg-black">
+            <section id="about" className="flex flex-col sm:flex-row text-white" style={{ backgroundColor: "#141414" }}>
                 {/* Image */}
                 <div
-                    className="w-full sm:w-1/2 md:w-1/3 h-80 sm:h-auto relative"
+                    className="w-full sm:w-1/2 md:w-1/3 relative sm:ml-40"
                     data-aos="fade-up"
                     data-aos-duration="1000"
                     data-aos-easing="ease-in-out"
@@ -180,49 +216,74 @@ export default function Home() {
                     <img
                         src="/images/about/chase.jpg"
                         alt="Chase Padgett"
-                        className="w-full h-full object-cover object-left"
+                        className="w-full h-auto object-contain object-top"
                     />
                 </div>
 
+
                 {/* Text Content */}
-                <div className="w-full sm:w-1/2 md:w-2/3 px-6 py-12 flex flex-col justify-right">
-                    <div className="max-w-4xl mx-auto text-left sm:text-left">
-                        <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
-                                <span data-aos="fade-up" data-aos-delay="0" className="[font-family:var(--font-rock)] text-[#0562D7]">Blues</span>
+                <div className="mt-15 w-full sm:w-1/2 md:w-2/3 px-6 py-12 flex flex-col justify-right">
+                    <div className="relative sm:ml-10 max-w-3xl mx-auto text-left md:text-left">
+                        <p className="text-xl mb-4">
+                            6 Guitars is a two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
+                        </p>
+                        <p className="text-xl mb-6">
+                            Chase Padgett brings 6 guitar-playing characters to life — each with their own voice, personality, and musical style.
+                        </p>
+                    </div>
+                    <div className="relative sm:ml-10 max-w-4xl mx-auto text-center sm:text-left">
+                        <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold mb-6 leading-tight">
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-10">
+                                <span data-aos="fade-right" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-blues)] text-[#0562D7]">Blues</span>
+
+                                <span data-aos="fade-down" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-classical)] text-[#BD5217]">Classical</span>
+
+                                <span data-aos="fade-left" data-aos-duration="600"data-aos-delay="1" className="[font-family:var(--font-jazz)] text-[#BB6DEB]">Jazz</span>
                             </div>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
-                                <span data-aos="fade-up" data-aos-delay="50" className="[font-family:var(--font-rock)] text-[#BD5217]">Classical</span>
-                            </div>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
-                                <span data-aos="fade-up" data-aos-delay="100" className="[font-family:var(--font-rock)] text-[#BB6DEB]">Jazz</span>
-                            </div>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
-                                <span data-aos="fade-up" data-aos-delay="150" className="[font-family:var(--font-rock)] text-[#D2153D]">Rock</span>
-                            </div>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
-                                <span data-aos="fade-up" data-aos-delay="200" className="[font-family:var(--font-rock)] text-[#E09608]">Folk</span>
-                            </div>
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
-                                <span data-aos="fade-up" data-aos-delay="250" className="[font-family:var(--font-rock)] text-[#10AD43]">Country</span>
+                            <div className=" flex flex-wrap justify-center sm:justify-start gap-10 mt-5">
+                                <span data-aos="fade-right" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-rock)] text-[#D2153D]">Rock</span>
+
+                                <span data-aos="fade-up" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-folk)] text-[#E09608]">Folk</span>
+
+                                <span data-aos="fade-left" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-country)] text-[#10AD43]">Country</span>
                             </div>
                         </h2>
 
-                        <p className="text-lg mb-4">
-                            6 Guitars is a two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
-                        </p>
-                        <p className="text-lg mb-6">
-                            Chase Padgett brings 6 guitar-playing characters to life — each with their own voice, personality, and musical style.
-                        </p>
 
-                        <div className="flex justify-center">
+
+                        <div className="flex justify-center flex-wrap gap-4 mt-6">
+                            {/* Trailer Button */}
                             <button
                                 onClick={() => setShowTrailer(true)}
-                                className="bg-yellow-400 text-black px-6 py-2 rounded-full text-lg font-semibold hover:bg-yellow-300 transition"
+                                className="flex items-center gap-2 bg-yellow-400 text-black px-13 py-3 rounded-full font-semibold text-base hover:bg-yellow-300 transition"
                             >
-                                ▶️ Watch the Trailer
+                                <svg
+                                    className="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                                Watch the Trailer
+                            </button>
+
+                            {/* Audience Reactions Button */}
+                            <button
+                                onClick={() => setShowReactions(true)}
+                                className="flex items-center gap-2 bg-yellow-400 text-black px-5 py-3 rounded-full font-semibold text-base hover:bg-yellow-300 transition"
+                            >
+                                <svg
+                                    className="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M12 4.5c-7 0-11 6.5-11 6.5s4 6.5 11 6.5 11-6.5 11-6.5-4-6.5-11-6.5zm0 11c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z" />
+                                </svg>
+                                See Audience Reactions
                             </button>
                         </div>
+
+                        {/* Trailer Modal */}
                         {showTrailer && (
                             <div
                                 className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
@@ -249,7 +310,32 @@ export default function Home() {
                             </div>
                         )}
 
-
+                        {/* Reactions Modal */}
+                        {showReactions && (
+                            <div
+                                className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                                onClick={() => setShowReactions(false)}
+                            >
+                                <div
+                                    className="relative w-[90%] max-w-3xl aspect-video"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <button
+                                        className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
+                                        onClick={() => setShowReactions(false)}
+                                    >
+                                        ×
+                                    </button>
+                                    <iframe
+                                        src="https://www.youtube.com/embed/TQh8Uz4_VBc?autoplay=1"
+                                        title="Audience Reactions"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                        className="w-full h-full rounded-lg"
+                                    />
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
@@ -261,7 +347,11 @@ export default function Home() {
             {/* Reviews */}
 
 
-            <section id="reviews" className="bg-black text-white px-6 py-16">
+            <section
+                id="reviews"
+                className="text-white px-6 py-16"
+                style={{ backgroundColor: "#1a1a1a" }}
+            >
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-bold mb-8">Critic Reviews</h2>
 
@@ -335,26 +425,6 @@ export default function Home() {
     }
   }
 `}</style>
-
-
-            <section id="Review video" className="bg-gray-900 text-white px-6 py-16">
-
-            <div className="aspect-w-16 aspect-h-9 mt-12 max-w-3xl mx-auto">
-                <h2 className="text-4xl font-bold mb-8">Audience Reviews</h2>
-
-                <iframe
-                        src="https://www.youtube.com/embed/TQh8Uz4_VBc"
-                        title="6 Guitars Review Video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-64 md:h-96 rounded-xl"
-                    ></iframe>
-                </div>
-            </section>
-
-
-
-
 
 
             {/*

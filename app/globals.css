@@ -3,7 +3,7 @@
 
 
 :root {
-  --background: #ffffff;
+  --background: #000000;
   --foreground: #171717;
 }
 
@@ -37,4 +37,69 @@ body {
 }
 .animate-fade-in {
   animation-fill-mode: forwards;
+}
+
+/*top left*/
+@keyframes slideOut0 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(-500px, -150px); opacity: 1; }
+}
+
+{/*Top Center*/}
+@keyframes slideOut1 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(200px, -150px); opacity: 1; }
+}
+
+{/*top right*/}
+@keyframes slideOut2 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(500px, -150px); opacity: 1; }
+}
+
+{/*bottom right*/}
+@keyframes slideOut3 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(500px, 250px); opacity: 1; }
+}
+
+{/*bottom middle*/}
+@keyframes slideOut4 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(-159px, -150px); opacity: 1; }
+}
+
+{/*bottom left*/}
+@keyframes slideOut5 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  100% { transform: translate(-500px, 250px); opacity: 1; }
+}
+
+{/*center photo*/}
+@keyframes fadeInCenter {
+  0% { opacity: 0; transform: scale(1); }
+  100% { opacity: 1; transform: translate(0px, 143px); }
+}
+
+.animate-fade-center {
+  animation: fadeInCenter 0.8s ease-out forwards;
+}
+
+.animate-slideOut-0 {
+  animation: slideOut0 1s ease-out forwards;
+}
+.animate-slideOut-1 {
+  animation: slideOut1 1s ease-out forwards;
+}
+.animate-slideOut-2 {
+  animation: slideOut2 1s ease-out forwards;
+}
+.animate-slideOut-3 {
+  animation: slideOut3 1s ease-out forwards;
+}
+.animate-slideOut-4 {
+  animation: slideOut4 1s ease-out forwards;
+}
+.animate-slideOut-5 {
+  animation: slideOut5 1s ease-out forwards;
 }
