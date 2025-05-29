@@ -13,6 +13,7 @@ import {
     Rancho,
     Fredericka_the_Great,
     //Roboto_Slab,
+    Michroma,
 
 } from "next/font/google";
 
@@ -24,6 +25,7 @@ const jazzFont = Italianno({ weight: "400", subsets: ["latin"], variable: "--fon
 const bluesFont = Limelight({ weight: "400", subsets: ["latin"], variable: "--font-blues" });
 const folkFont = Rancho({ weight: "400", subsets: ["latin"], variable: "--font-folk" });
 const countryFont = Fredericka_the_Great({ weight: "400", subsets: ["latin"], variable: "--font-country" });
+const michroma = Michroma({subsets: ['latin'], weight: '400', display: 'swap',variable: '--font-michroma'});
 
 export const metadata = {
     title: "6 Guitars",

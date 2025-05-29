@@ -6,6 +6,12 @@ import { useRef } from 'react';
 import { useEffect, useState } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import HomeTitle from './HomeTitle';
+import './globals.css';
+import { Michroma } from 'next/font/google';
+const michroma = Michroma({ subsets: ['latin'], weight: '400' });
+
+
 
 //character images for home
 const characterImages = [
@@ -74,8 +80,6 @@ function formatDate(show) {
 
     return show.time ? `${datePart} - ${show.time}` : datePart;
 }
-
-
 
 export default function Home() {
 
@@ -167,12 +171,19 @@ export default function Home() {
             )}
 
             <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: "#1a1a1a" }}>
+
+                <div className="absolute top-1 w-full flex justify-center z-20">
+                    <HomeTitle />
+                </div>
+
                 {/* Central image */}
                 <img
                     src="/images/characters/chase.jpg"
                     alt="Guitarist"
-                    className="z-10 relative w-148 h-148 object-cover aspect-square animate-fade-center"
+                    className="z-10 relative w-125 h-125 top-15 object-cover aspect-square animate-fade-center"
                 />
+
+
 
                 {/* Sliding character images */}
                 {characterImages.map((char, i) => (
@@ -180,7 +191,7 @@ export default function Home() {
                         key={i}
                         src={char.src}
                         alt={char.alt}
-                        className={`absolute w-132 h-132 object-cover aspect-square transition-transform duration-2000 ease-out z-0 ${startAnimation ? `${char.animation}` : 'hidden'} z-0`}
+                        className={`top-100 absolute w-132 h-90 object-cover aspect-square transition-transform duration-50 ease-out z-0 ${startAnimation ? `${char.animation}` : 'hidden'} z-0`}
                     />
                 ))}
             </section>
@@ -206,6 +217,7 @@ export default function Home() {
 
             {/* About Section */}
             <section id="about" className="flex flex-col sm:flex-row text-white" style={{ backgroundColor: "#141414" }}>
+
                 {/* Image */}
                 <div
                     className="w-full sm:w-1/2 md:w-1/3 relative sm:ml-40"
@@ -341,9 +353,6 @@ export default function Home() {
             </section>
 
 
-
-
-
             {/* Reviews */}
 
 
@@ -352,67 +361,65 @@ export default function Home() {
                 className="text-white px-6 py-16"
                 style={{ backgroundColor: "#1a1a1a" }}
             >
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-bold mb-8">Critic Reviews</h2>
+                <div className={`max-w-4xl mx-auto text-center`}>
+                    <h2 className="text-4xl font-bold mb-8">Reviews</h2>
 
                     <div className="relative w-full h-[600px] overflow-hidden">
-                        <div ref={sliderInstanceRef} className="keen-slider h-full">
-                            {reviews.map((review, index) => (
-                                <div key={index} className="keen-slider__slide relative w-full h-full">
-                                    {/* Background character image with parallax zoom effect */}
-                                    <div
-                                        className="absolute inset-0 overflow-hidden z-0"
-                                        style={{ transform: 'scale(1.05)', animation: 'zoomIn 5s ease-out forwards' }}
-                                    >
-                                        <img
-                                            src={review.characterImage}
-                                            alt="Character"
-                                            className="w-full h-full object-cover opacity-20"
-                                        />
+                            <div ref={sliderInstanceRef} className="keen-slider h-full">
+                                {reviews.map((review, index) => (
+                                    <div key={index} className="keen-slider__slide relative w-full h-full">
+                                        {/* Background character image with parallax zoom effect */}
+                                        <div
+                                            className="absolute inset-0 overflow-hidden z-0"
+                                            style={{ transform: 'scale(1.05)', animation: 'zoomIn 5s ease-out forwards' }}
+                                        >
+                                            <img
+                                                src={review.characterImage}
+                                                alt="Character"
+                                                className="w-full h-full object-cover opacity-20"
+                                            />
+                                        </div>
+
+                                        {/* Review content overlay */}
+                                        <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center bg-black/1 rounded-xl max-w-2xl mx-auto">
+
+                                            <p className="italic text-xl md:text-2xl mb-2 pt-40">"{review.quote}"</p>
+                                            <img
+                                                src="/images/5 Stars.png"
+                                                alt="5 stars"
+                                                className="h-6 md:h-8 mt-2 object-contain"
+                                            />
+
+                                            <p className="text-yellow-300 text-md mt-1">&ndash; {review.source}</p>
+                                            <img
+                                                src={review.logo}
+                                                alt={review.source}
+                                                className="h-24 mt-12 object-contain"
+                                            />
+
+                                        </div>
                                     </div>
+                                ))}
+                            </div>
+                            {/* Left Arrow */}
+                            <button
+                                onClick={() => slider.current?.prev()}
+                                className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
+                                aria-label="Previous Slide"
+                            >
+                                ‹
+                            </button>
 
-                                    {/* Review content overlay */}
-                                    <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center bg-black/1 rounded-xl max-w-2xl mx-auto">
-
-                                        <p className="italic text-xl md:text-2xl mb-2 pt-40">"{review.quote}"</p>
-                                        <img
-                                            src="/images/5 Stars.png"
-                                            alt="5 stars"
-                                            className="h-6 md:h-8 mt-2 object-contain"
-                                        />
-
-                                        <p className="text-yellow-300 text-md mt-1">&ndash; {review.source}</p>
-                                        <img
-                                            src={review.logo}
-                                            alt={review.source}
-                                            className="h-24 mt-12 object-contain"
-                                        />
-
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        {/* Left Arrow */}
-                        <button
-                            onClick={() => slider.current?.prev()}
-                            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
-                            aria-label="Previous Slide"
-                        >
-                            ‹
-                        </button>
-
-                        {/* Right Arrow */}
-                        <button
-                            onClick={() => slider.current?.next()}
-                            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
-                            aria-label="Next Slide"
-                        >
-                            ›
-                        </button>
+                            {/* Right Arrow */}
+                            <button
+                                onClick={() => slider.current?.next()}
+                                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
+                                aria-label="Next Slide"
+                            >
+                                ›
+                            </button>
                     </div>
                 </div>
-
-
             </section>
 
             <style jsx>{`
