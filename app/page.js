@@ -9,6 +9,7 @@ import 'aos/dist/aos.css';
 import HomeTitle from './HomeTitle';
 import './globals.css';
 import { Michroma } from 'next/font/google';
+import HeroSection from "@/app/HeroSection";
 const michroma = Michroma({ subsets: ['latin'], weight: '400' });
 
 
@@ -170,31 +171,8 @@ export default function Home() {
                 </nav>
             )}
 
-            <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: "#1a1a1a" }}>
 
-                <div className="absolute top-1 w-full flex justify-center z-20">
-                    <HomeTitle />
-                </div>
-
-                {/* Central image */}
-                <img
-                    src="/images/characters/chase.jpg"
-                    alt="Guitarist"
-                    className="z-10 relative w-125 h-125 top-15 object-cover aspect-square animate-fade-center"
-                />
-
-
-
-                {/* Sliding character images */}
-                {characterImages.map((char, i) => (
-                    <img
-                        key={i}
-                        src={char.src}
-                        alt={char.alt}
-                        className={`top-100 absolute w-132 h-90 object-cover aspect-square transition-transform duration-50 ease-out z-0 ${startAnimation ? `${char.animation}` : 'hidden'} z-0`}
-                    />
-                ))}
-            </section>
+                <HeroSection />
             {/*
             <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white px-4">
                 <div className="text-center max-w-2xl">
