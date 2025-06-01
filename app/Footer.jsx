@@ -1,4 +1,15 @@
+import { useEffect, useState } from 'react';
 export default function Footer() {
+    const [showButton, setShowButton] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowButton(window.scrollY > 100); // Show after 100px scroll
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     return (
         <>
             <footer className="bg-black text-white px-6 py-8">
@@ -50,7 +61,12 @@ export default function Footer() {
             </footer>
 
             {/* Floating Ticket Button */}
-            <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+            {/* Scroll-triggered Button */}
+            <div
+                className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-500 ${
+                    showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                }`}
+            >
                 <div
                     className="inline-block bg-white/10 border border-white px-1 py-5 rounded-xl"
                     style={{
@@ -67,8 +83,8 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Spacer for bottom padding */}
-            <div className="h-20 md:h-16"></div>
+            {/* Spacer */}
+            <div className="h-20 md:h-16" />
         </>
     );
 }
