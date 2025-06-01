@@ -25,8 +25,13 @@ const About = () => {
 
             {/* Text Content */}
             <div className="mt-15 w-full sm:w-1/2 md:w-2/3 px-6 py-12 flex flex-col justify-right">
+                <div className="relative sm:ml-10 max-w-5xl mx-auto text-left md:text-left">
+                    <h1 className={"text-5xl mt-40 mb-4"}>
+                        About the Show
+                    </h1>
+                </div>
                 <div className="relative sm:ml-10 max-w-3xl mx-auto text-left md:text-left">
-                    <p className="text-xl mb-4">
+                    <p className="text-xl mt-10 mb-4">
                         6 Guitars is a two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
                     </p>
                     <p className="text-xl mb-6">

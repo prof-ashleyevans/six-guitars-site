@@ -21,7 +21,7 @@ export default function Contact() {
                         <iframe
                             src="https://f235afe6.sibforms.com/serve/MUIFAH3opnOlO_tL0vrN6_308qhceyLUxWLUV9IdGdme7Z6S7vJHUQpKW31bsTBkanDNUZJgpcaRzCYkFISgp0dcX2QFIu3jrZjHcEktV8fhpV1vPcTqisBfj4DKWVEcHIWSW3JyfMFnA1gCmIKFVEPeA31BuWQKS6ciwxmFhF6MYqXSfHgTOGONOD2QtIpAZwNp_SydrmGD5gtR"
                             width="100%"
-                            height="1000"
+                            height="600"
                             frameBorder="0"
                             scrolling="auto"
                             allowFullScreen

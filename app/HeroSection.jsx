@@ -75,7 +75,7 @@ const HeroSection = () => {
                 <img
                     src="/images/characters/chase.jpg"
                     alt="Guitarist"
-                    className="z-10 relative w-125 h-90 top-72 object-cover aspect-square animate-fade-center"
+                    className="z-10 relative w-125 h-75 top-72 object-cover aspect-square animate-fade-center"
                 />
 
                 {/* Sliding character images */}
@@ -84,7 +84,7 @@ const HeroSection = () => {
                         key={i}
                         src={char.src}
                         alt={char.alt}
-                        className={`top-100 absolute w-132 h-90 object-cover aspect-square transition-transform duration-50 ease-out z-0 ${startAnimation ? (isMobile ? char.mobileAnimation : char.desktopAnimation) : 'hidden'}
+                        className={`top-100 absolute w-132 h-75 object-cover aspect-square transition-transform duration-50 ease-out z-0 ${startAnimation ? (isMobile ? char.mobileAnimation : char.desktopAnimation) : 'hidden'}
 } z-0`}
                     />
                 ))}
