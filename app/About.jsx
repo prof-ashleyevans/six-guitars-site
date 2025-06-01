@@ -53,23 +53,23 @@ const About = () => {
                     <div className="flex justify-center flex-wrap gap-4 mt-6">
                         <button
                             onClick={() => setShowTrailer(true)}
-                            className="flex items-center gap-2 bg-yellow-400 text-black px-13 py-3 rounded-full font-semibold text-base hover:bg-yellow-300 transition"
+                            className="flex items-center gap-2 bg-yellow-400 text-black px-13 py-3 rounded-full font-semibold text-base hover:bg-yellow-200 transition"
                         >
                             ▶ Watch the Trailer
                         </button>
 
                         <button
                             onClick={() => setShowReactions(true)}
-                            className="flex items-center gap-2 bg-yellow-400 text-black px-5 py-3 rounded-full font-semibold text-base hover:bg-yellow-300 transition"
+                            className="flex items-center gap-2 bg-yellow-400 text-black px-5 py-3 rounded-full font-semibold text-base hover:bg-yellow-200 transition"
                         >
                             👁️ See Audience Reactions
                         </button>
 
                         <button
                             onClick={() => setShowFAQs(!showFAQs)}
-                            className="flex items-center gap-2 border border-yellow-400 text-yellow-400 px-5 py-3 rounded-full font-semibold text-base hover:bg-yellow-400 hover:text-black transition"
+                            className="flex items-center gap-2 border border-yellow-400 bg-yellow-400 text-black px-15 py-3 rounded-full font-semibold text-base hover:bg-yellow-200 hover:text-black transition"
                         >
-                            {showFAQs ? 'Hide FAQs' : 'View FAQs'}
+                            {showFAQs ? '🚪 Hide FAQs' : ' ❔ View FAQs'}
                         </button>
                     </div>
 
