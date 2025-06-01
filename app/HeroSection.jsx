@@ -2,6 +2,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import HomeTitle from "@/app/HomeTitle";
+import CharacterGridSection from "@/app/CharacterGridSection";
 
 //character images for home
 const characterImages = [
@@ -70,25 +71,7 @@ const HeroSection = () => {
             <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: "#1a1a1a" }}>
 
 
-                <div className="absolute top-1 w-full flex justify-center z-20">
-                {/* Central image */}
-                <img
-                    src="/images/characters/chase.jpg"
-                    alt="Guitarist"
-                    className="z-10 relative w-125 h-55 top-72 object-cover aspect-square animate-fade-center"
-                />
-
-                {/* Sliding character images */}
-                {characterImages.map((char, i) => (
-                    <img
-                        key={i}
-                        src={char.src}
-                        alt={char.alt}
-                        className={`top-100 absolute w-132 h-55 object-cover aspect-square transition-transform duration-50 ease-out z-0 ${startAnimation ? (isMobile ? char.mobileAnimation : char.desktopAnimation) : 'hidden'}
-} z-0`}
-                    />
-                ))}
-                 </div>
+                <CharacterGridSection />
 
                 <div className="absolute w-full flex justify-center z-20">
                     <HomeTitle />
