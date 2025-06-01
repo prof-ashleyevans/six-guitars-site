@@ -44,12 +44,24 @@ const characterImages = [
 ];
 const HeroSection = () => {
     const [startAnimation, setStartAnimation] = useState(false);
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 640);
+        };
+
+        handleResize(); // Run once on mount
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setStartAnimation(true);
-        }, 800);
+        }, 0);
         return () => clearTimeout(timer);
     }, []);
 
@@ -57,18 +69,14 @@ const HeroSection = () => {
         <>
             <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: "#1a1a1a" }}>
 
-                <div className="absolute top-1 w-full flex justify-center z-20">
-                    <HomeTitle />
-                </div>
 
+                <div className="absolute top-1 w-full flex justify-center z-20">
                 {/* Central image */}
                 <img
                     src="/images/characters/chase.jpg"
                     alt="Guitarist"
-                    className="z-10 relative w-125 h-125 top-15 object-cover aspect-square animate-fade-center"
+                    className="z-10 relative w-125 h-90 top-72 object-cover aspect-square animate-fade-center"
                 />
-
-
 
                 {/* Sliding character images */}
                 {characterImages.map((char, i) => (
@@ -80,6 +88,15 @@ const HeroSection = () => {
 } z-0`}
                     />
                 ))}
+                 </div>
+
+                <div className="absolute w-full flex justify-center z-20">
+                    <HomeTitle />
+                </div>
+
+
+
+
             </section>
         </>
     );

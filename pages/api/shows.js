@@ -8,6 +8,7 @@ export default async function handler(req, res) {
     const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}?sort[0][field]=date&sort[0][direction]=asc`;
 
     try {
+        console.log(url);
         const airtableRes = await fetch(url, {
             headers: {
                 Authorization: `Bearer ${AIRTABLE_PERSONAL_ACCESS_TOKEN}`,

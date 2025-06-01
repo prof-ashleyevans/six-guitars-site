@@ -39,69 +39,69 @@ body {
   animation-fill-mode: forwards;
 }
 
-/*top left*/
+/*top left - Folk*/
 @keyframes slideOut0 {
   0% { transform: translate(0, 0); opacity: 0; }
-  100% { transform: translate(-500px, -150px); opacity: 1; }
+  100% { transform: translate(-500px, -400px); opacity: 1; }
 }
 
-/*Top Center*/
+/*Top Center - Classical*/
 @keyframes slideOut1 {
   0% { transform: translate(0, 0); opacity: 0; }
-  100% { transform: translate(200px, -150px); opacity: 1; }
+  100% { transform: translate(200px, -400px); opacity: 1; }
 }
 
-/*top right*/
+/*top right - Jazz*/
 @keyframes slideOut2 {
   0% { transform: translate(0, 0); opacity: 0; }
-  100% { transform: translate(500px, -150px); opacity: 1; }
+  100% { transform: translate(500px, -400px); opacity: 1; }
 }
 
-/*bottom right*/
+/*bottom right - Rock*/
 @keyframes slideOut3 {
   0% { transform: translate(0, 0); opacity: 0; }
-  100% { transform: translate(500px, 250px); opacity: 1; }
+  100% { transform: translate(500px, -100px); opacity: 1; }
 }
 
-/*bottom middle*/
+/*Top middle - blues*/
 @keyframes slideOut4 {
   0% { transform: translate(0, 0); opacity: 0; }
-  100% { transform: translate(-159px, -150px); opacity: 1; }
+  100% { transform: translate(-159px, -400px); opacity: 1; }
 }
 
-/*bottom left*/
+/*bottom left - country*/
 @keyframes slideOut5 {
   0% { transform: translate(0, 0); opacity: 0; }
-  100% { transform: translate(-500px, 250px); opacity: 1; }
+  100% { transform: translate(-500px, -100px); opacity: 1; }
 }
 
 /*center photo*/
 @keyframes fadeInCenter {
   0% { opacity: 0; transform: scale(1); }
-  100% { opacity: 1; transform: translate(0px, 143px); }
+  100% { opacity: 1; transform: translate(0px, 13px); }
 }
 
 .animate-fade-center {
-  animation: fadeInCenter 0.8s ease-out forwards;
+  animation: fadeInCenter 0.8s ease-in-out forwards;
 }
 
 .animate-slideOut-0 {
-  animation: slideOut0 1s ease-out forwards;
+  animation: slideOut0 0.5s ease-out forwards;
 }
 .animate-slideOut-1 {
-  animation: slideOut1 1s ease-out forwards;
+  animation: slideOut1 0.5s ease-out forwards;
 }
 .animate-slideOut-2 {
-  animation: slideOut2 1s ease-out forwards;
+  animation: slideOut2 0.5s ease-out forwards;
 }
 .animate-slideOut-3 {
-  animation: slideOut3 1s ease-out forwards;
+  animation: slideOut3 0.5s ease-out forwards;
 }
 .animate-slideOut-4 {
-  animation: slideOut4 1s ease-out forwards;
+  animation: slideOut4 0.5s ease-out forwards;
 }
 .animate-slideOut-5 {
-  animation: slideOut5 1s ease-out forwards;
+  animation: slideOut5 0.5s ease-out forwards;
 }
 
 @layer utilities {
