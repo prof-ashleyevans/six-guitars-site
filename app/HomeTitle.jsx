@@ -48,7 +48,7 @@ const HomeTitle = () => {
     const text = "6 GUITARS";
 
     return (
-        <div className="flex flex-col items-center justify-center mt-20 sm:mt-40 md:mt-[500px] px-4">
+        <div className="flex flex-col items-center justify-center mt-20 sm:mt-40 md:mt-[350px] px-4">
             {/* Title box */}
             <div
                 className={`text-3xl sm:text-5xl md:text-7xl lg:text-9xl font-bold inline-block tracking-widest text-center break-words
