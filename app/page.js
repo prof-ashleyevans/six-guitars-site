@@ -2,15 +2,14 @@
 
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
-import { useRef } from 'react';
 import { useEffect, useState } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import HomeTitle from './HomeTitle';
 import './globals.css';
 import { Michroma } from 'next/font/google';
 import HeroSection from "@/app/HeroSection";
-const michroma = Michroma({ subsets: ['latin'], weight: '400' });
+import About from "@/app/About";
+import Reviews from "@/app/Reviews";
 
 
 
@@ -26,49 +25,7 @@ const characterImages = [
 
 
 //reviews slider
-const reviews = [
-    {
-        quote: "Nothing short of a storytelling masterpiece",
-        source: "Edmonton Sun",
-        logo: "/images/edmonton-sun-logo.jpg",
-        characterImage: "/images/characters/rock.jpg",
-    },
-    {
-        quote: "So virtuosic it had me on my feet",
-        source: "Georgia Straight",
-        logo: "/images/Georgia-Straight-Logo.jpg",
-        characterImage: "/images/characters/jazz.jpg",
 
-    },
-    {
-        quote: "A captivating entertainer",
-        source: "VUE Weekly",
-        logo: "/images/Vue_Weekly_Logo.jpg",
-        characterImage: "/images/characters/country.jpg",
-
-    },
-    {
-        quote: "6 Guitars is note perfect",
-        source: "Ottawa Citizen",
-        logo: "/images/ottowa-citizen-logo.jpg",
-        characterImage: "/images/characters/folk.jpg",
-
-    },
-    {
-        quote: "Superb, funny, & flat out stunning",
-        source: "Winnipeg Free Press",
-        logo: "/images/winnipeg-free-press-logo.jpg",
-        characterImage: "/images/characters/classical.jpg",
-
-    },
-    {
-        quote: "A stunning performance",
-        source: "Austin Post",
-        logo: "/images/austin-post-logo.jpg",
-        characterImage: "/images/characters/blues.jpg",
-
-    },
-];
 
 function formatDate(show) {
     const [year, month, day] = show.date.split("-");
@@ -109,27 +66,10 @@ export default function Home() {
     //hamburger menu
     const [menuOpen, setMenuOpen] = useState(false);
 
-    //"Watch the Trailer" / "Audience Reactions" opens a YouTube video in a modal/lightbox, rather than embedding it directly on the page.
-    const [showTrailer, setShowTrailer] = useState(false);
-    const [showReactions, setShowReactions] = useState(false);
 
 
-    //reviews slider
-    const [sliderInstanceRef, slider] = useKeenSlider({
-        loop: true,
-        slides: {
-            perView: 1,
-            spacing: 40,
-        },
-        breakpoints: {
-            '(min-width: 768px)': {
-                slides: {
-                    perView: 3,
-                    spacing: 40,
-                },
-            },
-        },
-    });
+
+
 
 
     return (
@@ -172,245 +112,12 @@ export default function Home() {
             )}
 
 
-                <HeroSection />
-            {/*
-            <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white px-4">
-                <div className="text-center max-w-2xl">
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-                        6 Guitars
-                    </h1>
-                    <p className="text-xl md:text-2xl mb-8">
-                        One performer. Six characters. A celebration of music, storytelling, and laughter.
-                    </p>
-                    <a
-                        href="#"
-                        className="inline-block bg-yellow-400 text-black font-semibold px-6 py-3 rounded-full hover:bg-yellow-300 transition"
-                    >
-                        Buy Tickets
-                    </a>
-                </div>
-            </main>
 
-            */}
+            <HeroSection />
 
-            {/* About Section */}
-            <section id="about" className="flex flex-col sm:flex-row text-white" style={{ backgroundColor: "#141414" }}>
+            <About />
 
-                {/* Image */}
-                <div
-                    className="w-full sm:w-1/2 md:w-1/3 relative sm:ml-40"
-                    data-aos="fade-up"
-                    data-aos-duration="1000"
-                    data-aos-easing="ease-in-out"
-                >
-                    <img
-                        src="/images/about/chase.jpg"
-                        alt="Chase Padgett"
-                        className="w-full h-auto object-contain object-top"
-                    />
-                </div>
-
-
-                {/* Text Content */}
-                <div className="mt-15 w-full sm:w-1/2 md:w-2/3 px-6 py-12 flex flex-col justify-right">
-                    <div className="relative sm:ml-10 max-w-3xl mx-auto text-left md:text-left">
-                        <p className="text-xl mb-4">
-                            6 Guitars is a two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
-                        </p>
-                        <p className="text-xl mb-6">
-                            Chase Padgett brings 6 guitar-playing characters to life — each with their own voice, personality, and musical style.
-                        </p>
-                    </div>
-                    <div className="relative sm:ml-10 max-w-4xl mx-auto text-center sm:text-left">
-                        <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold mb-6 leading-tight">
-                            <div className="flex flex-wrap justify-center sm:justify-start gap-10">
-                                <span data-aos="fade-right" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-blues)] text-[#0562D7]">Blues</span>
-
-                                <span data-aos="fade-down" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-classical)] text-[#BD5217]">Classical</span>
-
-                                <span data-aos="fade-left" data-aos-duration="600"data-aos-delay="1" className="[font-family:var(--font-jazz)] text-[#BB6DEB]">Jazz</span>
-                            </div>
-                            <div className=" flex flex-wrap justify-center sm:justify-start gap-10 mt-5">
-                                <span data-aos="fade-right" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-rock)] text-[#D2153D]">Rock</span>
-
-                                <span data-aos="fade-up" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-folk)] text-[#E09608]">Folk</span>
-
-                                <span data-aos="fade-left" data-aos-duration="600" data-aos-delay="1" className="[font-family:var(--font-country)] text-[#10AD43]">Country</span>
-                            </div>
-                        </h2>
-
-
-
-                        <div className="flex justify-center flex-wrap gap-4 mt-6">
-                            {/* Trailer Button */}
-                            <button
-                                onClick={() => setShowTrailer(true)}
-                                className="flex items-center gap-2 bg-yellow-400 text-black px-13 py-3 rounded-full font-semibold text-base hover:bg-yellow-300 transition"
-                            >
-                                <svg
-                                    className="w-5 h-5"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path d="M8 5v14l11-7z" />
-                                </svg>
-                                Watch the Trailer
-                            </button>
-
-                            {/* Audience Reactions Button */}
-                            <button
-                                onClick={() => setShowReactions(true)}
-                                className="flex items-center gap-2 bg-yellow-400 text-black px-5 py-3 rounded-full font-semibold text-base hover:bg-yellow-300 transition"
-                            >
-                                <svg
-                                    className="w-5 h-5"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path d="M12 4.5c-7 0-11 6.5-11 6.5s4 6.5 11 6.5 11-6.5 11-6.5-4-6.5-11-6.5zm0 11c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z" />
-                                </svg>
-                                See Audience Reactions
-                            </button>
-                        </div>
-
-                        {/* Trailer Modal */}
-                        {showTrailer && (
-                            <div
-                                className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-                                onClick={() => setShowTrailer(false)}
-                            >
-                                <div
-                                    className="relative w-[90%] max-w-3xl aspect-video"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <button
-                                        className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
-                                        onClick={() => setShowTrailer(false)}
-                                    >
-                                        ×
-                                    </button>
-                                    <iframe
-                                        src="https://www.youtube.com/embed/7f7KWksfxAc?autoplay=1"
-                                        title="6 Guitars Trailer"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                        className="w-full h-full rounded-lg"
-                                    />
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Reactions Modal */}
-                        {showReactions && (
-                            <div
-                                className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-                                onClick={() => setShowReactions(false)}
-                            >
-                                <div
-                                    className="relative w-[90%] max-w-3xl aspect-video"
-                                    onClick={(e) => e.stopPropagation()}
-                                >
-                                    <button
-                                        className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
-                                        onClick={() => setShowReactions(false)}
-                                    >
-                                        ×
-                                    </button>
-                                    <iframe
-                                        src="https://www.youtube.com/embed/TQh8Uz4_VBc?autoplay=1"
-                                        title="Audience Reactions"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                        className="w-full h-full rounded-lg"
-                                    />
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </section>
-
-
-            {/* Reviews */}
-
-
-            <section
-                id="reviews"
-                className="text-white px-6 py-16"
-                style={{ backgroundColor: "#1a1a1a" }}
-            >
-                <div className={`max-w-4xl mx-auto text-center`}>
-                    <h2 className="text-4xl font-bold mb-8">Reviews</h2>
-
-                    <div className="relative w-full h-[600px] overflow-hidden">
-                            <div ref={sliderInstanceRef} className="keen-slider h-full">
-                                {reviews.map((review, index) => (
-                                    <div key={index} className="keen-slider__slide relative w-full h-full">
-                                        {/* Background character image with parallax zoom effect */}
-                                        <div
-                                            className="absolute inset-0 overflow-hidden z-0"
-                                            style={{ transform: 'scale(1.05)', animation: 'zoomIn 5s ease-out forwards' }}
-                                        >
-                                            <img
-                                                src={review.characterImage}
-                                                alt="Character"
-                                                className="w-full h-full object-cover opacity-20"
-                                            />
-                                        </div>
-
-                                        {/* Review content overlay */}
-                                        <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center bg-black/1 rounded-xl max-w-2xl mx-auto">
-
-                                            <p className="italic text-xl md:text-2xl mb-2 pt-40">"{review.quote}"</p>
-                                            <img
-                                                src="/images/5 Stars.png"
-                                                alt="5 stars"
-                                                className="h-6 md:h-8 mt-2 object-contain"
-                                            />
-
-                                            <p className="text-yellow-300 text-md mt-1">&ndash; {review.source}</p>
-                                            <img
-                                                src={review.logo}
-                                                alt={review.source}
-                                                className="h-24 mt-12 object-contain"
-                                            />
-
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                            {/* Left Arrow */}
-                            <button
-                                onClick={() => slider.current?.prev()}
-                                className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
-                                aria-label="Previous Slide"
-                            >
-                                ‹
-                            </button>
-
-                            {/* Right Arrow */}
-                            <button
-                                onClick={() => slider.current?.next()}
-                                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-yellow-400 text-black px-3 py-2 rounded-full hover:bg-yellow-300 transition z-20"
-                                aria-label="Next Slide"
-                            >
-                                ›
-                            </button>
-                    </div>
-                </div>
-            </section>
-
-            <style jsx>{`
-  @keyframes zoomIn {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(1.1);
-    }
-  }
-`}</style>
-
+            <Reviews />
 
             {/*
             TICKETS
