@@ -42,19 +42,19 @@ const characterImages = [
 
 export default function CharacterGridSection() {
     useEffect(() => {
-        AOS.init({ duration: 500, once: true });
+        AOS.init({ duration: 800, once: true });
     }, []);
 
     return (
         <div className="flex flex-col w-full">
-            <section className="relative bg-[#1a1a1a] w-full flex flex-col items-start h-auto lg:min-h-fit pt-0 sm:pt-4 pb-6 sm:pb-20">
+            <section className="relative bg-[#1a1a1a] w-full flex flex-col items-start h-auto lg:min-h-fit pt-0 sm:pt-4 pb-4 sm:pb-2">
                 {/* Grid */}
                 <div className="grid grid-cols-3 gap-1 w-full px-4 sm:px-1 max-w-screen-xl mx-auto">
                     {characterImages.map((char, i) => (
                         <div
                             key={i}
                             data-aos={char.aos}
-                            className="h-[90px] sm:h-[120px] md:h-[160px] lg:h-[200px] xl:h-[340px] flex justify-center items-center"
+                            className="h-[140px] sm:h-[120px] md:h-[160px] lg:h-[200px] xl:h-[340px] flex justify-center items-center"
                         >
                             <img
                                 src={char.src}
@@ -66,9 +66,9 @@ export default function CharacterGridSection() {
                 </div>
 
                 {/* Title overlay (desktop only) */}
-                <div className="absolute top-1/2 w-full px-8 -translate-y-[40%] z-20 hidden lg:block text-center">
+                {/*<div className="absolute top-1/2 w-full px-8 -translate-y-[40%] z-20 hidden lg:block text-center">
                     <HomeTitle />
-                </div>
+                </div>*/}
             </section>
 
             {/* Now safely stacked below */}
