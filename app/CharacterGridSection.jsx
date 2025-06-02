@@ -69,10 +69,9 @@ export default function CharacterGridSection() {
 
 
             {/* Title for mobile only */}
-            <div className="absolute top-1/2 w-full px-4 -translate-y-[25%] z-20 block lg:hidden text-center">
+            <div className="block lg:hidden mt-0">
                 <HomeTitle />
             </div>
-
         </section>
 
 );
