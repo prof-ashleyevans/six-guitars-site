@@ -44,7 +44,7 @@ export default function CharacterGridSection() {
     }, []);
 
     return (
-        <section className="relative bg-[#1a1a1a] w-full flex flex-col items-center pt-2 sm:pt-1 pb-1 sm:pb-1">
+        <section className="relative bg-[#1a1a1a] w-full flex flex-col items-center pt-2 sm:pt-4 pb-8 sm:pb-20 min-h-[500px] lg:min-h-fit">
             {/* Grid (same as current) */}
             <div className="grid grid-cols-3 gap-1 w-full px-4 sm:px-1 max-w-screen-xl mx-auto">
                 {characterImages.map((char, i) => (
@@ -69,9 +69,10 @@ export default function CharacterGridSection() {
 
 
             {/* Title for mobile only */}
-            <div className="block lg:hidden mt-0">
+            <div className="absolute top-[35%] w-full px-4 z-20 block lg:hidden text-center">
                 <HomeTitle />
             </div>
+
         </section>
 
 );
