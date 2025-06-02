@@ -69,10 +69,10 @@ const HomeTitle = () => {
     const text = "6 GUITARS";
 
     return (
-        <div className="flex flex-col items-center justify-center mt-20 sm:mt-40 md:mt-[50px] px-4">
+        <div className="flex flex-col items-center justify-center mt-20 sm:mt-4 md:mt-[50px] px-4">
             {/* Title box */}
             <div
-                className={`text-3xl bg-black/80 sm:text-5xl md:text-7xl lg:text-9xl font-bold inline-block tracking-widest text-center break-words
+                className={`text-9xl bg-black/80 sm:text-6xl md:text-7xl lg:text-9xl font-bold inline-block tracking-widest text-center break-words
 
                  ${michroma.className}`}
             >
