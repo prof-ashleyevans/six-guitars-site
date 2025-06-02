@@ -89,48 +89,7 @@ const HomeTitle = () => {
                 ))}
             </div>
 
-            {/* Icons row */}
-            <div
-                ref={iconRef}
-                className={`flex justify-center items-center gap-12 w-full max-w-3xl mt-6 z-10 transition-opacity duration-1000 ${
-                    isIconVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-            >
-                {/* Guitar Icon + Label */}
-                <div className="flex items-center gap-2">
-                    <img
-                        src="/images/icons/guiar_icon.png"
-                        alt="Guitar Icon"
-                        className="w-22 h-22 object-contain"
-                    />
-                    <p className="text-white text-xl"> Live Music</p>
-                </div>
 
-                {/* Ticket Icon + Label */}
-                <div className="flex items-center gap-2">
-                    <img
-                        src="/images/icons/ticket_icon.png"
-                        alt="Ticket Icon"
-                        className="w-22 h-22 object-contain"
-                    />
-                    <p className="text-white text-xl">Comedy</p>
-                </div>
-
-                {/* Comedy Mask Icon + Label */}
-                <div className="flex items-center gap-2">
-                    <img
-                        src="/images/icons/comedy_mask_icon.png"
-                        alt="Comedy Mask Icon"
-                        className="w-22 h-22 object-contain"
-                    />
-                    <p className="text-white text-xl leading-tight">
-                        50,000+<br />Tickets Sold
-                    </p>
-
-                </div>
-
-
-            </div>
 
         </div>
     );

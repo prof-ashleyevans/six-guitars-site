@@ -73,9 +73,9 @@ const HeroSection = () => {
 
                 <CharacterGridSection />
 
-                {/*<div className="absolute w-full flex justify-center z-20">
+                *<div className="absolute w-full flex justify-center z-20">
                     <HomeTitle />
-                </div>*/}
+                </div>*
 
 
             </section>
