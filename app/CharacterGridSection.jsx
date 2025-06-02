@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import HomeTitle from "@/app/HomeTitle"
 
 const characterImages = [
     {
@@ -39,22 +40,40 @@ const characterImages = [
 
 export default function CharacterGridSection() {
     useEffect(() => {
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 500, once: true });
     }, []);
 
     return (
-        <section className="bg-black py-12 px-4">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+        <section className="relative bg-[#1a1a1a] w-full flex flex-col items-center pt-2 sm:pt-4 pb-140 sm:pb-70">
+            {/* Grid (same as current) */}
+            <div className="grid grid-cols-3 gap-1 w-full px-4 sm:px-8 max-w-screen-xl mx-auto">
                 {characterImages.map((char, i) => (
-                    <img
+                    <div
                         key={i}
-                        src={char.src}
-                        alt={char.alt}
                         data-aos={char.aos}
-                        className="w-full h-auto object-cover rounded"
-                    />
+                        className="h-[90px] sm:h-[120px] md:h-[160px] lg:h-[200px] xl:h-[340px] flex justify-center items-center"
+                    >
+                        <img
+                            src={char.src}
+                            alt={char.alt}
+                            className="h-full w-full object-cover"
+                        />
+                    </div>
                 ))}
             </div>
+
+            {/* Title overlay (desktop only) */}
+            <div className="absolute top-1/2 w-full px-8 -translate-y-[90%] z-20 hidden lg:block text-center">
+                <HomeTitle />
+            </div>
+
+
+
+            {/* Title for mobile only */}
+            <div className="block lg:hidden mt-8">
+                <HomeTitle />
+            </div>
         </section>
-    );
+
+);
 }
