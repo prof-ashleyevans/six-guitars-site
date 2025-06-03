@@ -70,7 +70,7 @@ const HeroSection = () => {
         <>
             <section
                 id="home"
-                className="relative h-screen w-full overflow-hidden flex items-center justify-center"
+                className="relative py-60 w-full overflow-hidden flex items-center justify-center"
                 style={{ backgroundColor: "#1a1a1a" }}
             >
                 <div className="absolute inset-0 z-0">
