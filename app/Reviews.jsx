@@ -79,9 +79,9 @@ export default function Reviews() {
 
                                 {/* Content */}
                                 <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-                                    <p className="italic text-xl md:text-2xl mb-2 pt-40">"{review.quote}"</p>
-                                    <img src="/images/5 Stars.png" alt="5 stars" className="h-6 md:h-8 mt-2 object-contain" />
-                                    <p className="text-yellow-300 text-md mt-1">&ndash; {review.source}</p>
+                                    <img src="/images/5 Stars.png" alt="5 stars" className="h-6 md:h-13 mt-2 object-contain" />
+                                    <p className="italic text-xl md:text-2xl mb-12 pt-40">"{review.quote}"</p>
+                                    {/*} <p className="text-yellow-300 text-md mt-1">&ndash; {review.source}</p>*/}
                                     <img src={review.logo} alt={review.source} className="h-24 mt-12 object-contain" />
                                 </div>
                             </div>

@@ -70,11 +70,13 @@ export default function Tickets() {
                                         rel="noopener noreferrer"
                                         className="border border-white px-4 py-2 h-[42px] flex items-center justify-center rounded-full hover:bg-white hover:text-black transition text-sm font-semibold text-center"
                                     >
+                                        <span className="text-yellow-400 text-xl w-6 h-[42px] flex items-center justify-center">
+                                         {show.fullBand ? '⭐' : ''}  </span>
                                         GET TICKETS →
+
+
                                     </a>
-                                    <span className="text-yellow-400 text-xl w-6 h-[42px] flex items-center justify-center">
-                    {show.fullBand ? '⭐' : ''}
-                  </span>
+
                                 </div>
                             </div>
                         ))}
