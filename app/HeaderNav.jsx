@@ -77,6 +77,8 @@ export default function HeaderNav() {
                     <a href="#about" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>About</a>
                     <a href="#contact" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>Contact</a>
                     <a href="#reviews" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>Reviews</a>
+                    <a href="#tickets" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>Tour</a>
+
                 </nav>
             )}
         </>

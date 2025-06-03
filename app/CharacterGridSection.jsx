@@ -47,7 +47,7 @@ export default function CharacterGridSection() {
 
     return (
         <div className="flex flex-col w-full">
-            <section className="relative bg-[#1a1a1a] w-full flex flex-col items-start h-auto lg:min-h-fit pt-0 sm:pt-4 pb-4 sm:pb-2">
+            <section className="relative bg-[#1a1a1a] w-full flex flex-col items-start pt-2 pb-4 sm:pt-4 sm:pb-10 lg:pb-20 h-auto lg:min-h-fit">
                 {/* Grid */}
                 <div className="grid grid-cols-3 gap-1 w-full px-4 sm:px-1 max-w-screen-xl mx-auto">
                     {characterImages.map((char, i) => (

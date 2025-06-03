@@ -10,6 +10,7 @@ import HeaderNav from "@/app/HeaderNav";
 import Tickets from "@/app/Tickets";
 import Contact from "@/app/Contact";
 import Footer from "@/app/Footer";
+import CharacterGridSection from "@/app/CharacterGridSection";
 
 export default function Home() {
 
