@@ -73,6 +73,7 @@ const HeroSection = () => {
 
                 <CharacterGridSection />
 
+
                 {/* Desktop view */}
                 <div className="hidden lg:flex absolute w-full justify-center z-20 mt-30 lg:mb-72">
                     <HomeTitle />
