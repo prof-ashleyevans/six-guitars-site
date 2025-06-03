@@ -68,26 +68,26 @@ const HeroSection = () => {
 
     return (
         <>
-            <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center" style={{ backgroundColor: "#1a1a1a" }}>
-
-
-                <CharacterGridSection />
-
+            <section
+                id="home"
+                className="relative h-screen w-full overflow-hidden flex items-center justify-center"
+                style={{ backgroundColor: "#1a1a1a" }}
+            >
+                <div className="absolute inset-0 z-0">
+                    <CharacterGridSection />
+                </div>
 
                 {/* Desktop view */}
-                <div className="hidden lg:flex absolute w-full justify-center z-20 mt-30 lg:mb-72">
+                <div className="hidden lg:flex absolute w-full justify-center z-20 mt-10 lg:mb-72">
                     <HomeTitle />
                 </div>
 
                 {/* Mobile view */}
-                <div className="flex lg:hidden absolute w-full justify-center z-20 mb-50">
+                <div className="flex lg:hidden absolute w-full justify-center z-20 mb-80">
                     <HomeTitle />
                 </div>
-
-
-
-
             </section>
+
         </>
     );
 };
