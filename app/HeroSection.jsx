@@ -83,7 +83,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Mobile view */}
-                <div className="flex lg:hidden absolute w-full justify-center z-20 mb-160">
+                <div className="flex lg:hidden absolute w-full justify-center z-20 mb-140">
                     <HomeTitle />
                 </div>
             </section>
