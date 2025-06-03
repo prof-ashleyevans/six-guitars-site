@@ -9,28 +9,48 @@ const About = () => {
 
     return (
         <section id="about" className="flex flex-col sm:flex-row text-white" style={{ backgroundColor: "#141414" }}>
-            {/* Image */}
+            {/* Image + Mobile Title */}
             <div
                 className="w-full sm:w-1/2 md:w-1/3 relative sm:ml-40"
                 data-aos="fade-up"
                 data-aos-duration="1000"
                 data-aos-easing="ease-in-out"
             >
+                {/* Image */}
                 <img
                     src="/images/about/chase.jpg"
                     alt="Chase Padgett"
-                    className="w-full h-auto object-contain object-top"
+                    className="w-full h-[550px] sm:h-auto object-cover object-top"
                 />
-            </div>
 
-            {/* Text Content */}
-            <div className="mt-15 w-full sm:w-1/2 md:w-2/3 px-6 py-12 flex flex-col justify-right">
-                <div className="relative sm:ml-10 max-w-5xl mx-auto text-left md:text-left">
-                    <h1 className={"text-5xl mt-40 mb-4"}>
+
+                {/* Mobile Overlay Title */}
+                <div className="absolute top-0 left-0 w-full sm:hidden z-20 bg-gray-900/10 py-4 px-4">
+                    <h1 className="text-3xl font-bold text-white text-center px-4">
                         About the Show
                     </h1>
                 </div>
-                <div className="relative sm:ml-10 max-w-3xl mx-auto text-left md:text-left">
+            </div>
+
+            {/* Text Content */}
+            <div className="mt-6 sm:mt-25 w-full sm:w-1/2 md:w-2/3 px-4 sm:px-25 py-5 sm:py-5 flex flex-col">
+                {/* Heading - on top of image for mobile, inline for desktop */}
+
+                <div
+                    className="hidden sm:block relative sm:ml-10 max-w-5xl mx-auto text-left md:text-left"
+                    data-aos="fade-up"
+                    data-aos-duration="800"
+                    data-aos-easing="ease-in-out"
+                >
+                    <h1 className="text-5xl mt-20 mb-4">About the Show</h1>
+                </div>
+                <div
+                    className="relative sm:ml-10 max-w-3xl mx-auto text-left md:text-left"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                    data-aos-duration="800"
+                    data-aos-easing="ease-in-out"
+                >
                     <p className="text-xl mt-10 mb-4">
                         6 Guitars is a two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
                     </p>
