@@ -20,7 +20,7 @@ const TitleComponent = ({ showText, text }) => (
           key={idx}
           className={`${showText ? "flip-y inline-block" : "opacity-0 inline-block"}`}
           style={{
-              animationDelay: `${idx * 0.1}s`,
+              animationDelay: `${idx * 0.001}s`,
               marginRight: char === "6" ? "0.5em" : undefined,
           }}
       >
@@ -80,7 +80,7 @@ const HomeTitle = () => {
                     <span
                         key={idx}
                         className={`inline-block ${showText ? "flip-y" : "opacity-0"}`}
-                        style={{ animationDelay: `${idx * 0.1}s`,
+                        style={{ animationDelay: `${idx * 0.0001}s`,
                                 marginRight: char === "6" ? "0.5em" : undefined // Extra space after 6
                     }}
                     >
