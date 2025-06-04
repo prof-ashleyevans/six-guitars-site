@@ -36,21 +36,10 @@ const About = () => {
             <div className="mt-6 sm:mt-25 w-full sm:w-1/2 md:w-2/3 px-4 sm:px-25 py-5 sm:py-5 flex flex-col">
                 {/* Heading - on top of image for mobile, inline for desktop */}
 
-                <div
-                    className="hidden sm:block relative sm:ml-10 max-w-5xl mx-auto text-left md:text-left"
-                    data-aos="fade-up"
-                    data-aos-duration="800"
-                    data-aos-easing="ease-in-out"
-                >
+                <div className="hidden sm:block relative sm:ml-10 max-w-5xl mx-auto text-left md:text-left">
                     <h1 className="text-5xl mt-20 mb-4">About the Show</h1>
                 </div>
-                <div
-                    className="relative sm:ml-10 max-w-3xl mx-auto text-left md:text-left"
-                    data-aos="fade-up"
-                    data-aos-delay="200"
-                    data-aos-duration="800"
-                    data-aos-easing="ease-in-out"
-                >
+                <div className="relative sm:ml-10 max-w-3xl mx-auto text-left md:text-left">
                     <p className="text-xl mt-10 mb-4">
                         6 Guitars is a two-act one-man show featuring <span className="font-semibold">Music, Comedy, and so Much More</span>.
                     </p>
