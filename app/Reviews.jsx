@@ -62,7 +62,7 @@ export default function Reviews() {
     return (
         <section id="reviews" className="text-white px-6 py-16 bg-[#1a1a1a]">
             <div className="max-w-6xl mx-auto text-center">
-                <h2 className="text-4xl font-bold mb-8">Reviews</h2>
+                <h2 className="text-4xl font-bold mb-8">Critic Reviews</h2>
 
                 <div className="relative w-full h-[600px] overflow-hidden">
                     <div ref={sliderRef} className="keen-slider h-full">

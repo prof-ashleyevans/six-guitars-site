@@ -11,7 +11,18 @@ export default function AudienceReviews() {
             duration: 800,
             once: true,
         });
+
+        // Trigger refresh on scroll stop
+        let timeout;
+        const handleScroll = () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => AOS.refresh(), 100);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
 
     return (
         <section id="audience-reviews" className="relative py-16 px-4 bg-black text-white overflow-hidden">
@@ -53,8 +64,8 @@ export default function AudienceReviews() {
 
                 @media (max-width: 768px) {
                     .audience-bg-mask {
-                        mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-                        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+                        mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+                        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
                     }
                 }
             `}</style>
