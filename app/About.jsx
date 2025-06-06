@@ -119,8 +119,7 @@ const About = () => {
                         </div>
                     )}
 
-                    {/* FAQs */}
-                    {showFAQs && <FAQ />}
+
                 </div>
             </div>
         </section>

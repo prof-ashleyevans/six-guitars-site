@@ -11,6 +11,8 @@ import Tickets from "@/app/Tickets";
 import Contact from "@/app/Contact";
 import Footer from "@/app/Footer";
 import CharacterGridSection from "@/app/CharacterGridSection";
+import FAQ from "@/app/FAQ";
+import AudienceReviews from "@/app/AudienceReviews";
 
 export default function Home() {
 
@@ -24,7 +26,11 @@ export default function Home() {
 
             <Reviews />
 
+            <AudienceReviews />
+
             <Tickets />
+
+            <FAQ />
 
             <Contact />
 
