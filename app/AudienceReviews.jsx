@@ -14,39 +14,50 @@ export default function AudienceReviews() {
     }, []);
 
     return (
-        <section id="audience-reviews" className="relative py-16 px-6 bg-black text-white">
-            {/* Background Image with Gradient Mask */}
+        <section id="audience-reviews" className="relative py-16 px-4 bg-black text-white overflow-hidden">
+            {/* Responsive background gradient mask */}
             <div
-                className="relative bg-fixed bg-center bg-cover bg-no-repeat"
+                className="relative bg-fixed bg-center bg-cover bg-no-repeat audience-bg-mask"
                 style={{
                     backgroundImage: "url('/images/characters/blues.jpg')",
-                    WebkitMaskImage:
-                        "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
-                    maskImage:
-                        "linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%)",
                 }}
             >
-                {/* Overlay for darkening */}
+                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/60 z-0" />
 
                 {/* Content */}
                 <div className="relative z-10 bg-black/30 py-24 px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-bold text-center text-white mb-12">Audience Reviews</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {audienceReviews.map((src, index) => (
                             <div key={index} data-aos="fade-up" data-aos-delay={index * 50}>
                                 <Image
                                     src={src}
                                     alt={`Review ${index + 1}`}
-                                    width={400}
-                                    height={300}
-                                    className="rounded-lg shadow-lg"
+                                    width={440} // slightly larger
+                                    height={330}
+                                    className="rounded-lg shadow-lg w-full h-auto"
                                 />
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
+
+            {/* Styles for background gradient mask */}
+            <style jsx>{`
+                .audience-bg-mask {
+                    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+                    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+                }
+
+                @media (max-width: 768px) {
+                    .audience-bg-mask {
+                        mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+                        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+                    }
+                }
+            `}</style>
         </section>
     );
 }
