@@ -71,20 +71,6 @@ const About = () => {
                         >
                             ▶ Watch the Trailer
                         </button>
-
-                        <button
-                            onClick={() => setShowReactions(true)}
-                            className="flex items-center gap-2 bg-yellow-400 text-black px-5 py-3 rounded-full font-semibold text-base hover:bg-yellow-200 transition"
-                        >
-                            👁️ See Audience Reactions
-                        </button>
-
-                        <button
-                            onClick={() => setShowFAQs(!showFAQs)}
-                            className="flex items-center gap-2 border border-yellow-400 bg-yellow-400 text-black px-15 py-3 rounded-full font-semibold text-base hover:bg-yellow-200 hover:text-black transition"
-                        >
-                            {showFAQs ? '🚪 Hide FAQs' : ' ❔ View FAQs'}
-                        </button>
                     </div>
 
                     {/* Trailer Modal */}
