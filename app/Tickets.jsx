@@ -3,15 +3,42 @@ import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+// Toggle this flag to switch between dummy data and live API call
+const USE_DUMMY_DATA = true;
+
+// Dummy show data
+const dummyShows = [
+    {
+        date: '2025-07-15',
+        time: '8:00 PM',
+        venue: 'Apollo Theater',
+        location: 'New York, NY',
+        link: 'https://example.com/tickets/1',
+        fullBand: true,
+    },
+    {
+        date: '2025-07-22',
+        time: '7:30 PM',
+        venue: 'House of Blues',
+        location: 'Chicago, IL',
+        link: 'https://example.com/tickets/2',
+        fullBand: false,
+    },
+];
+
 export default function Tickets() {
     const [shows, setShows] = useState([]);
     const [startAnimation, setStartAnimation] = useState(false);
 
     useEffect(() => {
-        fetch('/api/shows')
-            .then((res) => res.json())
-            .then((data) => setShows(data))
-            .catch((err) => console.error('Failed to load shows:', err));
+        if (USE_DUMMY_DATA) {
+            setShows(dummyShows);
+        } else {
+            fetch('/api/shows')
+                .then((res) => res.json())
+                .then((data) => setShows(data))
+                .catch((err) => console.error('Failed to load shows:', err));
+        }
 
         AOS.init({ once: true });
 
@@ -51,18 +78,15 @@ export default function Tickets() {
                                 key={index}
                                 className="flex flex-col items-center md:flex-row md:items-center md:justify-between border-t border-white py-6 text-center md:text-left space-y-2 md:space-y-0"
                             >
-                                {/* Date */}
                                 <div className="text-lg font-bold text-center md:text-left w-full md:w-1/4">
                                     {formatDate(show)}
                                 </div>
 
-                                {/* Venue and Location */}
                                 <div className="w-full md:w-1/2 flex flex-col items-center text-center">
                                     <div className="uppercase font-semibold">{show.venue}</div>
                                     <div>{show.location}</div>
                                 </div>
 
-                                {/* Ticket Link and Full Band Icon */}
                                 <div className="w-full md:w-1/4 flex flex-col md:flex-row justify-center md:justify-end items-center gap-2 md:gap-4">
                                     <a
                                         href={show.link?.startsWith('http') ? show.link : `https://${show.link}`}
@@ -71,12 +95,10 @@ export default function Tickets() {
                                         className="border border-white px-4 py-2 h-[42px] flex items-center justify-center rounded-full hover:bg-white hover:text-black transition text-sm font-semibold text-center"
                                     >
                                         <span className="text-yellow-400 text-xl w-6 h-[42px] flex items-center justify-center">
-                                         {show.fullBand ? '⭐' : ''}  </span>
+                                            {show.fullBand ? '⭐' : ''}
+                                        </span>
                                         GET TICKETS →
-
-
                                     </a>
-
                                 </div>
                             </div>
                         ))}
