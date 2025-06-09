@@ -25,30 +25,30 @@ export default function AudienceReviews() {
 
 
     return (
-        <section id="audience-reviews" className="relative bg-black text-white overflow-hidden">
-            {/* Background image wrapper with parallax only on desktop */}
+        <section id="audience-reviews" className="relative py-16 px-4 bg-black text-white overflow-hidden">
+            {/* Responsive background gradient mask */}
             <div
-                className="relative w-full bg-no-repeat bg-center bg-cover sm:bg-fixed audience-bg-mask"
+                className="relative bg-no-repeat bg-center sm:bg-fixed audience-bg-mask w-full"
                 style={{
                     backgroundImage: "url('/images/audience_photo.jpg')",
+                    backgroundSize: '101% auto', // or '100% auto' if you prefer
                     backgroundPosition: 'top center',
-                    backgroundAttachment: 'scroll', // overridden by sm:bg-fixed on desktop
                 }}
             >
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-black/60 z-0" />
 
-                {/* Title + reviews content */}
-                <div className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl sm:text-5xl font-bold text-white mb-12">Audience Reviews</h2>
+            {/* Dark overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-0" />
 
+                {/* Content */}
+                <div className="relative z-10 bg-black/30 py-24 px-4 sm:px-6 lg:px-8">
+                    <h2 className="text-3xl font-bold text-center text-white mb-12">Audience Reviews</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {audienceReviews.map((src, index) => (
                             <div key={index} data-aos="fade-up" data-aos-delay={index * 50}>
                                 <Image
                                     src={src}
                                     alt={`Review ${index + 1}`}
-                                    width={440}
+                                    width={440} // slightly larger
                                     height={330}
                                     className="rounded-lg shadow-lg w-full h-auto"
                                 />
@@ -58,7 +58,7 @@ export default function AudienceReviews() {
                 </div>
             </div>
 
-            {/* Optional fade mask */}
+            {/* Styles for background gradient mask */}
             <style jsx>{`
                 .audience-bg-mask {
                     mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
@@ -73,7 +73,5 @@ export default function AudienceReviews() {
                 }
             `}</style>
         </section>
-
-
     );
 }
