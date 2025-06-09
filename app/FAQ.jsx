@@ -1,16 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 
-const bgColors = [
-    'bg-[#2f4858]', // Blues
-    'bg-[#4e342e]', // Jazz
-    'bg-[#1a237e]', // Classical
-    'bg-[#b71c1c]', // Rock
-    'bg-[#388e3c]', // Folk
-    'bg-[#f9a825]', // Country
-];
-
-
 const faqs = [
     {
         question: "What is 6 Guitars?",
@@ -53,9 +43,25 @@ const faqs = [
 export default function FAQ() {
     return (
         <section id="faqs">
+            {/* HEADER with background image */}
+            <div className="relative bg-center bg-no-repeat bg-contain" style={{
+                backgroundImage: "url('/images/chase_live_show.jpg')",
+                backgroundPosition: 'center center',
+                backgroundSize: 'contain',
+            }}>
+                {/* Gradient overlay that fades edges to black */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none z-10" />
 
-            <div className="bg-black/90 py-12 px-4 sm:px-6 lg:px-8  text-center">
-                <h2 className="text-5xl font-bold mb-16 text-white">FAQ</h2>
+                {/* Content (title) */}
+                <div className="relative z-20 bg-black/50 py-16 px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 className="text-5xl font-bold text-white">FAQ</h2>
+                </div>
+            </div>
+
+
+
+            {/* FAQ list on solid black */}
+            <div className="bg-black py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-2xl mx-auto">
                     {faqs.map((faq, idx) => (
                         <div key={idx} className="mb-6">
@@ -81,6 +87,5 @@ export default function FAQ() {
                 </div>
             </div>
         </section>
-
     );
 }
