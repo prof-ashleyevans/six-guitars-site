@@ -28,15 +28,15 @@ export default function AudienceReviews() {
         <section id="audience-reviews" className="relative py-16 px-4 bg-black text-white overflow-hidden">
             {/* Responsive background gradient mask */}
             <div
-                className="relative bg-fixed bg-center bg-no-repeat audience-bg-mask"
+                className="relative bg-repeat-y bg-top bg-no-repeat sm:bg-cover sm:bg-fixed audience-bg-mask"
                 style={{
-                    backgroundImage: "url('/images/audience_photo.jpg')",
-                    backgroundSize: '70%', // zoomed in
-                    // Try 120%, 100%, 80%, etc. to zoom out
-                }}
-            >
+                backgroundImage: "url('/images/audience_photo.jpg')",
+                backgroundSize: "100% 400px",
+            }}
+                >
 
-            {/* Dark overlay */}
+
+                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-black/60 z-0" />
 
                 {/* Content */}
