@@ -28,7 +28,7 @@ export default function AudienceReviews() {
         <section id="audience-reviews" className="relative py-16 px-4 bg-black text-white overflow-hidden">
             {/* Responsive background gradient mask */}
             <div
-                className="relative bg-no-repeat bg-fixed bg-center audience-bg-mask min-h-[600px] sm:min-h-[800px]"
+                className="relative bg-no-repeat bg-fixed bg-center audience-bg-mask min-h-[1200px] sm:min-h-[800px]"
                 style={{
                     backgroundImage: "url('/images/audience_photo.jpg')",
                     backgroundSize: '100% auto', // full width, natural height
