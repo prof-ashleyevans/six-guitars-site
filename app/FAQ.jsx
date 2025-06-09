@@ -31,7 +31,7 @@ const faqs = [
         ),
     },
     {
-        question: "How long is the show typically?",
+        question: "How long is the show time?",
         answer: "6 Guitars usually lasts two hours, with a 15-minute intermission.",
     },
     {
