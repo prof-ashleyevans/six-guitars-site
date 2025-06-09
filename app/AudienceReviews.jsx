@@ -31,7 +31,7 @@ export default function AudienceReviews() {
                 className="relative bg-no-repeat bg-center sm:bg-fixed audience-bg-mask w-full"
                 style={{
                     backgroundImage: "url('/images/audience_photo.jpg')",
-                    backgroundSize: '100% auto', // or '100% auto' if you prefer
+                    backgroundSize: '101% auto', // or '100% auto' if you prefer
                     backgroundPosition: 'top center',
                 }}
             >
