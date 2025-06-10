@@ -27,6 +27,8 @@ export default function AudienceReviews() {
     return (
         <section id="audience-reviews" className="relative py-16 px-4 bg-black text-white overflow-hidden">
             {/* Responsive background gradient mask */}
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-0" />
             <div
                 className="relative w-full bg-no-repeat bg-center bg-cover bg-fixed audience-bg-mask"
                 style={{
@@ -36,8 +38,7 @@ export default function AudienceReviews() {
                 }}
             >
 
-            {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-0" />
+
 
                 {/* Content */}
                 <div className="relative z-10 bg-black/30 py-24 px-4 sm:px-6 lg:px-8">
