@@ -44,19 +44,26 @@ export default function FAQ() {
     return (
         <section id="faqs">
             {/* HEADER with background image */}
-            <div className="relative bg-center bg-no-repeat bg-contain" style={{
-                backgroundImage: "url('/images/chase_live_show.jpg')",
-                backgroundPosition: 'center center',
-                backgroundSize: 'contain',
-            }}>
-                {/* Gradient overlay that fades edges to black */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none z-10" />
+            <div
+                className="relative w-full h-[130px] bg-center bg-no-repeat bg-contain"
+                style={{
+                    backgroundImage: "url('/images/guitar_only.jpg')",
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center center',
+                    backgroundSize: 'cover', // or 'contain' if you want the whole image
+                }}
+            >
+                {/* Dark overlay for readability (optional) */}
+                <div className="absolute inset-0 bg-black/30 z-0" />
 
-                {/* Content (title) */}
-                <div className="relative z-20 bg-black/50 py-16 px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-5xl font-bold text-white">FAQ</h2>
+                {/* Title content over image */}
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                    <h2 className="text-3xl sm:text-5xl font-bold text-white text-center">
+                        FAQ's
+                    </h2>
                 </div>
             </div>
+
 
 
 
@@ -76,7 +83,7 @@ export default function FAQ() {
                                                 }`}
                                             />
                                         </Disclosure.Button>
-                                        <Disclosure.Panel className="px-4 pt-2 pb-4 text-md text-left text-gray-300">
+                                        <Disclosure.Panel className="px-4 pt-2 pb-4 text-md text-left text-black bg-white">
                                             {faq.answer}
                                         </Disclosure.Panel>
                                     </>
