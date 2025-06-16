@@ -13,6 +13,7 @@ import Footer from "@/app/Footer";
 import CharacterGridSection from "@/app/CharacterGridSection";
 import FAQ from "@/app/FAQ";
 import AudienceReviews from "@/app/AudienceReviews";
+import IconRow from "@/app/IconRow";
 
 export default function Home() {
 
@@ -21,6 +22,8 @@ export default function Home() {
             <HeaderNav />
 
             <HeroSection />
+
+            <IconRow />
 
             <About />
 

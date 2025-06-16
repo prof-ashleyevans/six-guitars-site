@@ -87,7 +87,7 @@ export default function CharacterGridSection() {
             </section>
 
             {/* Content below hero */}
-            <IconRow />
+
         </div>
     );
 }

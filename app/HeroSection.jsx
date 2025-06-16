@@ -1,46 +1,34 @@
 // components/HeroSection.jsx
 'use client';
 import { useEffect, useState } from "react";
-import HomeTitle from "@/app/HomeTitle";
 import CharacterGridSection from "@/app/CharacterGridSection";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 //character images for home
 const characterImages = [
     {
-        src: "/images/characters/folk.jpg",
-        alt: "Folk",
-        desktopAnimation: "animate-slideOut-0",
-        mobileAnimation: "animate-slideOut-mobile-0",
+        desktopSrc: '/images/hero/pc/Hero 16x9 Characters.png',
+        mobileSrc: '/images/hero/mobile/6G Hero 1x1 Characters.png',
+        alt: 'Hero Characters',
+        aos: 'fade',
+        zIndex: 10,
     },
     {
-        src: "/images/characters/classical.jpg",
-        alt: "Classical",
-        desktopAnimation: "animate-slideOut-1",
-        mobileAnimation: "animate-slideOut-mobile-1",
+        desktopSrc: '/images/hero/pc/Hero 16x9 Chase.png',
+        mobileSrc: '/images/hero/mobile/6G Hero 1x1 Chase.png',
+        alt: 'Hero Chase',
+        aos: 'fade-up',
+        zIndex: 20,
+        delay: 400,
     },
     {
-        src: "/images/characters/jazz.jpg",
-        alt: "Jazz",
-        desktopAnimation: "animate-slideOut-2",
-        mobileAnimation: "animate-slideOut-mobile-2",
-    },
-    {
-        src: "/images/characters/rock.jpg",
-        alt: "Rock",
-        desktopAnimation: "animate-slideOut-3",
-        mobileAnimation: "animate-slideOut-mobile-3",
-    },
-    {
-        src: "/images/characters/blues.jpg",
-        alt: "Blues",
-        desktopAnimation: "animate-slideOut-4",
-        mobileAnimation: "animate-slideOut-mobile-4",
-    },
-    {
-        src: "/images/characters/country.jpg",
-        alt: "Country",
-        desktopAnimation: "animate-slideOut-5",
-        mobileAnimation: "animate-slideOut-mobile-5",
+        desktopSrc: '/images/hero/pc/Hero 16x9 Logo.png',
+        mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
+        alt: '6 Guitars Logo',
+        aos: 'fade-up',
+        zIndex: 30,
+        delay: 800,
     },
 ];
 const HeroSection = () => {
@@ -66,21 +54,56 @@ const HeroSection = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    return (
-        <>
-            <section
-                id="home"
-                className="relative py-60 sm:py-40 md:py-32 lg:py-120 xl:py-120 w-full overflow-hidden flex items-center justify-center"
-                style={{ backgroundColor: "#1a1a1a" }}
-            >
-                <div className="absolute inset-0 z-0">
-                    <CharacterGridSection />
-                </div>
-            </section>
+    useEffect(() => {
+        AOS.init({ duration: 1800, once: true });
+    }, []);
 
-        </>
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640); // Tailwind's `sm` breakpoint
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    return (
+
+            <section
+                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-200 pb-4 sm:pt-0 sm:pb-0"
+                style={{
+                    backgroundImage: `url('/images/hero/pc/background.jpg')`,
+                }}
+            >
+
+                {characterImages.map((char, i) => (
+
+                    <div
+                        key={i}
+                        className={`
+      absolute left-1/2 transform -translate-x-1/2 
+      ${i === 2 ? 'top-[30%] sm:top-[45%]': 'top-1/2 -translate-y-1/2'}
+      ${i === 1 ? 'top-[24%] sm:top-[52%]' : 'top-1/2 -translate-y-1/2'} 
+      ${i === 0 ? 'w-screen max-w-none h-[95vh] overflow-hidden' : ''} 
+      ${i !== 0 ? 'w-full max-w-screen-xl' : ''}
+    `}
+                        style={{ zIndex: char.zIndex }}
+                    >
+                        <img
+                            data-aos={char.aos}
+                            data-aos-delay={char.delay}
+                            src={isMobile ? char.mobileSrc : char.desktopSrc}
+                            alt={char.alt}
+                            className={i === 0
+                                ? 'w-full h-auto sm:h-full sm:object-cover sm:object-top'
+                                : 'w-full h-auto object-contain'}
+                        />
+                    </div>
+                ))}
+
+
+            </section>
     );
-};
+}
+
 <style jsx>{`
 @keyframes zoomIn {
     from {
