@@ -58,6 +58,7 @@ export default function CharacterGridSection() {
             >
 
                 {characterImages.map((char, i) => (
+
                     <div
                         key={i}
                         className={`
@@ -81,7 +82,8 @@ export default function CharacterGridSection() {
                     </div>
                 ))}
 
-
+                <div className="hidden sm:block h-[95vh]" />
+                <div className="block sm:hidden h-[calc(100vw*0.5625)]" /> {/* ~16:9 ratio for mobile */}
 
             </section>
 
