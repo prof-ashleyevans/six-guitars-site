@@ -76,16 +76,6 @@ const HeroSection = () => {
                 <div className="absolute inset-0 z-0">
                     <CharacterGridSection />
                 </div>
-
-                {/* Desktop view */}
-                <div className="hidden lg:flex absolute w-full justify-center z-20 mt-10 lg:mb-72">
-                    <HomeTitle />
-                </div>
-
-                {/* Mobile view */}
-                <div className="flex lg:hidden absolute w-full justify-center z-20 mb-65">
-                    <HomeTitle />
-                </div>
             </section>
 
         </>

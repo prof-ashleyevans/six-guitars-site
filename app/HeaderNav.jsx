@@ -25,15 +25,15 @@ export default function HeaderNav() {
                     {/* Center: BUY TICKETS button */}
                     {showHeaderButton && (
                         <div
-                            className="absolute left-1/2 transform -translate-x-1/2 border border-white px-1 py-3 rounded-xl z-10"
+                            className="absolute left-1/2 transform -translate-x-1/2 border border-white px-1 py-1 rounded-sm z-10"
                             style={{
-                                animation: 'pulseGlow 2s ease-in-out infinite',
-                                boxShadow: '0 0 20px rgba(255, 255, 255, 0.5)',
+                                animation: 'pulseGlow 5s ease-in-out infinite',
+                                boxShadow: '0 0 1px rgba(255, 255, 255, 0.5)',
                             }}
                         >
                             <a
                                 href="#tickets"
-                                className="bg-[#8a828c] text-white px-5 py-3 rounded-lg font-semibold hover:bg-[#b01234] transition"
+                                className="bg-[#8a828c] text-white px-2 py-1 rounded-sm font-semibold hover:bg-[#b01234] transition"
                             >
                                 BUY TICKETS
                             </a>
