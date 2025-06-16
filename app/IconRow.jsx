@@ -26,7 +26,7 @@ const IconRow = () => {
     return (
         <div
             ref={iconRef}
-            className={`flex flex-wrap justify-center gap-5 mt-6 lg:mt-2 w-full max-w-screen-md px-4 mx-auto text-center transition-opacity duration-1000 ${
+            className={`flex flex-wrap justify-center gap-5 mt-10 lg:mt-2 w-full max-w-screen-md px-4 mx-auto text-center transition-opacity duration-1000 ${
                 isIconVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
         >
