@@ -63,7 +63,7 @@ export default function CharacterGridSection() {
                         className={`
       absolute left-1/2 transform -translate-x-1/2 
       ${i === 2 ? 'top-[30%] sm:top-[45%]' : 'top-1/2 -translate-y-1/2'}
-      ${i === 1 ? 'top-[29%] sm:top-[52%]' : 'top-1/2 -translate-y-1/2'} 
+      ${i === 1 ? 'top-[24%] sm:top-[52%]' : 'top-1/2 -translate-y-1/2'} 
       ${i === 0 ? 'w-screen max-w-none h-[95vh] overflow-hidden' : ''} 
       ${i !== 0 ? 'w-full max-w-screen-xl' : ''}
     `}
