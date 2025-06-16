@@ -51,7 +51,7 @@ export default function CharacterGridSection() {
     return (
         <div className="flex flex-col w-full">
             <section
-                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-200 pb-4 sm:pt-0 sm:pb-0"
+                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-150 pb-4 sm:pt-0 sm:pb-0"
                 style={{
                     backgroundImage: `url('/images/hero/pc/background.jpg')`,
                 }}
@@ -82,8 +82,7 @@ export default function CharacterGridSection() {
                     </div>
                 ))}
 
-                <div className="hidden sm:block h-[95vh]" />
-                <div className="block sm:hidden h-[calc(100vw*0.5625)]" /> {/* ~16:9 ratio for mobile */}
+
 
             </section>
 
