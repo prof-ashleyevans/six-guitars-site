@@ -57,14 +57,16 @@ export default function CharacterGridSection() {
                 }}
             >
 
-            {characterImages.map((char, i) => (
+                {characterImages.map((char, i) => (
                     <img
                         key={i}
                         data-aos={char.aos}
                         data-aos-delay={char.delay}
                         src={isMobile ? char.mobileSrc : char.desktopSrc}
                         alt={char.alt}
-                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-auto max-w-screen-xl object-contain"
+                        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+      ${i === 0 ? 'w-screen max-w-none' : 'w-full max-w-screen-xl'} 
+      h-auto object-contain`}
                         style={{ zIndex: char.zIndex }}
                     />
                 ))}
