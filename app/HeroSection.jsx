@@ -22,7 +22,7 @@ const characterImages = [
         alt: 'Hero Chase',
         aos: 'fade-up',
         zIndex: 20,
-        delay: 400,
+        delay: 200,
     },
     {
         desktopSrc: '/images/hero/pc/Hero 16x9 Logo.png',
@@ -30,7 +30,7 @@ const characterImages = [
         alt: '6 Guitars Logo',
         aos: 'fade-up',
         zIndex: 30,
-        delay: 800,
+        delay: 400,
     },
 ];
 const HeroSection = () => {
@@ -57,7 +57,7 @@ const HeroSection = () => {
     }, []);
 
     useEffect(() => {
-        AOS.init({ duration: 1800, once: true });
+        AOS.init({ duration: 600, once: true });
     }, []);
 
     useEffect(() => {
