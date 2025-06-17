@@ -70,7 +70,7 @@ const HeroSection = () => {
     return (
     <>
             <section
-                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-94 pb-4 sm:pt-0 sm:pb-0"
+                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-97 pb-4 sm:pt-0 sm:pb-0"
                 style={{
                     backgroundImage: `url('/images/hero/pc/background.jpg')`,
                 }}
@@ -82,8 +82,8 @@ const HeroSection = () => {
                         key={i}
                         className={`
       absolute left-1/2 transform -translate-x-1/2 
-      ${i === 2 ? 'top-[10%] sm:top-[5%]': ''}
-      ${i === 1 ? 'top-[64%] sm:top-[6%]' : ''} 
+      ${i === 2 ? 'top-[20%] sm:top-[5%]': ''}
+      ${i === 1 ? 'top-[18%] sm:top-[6%]' : ''} 
       ${i === 0 ? 'w-screen max-w-none h-[95vh] overflow-hidden' : ''} 
       ${i !== 0 ? 'w-full max-w-screen-xl' : ''}
     `}
@@ -105,7 +105,7 @@ const HeroSection = () => {
             </section>
 
 
-     <div className="relative z-10">
+     <div className="mt-15 mb-5 relative z-10">
          <IconRow />
      </div>
     </>
