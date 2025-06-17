@@ -31,7 +31,12 @@ module.exports = {
                     '100%': { transform: 'rotateY(0deg)', opacity: '1' },
                 },
             },
+            screens: {
+                'xs': '360px',  // Catch Galaxy S8-style widths
+                'fold': '280px' // For Samsung Fold when folded
+            }
         },
     },
     plugins: [],
+
 }

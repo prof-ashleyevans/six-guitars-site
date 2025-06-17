@@ -35,9 +35,9 @@ const IconRow = () => {
                 <img
                     src="/images/icons/guiar_icon.png"
                     alt="Guitar Icon"
-                    className="w-10 h-10 sm:w-21 sm:h-21 object-contain"
+                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md lg:text-2xl leading-tight text-center"><br />Live Music</p>
+                <p className="text-md lg:text-xl leading-tight text-center"><br />Live Music</p>
             </div>
 
             {/* Icon 2 */}
@@ -45,9 +45,9 @@ const IconRow = () => {
                 <img
                     src="/images/icons/ticket_icon.png"
                     alt="Ticket Icon"
-                    className="w-10 h-10 sm:w-21 sm:h-21 object-contain"
+                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md lg:text-2xl leading-tight text-center"><br />Comedy</p>
+                <p className="text-md lg:text-xl leading-tight text-center"><br />Comedy</p>
             </div>
 
             {/* Icon 3 */}
@@ -55,9 +55,9 @@ const IconRow = () => {
                 <img
                     src="/images/icons/comedy_mask_icon.png"
                     alt="Comedy Mask Icon"
-                    className="w-10 h-10 sm:w-21 sm:h-21 object-contain"
+                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md xl:text-2xl lg:text-lg sm:text-md leading-tight text-center whitespace-normal">
+                <p className="text-md xl:text-xl lg:text-lg sm:text-md leading-tight text-center whitespace-normal">
                     <span className="block">100,000+</span>
                     <span className="block">Tickets Sold</span>
                 </p>
