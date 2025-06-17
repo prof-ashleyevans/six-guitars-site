@@ -105,7 +105,7 @@ const HeroSection = () => {
             </section>
 
 
-     <div className="mb-5 relative z-10">
+     <div className="mb-5 pt-2 relative z-10">
          <IconRow />
      </div>
     </>
