@@ -17,7 +17,7 @@ export default function HeaderNav() {
     return (
         <>
             {/* Header */}
-            <header className="text-white px-6 py-4 bg-[#1a1a1a] relative">
+            <header className="text-white px-6 py-4 bg-[#000000] relative">
                 <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
                     {/* Left: Logo */}
                     <div className="text-xl font-bold whitespace-nowrap">6 Guitars</div>

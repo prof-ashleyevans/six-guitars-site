@@ -64,14 +64,13 @@ const HeroSection = () => {
                             className={`absolute ${char.style} z-[${char.zIndex}] object-contain`}
                         />
                     ))}
+
                 </div>
 
-                {/* Spacer to push IconRow below */}
-                <div className="h-[5vh]" />
+                <IconRow />
 
-                <div className="relative z-10">
-                    <IconRow />
-                </div>
+
+
             </section>
         </>
     );
