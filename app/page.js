@@ -23,8 +23,6 @@ export default function Home() {
 
             <HeroSection />
 
-            <IconRow />
-
             <About />
 
             <Reviews />
