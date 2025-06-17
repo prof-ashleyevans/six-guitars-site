@@ -7,7 +7,7 @@ import IconRow from "@/app/IconRow";
 const characterImages = [
     {
         id: 'characters',
-        desktopSrc: '/images/hero/pc/Hero 16x9 Characters.png',
+        desktopSrc: '/images/hero/pc/6G Hero 18x9 Characters.png',
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Characters.png',
         alt: 'Hero Characters',
         zIndex: 10,
@@ -15,22 +15,23 @@ const characterImages = [
     },
     {
         id: 'chase',
-        desktopSrc: '/images/hero/pc/Hero 16x9 Chase.png',
+        desktopSrc: '/images/hero/pc/6G Hero 18x9 Chase.png',
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Chase.png',
         alt: 'Hero Chase',
         zIndex: 20,
-        style: 'w-[100%] sm:w-[95%] top-[0%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[100%] sm:w-[75%] h-[100%] sm:h-[90%] bottom-[0%] left-1/2 transform -translate-x-1/2',
         delay: 400,
     },
     {
         id: 'logo',
-        desktopSrc: '/images/hero/pc/Hero 16x9 Logo.png',
+        desktopSrc: '/images/hero/pc/6G Hero 18x9 Logo.png',
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[100%] sm:w-[100%] top-[7%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[100%] sm:w-[100%] top-[-5%] left-1/2 transform -translate-x-1/2',
         delay: 800,
     },
+
 ];
 
 const HeroSection = () => {
@@ -50,29 +51,63 @@ const HeroSection = () => {
     return (
         <section
             className="relative w-full bg-cover bg-center bg-no-repeat overflow-hidden"
-            style={{ backgroundImage: `url('/images/hero/pc/background.jpg')` }}
+            style={{ backgroundImage: `url('/images/hero/pc/6G Hero 18x9 Plate.jpg')` }}
         >
             <div className="grid w-full grid-rows-[auto_auto]">
 
                 {/* Hero Images (row 1) */}
-                <div className="relative w-full h-auto">
-                    <div className="relative w-full" style={{ aspectRatio: isMobile ? '1 / 1' : '16 / 9' }}>
+                <div className="relative w-full h-full overflow-hidden">
+                    <div className="relative w-full" style={{ aspectRatio: isMobile ? '1 / 1' : '20 / 9' }}>
                         {characterImages.map((char) => (
-                            <img
+                            <div
                                 key={char.id}
-                                src={isMobile ? char.mobileSrc : char.desktopSrc}
-                                alt={char.alt}
-                                data-aos="fade-up"
-                                data-aos-delay={char.delay || 0}
-                                className={`absolute ${char.style} z-[${char.zIndex}] object-contain`}
-                            />
-                        ))}
-                    </div>
-                </div>
+                                className={`absolute z-[${char.zIndex}] ${char.style}`}
+                            >
+                                <img
+                                    src={isMobile ? char.mobileSrc : char.desktopSrc}
+                                    alt={char.alt}
+                                    data-aos="fade-up"
+                                    data-aos-delay={char.delay || 0}
+                                    className="w-full h-full object-cover object-top"
+                                />
 
-                {/* Icon Row (row 2) */}
-                <div className="w-full pt-4">
-                    <IconRow />
+                                {/* Fade to black overlay only for the character image */}
+                                {char.id === 'characters' && (
+                                    <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
+                                )}
+
+
+                            </div>
+                        ))}
+
+                        <div
+                            className="
+        absolute
+        left-1/2
+        transform -translate-x-1/2
+        bottom-0 sm:bottom-0 md:bottom-0
+        z-[50]
+        w-full
+        h-fit
+        pointer-events-none
+    "
+                        >
+                            {/* Gradient fade background */}
+                            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black" />
+
+                            {/* Icon Row */}
+                            <div className="relative pointer-events-auto">
+                                <IconRow />
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
                 </div>
             </div>
         </section>
