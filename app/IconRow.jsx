@@ -31,7 +31,7 @@ const IconRow = () => {
     `}
         >
             {/* Icon 1 */}
-            <div className="flex flex-col items-center w-24 sm:w-44 text-white">
+            <div className="flex flex-col items-center w-22 sm:w-50 text-white">
                 <img
                     src="/images/icons/guiar_icon.png"
                     alt="Guitar Icon"
@@ -41,7 +41,7 @@ const IconRow = () => {
             </div>
 
             {/* Icon 2 */}
-            <div className="flex flex-col items-center w-24 sm:w-44 text-white">
+            <div className="flex flex-col items-center w-22 sm:w-50 text-white">
                 <img
                     src="/images/icons/ticket_icon.png"
                     alt="Ticket Icon"
@@ -51,7 +51,7 @@ const IconRow = () => {
             </div>
 
             {/* Icon 3 */}
-            <div className="flex flex-col items-center w-24 sm:w-44 text-white">
+            <div className="flex flex-col items-center w-22 sm:w-50 text-white">
                 <img
                     src="/images/icons/comedy_mask_icon.png"
                     alt="Comedy Mask Icon"

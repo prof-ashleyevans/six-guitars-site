@@ -31,7 +31,6 @@ const characterImages = [
         style: 'w-[100%] sm:w-[100%] top-[-5%] left-1/2 transform -translate-x-1/2',
         delay: 800,
     },
-
 ];
 
 const HeroSection = () => {
@@ -54,8 +53,7 @@ const HeroSection = () => {
             style={{ backgroundImage: `url('/images/hero/pc/6G Hero 18x9 Plate.jpg')` }}
         >
             <div className="grid w-full grid-rows-[auto_auto]">
-
-                {/* Hero Images (row 1) */}
+                {/* Hero Images */}
                 <div className="relative w-full h-full overflow-hidden">
                     <div className="relative w-full" style={{ aspectRatio: isMobile ? '1 / 1' : '20 / 9' }}>
                         {characterImages.map((char) => (
@@ -71,43 +69,22 @@ const HeroSection = () => {
                                     className="w-full h-full object-cover object-top"
                                 />
 
-                                {/* Fade to black overlay only for the character image */}
                                 {char.id === 'characters' && (
                                     <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
                                 )}
-
-
                             </div>
                         ))}
 
-                        <div
-                            className="
-        absolute
-        left-1/2
-        transform -translate-x-1/2
-        bottom-0 sm:bottom-0 md:bottom-0
-        z-[50]
-        w-full
-        h-fit
-        pointer-events-none
-    "
-                        >
-                            {/* Gradient fade background */}
-                            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black" />
-
-                            {/* Icon Row */}
-                            <div className="relative pointer-events-auto">
+                        {/* ICON ROW: half on hero, half below */}
+                        <div className="absolute bottom-[-2.5rem] sm:bottom-[-3rem] left-1/2 transform -translate-x-1/2 z-[50] w-full mb-5 max-w-screen-lg px-4">
+                            <div className="relative z-10 pointer-events-auto">
                                 <IconRow />
                             </div>
+
+                            {/* Fade background behind icons */}
+                            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black z-[-1] pointer-events-none" />
                         </div>
-
-
-
-
-
-
                     </div>
-
                 </div>
             </div>
         </section>
