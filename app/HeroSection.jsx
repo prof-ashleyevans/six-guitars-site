@@ -70,7 +70,7 @@ const HeroSection = () => {
     return (
     <>
             <section
-                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-74 pb-4 sm:pt-0 sm:pb-0"
+                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-94 pb-4 sm:pt-0 sm:pb-0"
                 style={{
                     backgroundImage: `url('/images/hero/pc/background.jpg')`,
                 }}
