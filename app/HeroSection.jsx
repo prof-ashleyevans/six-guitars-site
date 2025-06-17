@@ -19,7 +19,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Chase.png',
         alt: 'Hero Chase',
         zIndex: 20,
-        style: 'w-[85%] sm:w-[85%] top-[15%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[100%] sm:w-[95%] top-[0%] left-1/2 transform -translate-x-1/2',
         delay: 400,
     },
     {
@@ -28,7 +28,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[75%] sm:w-[55%] top-[30%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[100%] sm:w-[100%] top-[7%] left-1/2 transform -translate-x-1/2',
         delay: 800,
     },
 ];
