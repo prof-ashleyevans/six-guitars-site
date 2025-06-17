@@ -83,7 +83,7 @@ const HeroSection = () => {
                         className={`
       absolute left-1/2 transform -translate-x-1/2 
       ${i === 2 ? 'top-[15%] sm:top-[5%]': ''}
-      ${i === 1 ? 'top-[1%] sm:top-[6%]' : ''} 
+      ${i === 1 ? 'bottom-[21%] sm:bottom-[12%]' : ''} 
       ${i === 0 ? 'w-screen max-w-none h-[95vh] overflow-hidden' : ''} 
       ${i !== 0 ? 'w-full max-w-screen-xl' : ''}
     `}
