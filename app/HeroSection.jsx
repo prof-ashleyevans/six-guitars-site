@@ -11,7 +11,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Characters.png',
         alt: 'Hero Characters',
         zIndex: 10,
-        style: 'w-full h-[80%] object-cover object-top top-0 left-0',
+        style: 'w-full h-full object-cover object-top top-0 left-0',
     },
     {
         id: 'chase',
@@ -19,7 +19,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Chase.png',
         alt: 'Hero Chase',
         zIndex: 20,
-        style: 'w-[75%] sm:w-[75%] top-[5%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[85%] sm:w-[85%] top-[15%] left-1/2 transform -translate-x-1/2',
         delay: 400,
     },
     {
@@ -28,7 +28,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[75%] sm:w-[55%] top-[20%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[75%] sm:w-[55%] top-[30%] left-1/2 transform -translate-x-1/2',
         delay: 800,
     },
 ];
@@ -48,31 +48,34 @@ const HeroSection = () => {
     }, []);
 
     return (
-        <>
-            <section
-                className="relative w-full bg-cover bg-center bg-no-repeat mt-5 pt-0  pb-1 sm:pt-0 sm:pb-0"
-                style={{ backgroundImage: `url('/images/hero/pc/background.jpg')` }}
-            >
-                <div className="relative grid place-items-center w-full aspect-square sm:aspect-[16/9] overflow-hidden">
-                    {characterImages.map((char) => (
-                        <img
-                            key={char.id}
-                            src={isMobile ? char.mobileSrc : char.desktopSrc}
-                            alt={char.alt}
-                            data-aos="fade-up"
-                            data-aos-delay={char.delay || 0}
-                            className={`absolute ${char.style} z-[${char.zIndex}] object-contain`}
-                        />
-                    ))}
+        <section
+            className="relative w-full bg-cover bg-center bg-no-repeat overflow-hidden"
+            style={{ backgroundImage: `url('/images/hero/pc/background.jpg')` }}
+        >
+            <div className="grid w-full grid-rows-[auto_auto]">
 
+                {/* Hero Images (row 1) */}
+                <div className="relative w-full h-auto">
+                    <div className="relative w-full" style={{ aspectRatio: isMobile ? '1 / 1' : '16 / 9' }}>
+                        {characterImages.map((char) => (
+                            <img
+                                key={char.id}
+                                src={isMobile ? char.mobileSrc : char.desktopSrc}
+                                alt={char.alt}
+                                data-aos="fade-up"
+                                data-aos-delay={char.delay || 0}
+                                className={`absolute ${char.style} z-[${char.zIndex}] object-contain`}
+                            />
+                        ))}
+                    </div>
                 </div>
 
-                <IconRow />
-
-
-
-            </section>
-        </>
+                {/* Icon Row (row 2) */}
+                <div className="w-full pt-4">
+                    <IconRow />
+                </div>
+            </div>
+        </section>
     );
 };
 
