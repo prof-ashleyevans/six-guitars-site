@@ -26,9 +26,9 @@ const IconRow = () => {
     return (
         <div
             ref={iconRef}
-            className={`flex flex-wrap justify-center gap-5 mt-10 lg:mt-2 w-full max-w-screen-md px-4 mx-auto text-center transition-opacity duration-1000 ${
-                isIconVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
+            className={`relative z-10 flex flex-wrap justify-center gap-5 mt-10 lg:mt-2 w-full max-w-screen-md px-4 mx-auto text-center transition-all duration-1000 ease-out
+                ${isIconVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}
+            `}
         >
             {/* Icon 1 */}
             <div className="flex flex-col items-center gap-1 w-24 text-white">
@@ -37,7 +37,7 @@ const IconRow = () => {
                     alt="Guitar Icon"
                     className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md lg:text-lg leading-tight "><br/>Live Music</p>
+                <p className="text-md lg:text-lg leading-tight text-center"><br />Live Music</p>
             </div>
 
             {/* Icon 2 */}
@@ -47,7 +47,7 @@ const IconRow = () => {
                     alt="Ticket Icon"
                     className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md lg:text-lg leading-tight "><br/>Comedy</p>
+                <p className="text-md lg:text-lg leading-tight text-center"><br />Comedy</p>
             </div>
 
             {/* Icon 3 */}
@@ -57,7 +57,7 @@ const IconRow = () => {
                     alt="Comedy Mask Icon"
                     className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md xl:text-lg lg:text-lg sm:text-md leading-tight whitespace-normal">
+                <p className="text-md xl:text-lg lg:text-lg sm:text-md leading-tight text-center whitespace-normal">
                     <span className="block">100,000+</span>
                     <span className="block">Tickets Sold</span>
                 </p>
