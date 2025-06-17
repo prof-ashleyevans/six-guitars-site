@@ -76,9 +76,7 @@ const HeroSection = () => {
 
                 {/* Icon Row as Second Grid Row */}
                 <div className="relative z-20 w-full max-w-screen-lg px-4 mx-auto
-                                mt-[-7rem] sm:mt-[-8rem] md:mt-[-6rem] lg:mt-[-8rem] xl:mt-[-10rem]
-                                xs:mt-[-10rem] fold:mt-[-8rem]
-                                2xl:mt-[-9rem]">
+                                mt-[-7rem] sm:mt-[-8rem] md:mt-[-6rem] lg:mt-[-10rem] xl:mt-[-10rem] 2xl:mt-[-9rem]">
                     <div className="relative z-10 pointer-events-auto">
                         <IconRow />
                     </div>
