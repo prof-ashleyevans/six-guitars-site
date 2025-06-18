@@ -12,8 +12,9 @@ import {
     //Quicksand,
     Rancho,
     Fredericka_the_Great,
-    //Roboto_Slab,
+    Roboto_Condensed,
     Michroma,
+    Oswald,
 
 } from "next/font/google";
 
@@ -25,7 +26,7 @@ const jazzFont = Italianno({ weight: "400", subsets: ["latin"], variable: "--fon
 const bluesFont = Limelight({ weight: "400", subsets: ["latin"], variable: "--font-blues" });
 const folkFont = Rancho({ weight: "400", subsets: ["latin"], variable: "--font-folk" });
 const countryFont = Fredericka_the_Great({ weight: "400", subsets: ["latin"], variable: "--font-country" });
-const michroma = Michroma({subsets: ['latin'], weight: '400', display: 'swap',variable: '--font-michroma'});
+const text_font = Oswald({subsets: ['latin'], weight: '400',variable: '--font-text_font'});
 
 export const metadata = {
     title: "6 Guitars",
@@ -36,7 +37,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
         <body
-            className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} ${text_font.variable}   antialiased`}
         >
         {children}
         </body>

@@ -9,7 +9,7 @@ const About = () => {
             {/* ✅ Background Image with Opacity */}
             {/* ✅ Background Image with Opacity */}
             <img
-                src="/images/about/image.jpg"
+                src="/images/about/bg_image2.jpg"
                 alt="Chase performing live"
                 className="absolute inset-0 w-full h-full object-cover opacity-40"
             />
@@ -27,21 +27,26 @@ const About = () => {
             />
 
             {/* ✅ Main Content */}
-            <div className="relative z-10 w-full max-w-screen-xl mx-auto px-4 sm:px-10 min-h-[700px] flex flex-col justify-center items-center text-center">
-                <h1 className="text-4xl sm:text-5xl font-bold mb-6">About the Show</h1>
+            <div className="relative pt-20 z-10 w-full max-w-screen-xl mx-auto px-4 sm:px-10 min-h-[700px] flex flex-col justify-center items-center text-center">
+                <h1 className="text-4xl sm:text-5xl font-bold mt-5 mb-6 tracking-wider">
+  <span className="[font-family:var(--font-text_font)] text-[#FFFFFF]" data-aos="fade-right">
+    1 MAN - 6 CHARACTERS
+  </span>
+                </h1>
 
-                <p className="text-xl mb-4 max-w-md mx-auto">
-                    <span className="font-semibold">Music, Comedy, and so Much More</span> — 6 Guitars is a two-act one-man show that delivers all three.
+
+
+
+                <p className="[font-family:var(--font-text_font)] text-2xl mb-4 max-w-xl mx-auto text-justify">
+                    Actor, Singer, & Guitarist Chase Padgett delivers a stunning performance as he becomes six original guitar-playing characters —
+                    each with their own voice, personality, and genre of music:
                 </p>
 
-                <p className="text-xl mb-6 max-w-md mx-auto">
-                    Chase Padgett brings six guitar-playing characters to life — each with their own voice, personality, and musical style.
-                </p>
 
-                {/* ✅ Genre Slider (moved up + font enlarged) */}
+                {/* Genre Slider Row 1 */}
                 {/* Genre Slider Row 1 */}
                 <div className="w-full mb-0 bg-transparent py-6 px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-                    <div className="inline-flex gap-8 justify-center min-w-full font-bold text-3xl sm:text-5xl leading-tight">
+                    <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-3xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
                         <span className="[font-family:var(--font-blues)] text-[#0562D7]" data-aos="fade-right">Blues</span>
                         <span className="[font-family:var(--font-classical)] text-[#BD5217]" data-aos="fade-down">Classical</span>
                         <span className="[font-family:var(--font-jazz)] text-[#BB6DEB]" data-aos="fade-left">Jazz</span>
@@ -49,13 +54,14 @@ const About = () => {
                 </div>
 
                 {/* Genre Slider Row 2 */}
-                <div className="w-full mb-10 bg-transparent py-6 px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-                    <div className="inline-flex gap-8 justify-center min-w-full font-bold text-3xl sm:text-5xl leading-tight">
+                <div className="w-full mb-1 bg-transparent py-6 px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                    <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-4xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
                         <span className="[font-family:var(--font-rock)] text-[#D2153D]" data-aos="fade-right">Rock</span>
                         <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-up">Folk</span>
                         <span className="[font-family:var(--font-country)] text-[#10AD43]" data-aos="fade-left">Country</span>
                     </div>
                 </div>
+
 
 
 
@@ -67,7 +73,7 @@ const About = () => {
                     <img
                         src="/images/about/6g_trailer_thumb.jpg"
                         alt="Watch the 6 Guitars Trailer"
-                        className="rounded-lg shadow-lg mx-auto max-w-[220px]"
+                        className="rounded-lg shadow-lg mb-5 mx-auto max-w-[420px]"
                     />
                 </div>
 
