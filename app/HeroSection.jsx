@@ -28,7 +28,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[90%] sm:w-[100%] top-[-8%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[90%] sm:w-[90%] top-[-5%] left-1/2 transform -translate-x-1/2',
         delay: 800,
     },
 ];
@@ -52,35 +52,37 @@ const HeroSection = () => {
             className="relative w-full bg-cover bg-center bg-no-repeat overflow-hidden"
             style={{ backgroundImage: `url('/images/hero/pc/6G Hero 18x9 Plate.jpg')` }}
         >
-            <div className="grid w-full" style={{ gridTemplateRows: 'auto auto' }}>
-                {/* Hero Image Row */}
-                <div className="relative w-full" style={{ aspectRatio: isMobile ? '1 / 1' : '20 / 9' }}>
-                    {characterImages.map((char) => (
-                        <div
-                            key={char.id}
-                            className={`absolute z-[${char.zIndex}] ${char.style}`}
-                        >
-                            <img
-                                src={isMobile ? char.mobileSrc : char.desktopSrc}
-                                alt={char.alt}
-                                data-aos="fade-up"
-                                data-aos-delay={char.delay || 0}
-                                className="w-full h-full object-cover object-top"
-                            />
-                            {char.id === 'characters' && (
-                                <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
-                            )}
-                        </div>
-                    ))}
+            <div className="relative w-full">
+                {/* Grid with just the Hero Image Row */}
+                <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
+                    <div className="relative w-full" style={{ aspectRatio: isMobile ? '1 / 1' : '20 / 9' }}>
+                        {characterImages.map((char) => (
+                            <div
+                                key={char.id}
+                                className={`absolute z-[${char.zIndex}] ${char.style}`}
+                            >
+                                <img
+                                    src={isMobile ? char.mobileSrc : char.desktopSrc}
+                                    alt={char.alt}
+                                    data-aos="fade-up"
+                                    data-aos-delay={char.delay || 0}
+                                    className="w-full h-full object-cover object-top"
+                                />
+                                {char.id === 'characters' && (
+                                    <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Icon Row as Second Grid Row */}
-                <div className="relative z-20 w-full max-w-screen-lg px-4 mx-auto
-                                mt-[-7rem] sm:mt-[-8rem] md:mt-[-6rem] lg:mt-[-10rem] xl:mt-[-10rem] 2xl:mt-[-11rem]">
-                    <div className="relative z-10 pointer-events-auto">
+                {/* Absolutely positioned Icon Row overlapping bottom of character image */}
+                <div className="absolute bottom-0 left-0 w-full z-30">
+                    <div className="w-full px-4 pointer-events-auto">
                         <IconRow />
                     </div>
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black z-[-1] pointer-events-none" />
+
                 </div>
             </div>
         </section>
