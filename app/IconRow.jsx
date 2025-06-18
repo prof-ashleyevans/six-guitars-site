@@ -58,8 +58,8 @@ const IconRow = () => {
                     className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
                 <p className="text-md xl:text-xl lg:text-lg sm:text-md leading-tight text-center whitespace-normal">
-                    <span className="block">100,000+</span>
-                    <span className="block">Tickets Sold</span>
+                    <span className="block">1000+ Shows </span>
+                    {/*<span className="block">Tickets Sold</span>*/}
                 </p>
             </div>
         </div>
