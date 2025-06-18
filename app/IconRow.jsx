@@ -37,7 +37,7 @@ const IconRow = () => {
                     alt="Guitar Icon"
                     className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md lg:text-xl leading-tight text-center"><br />Live Music</p>
+                <p className="text-md lg:text-xl leading-tight text-center">Live Music</p>
             </div>
 
             {/* Icon 2 */}
@@ -47,7 +47,7 @@ const IconRow = () => {
                     alt="Ticket Icon"
                     className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
                 />
-                <p className="text-md lg:text-xl leading-tight text-center"><br />Comedy</p>
+                <p className="text-md lg:text-xl leading-tight text-center">Comedy</p>
             </div>
 
             {/* Icon 3 */}
