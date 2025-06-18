@@ -35,7 +35,7 @@ const characterImages = [
 
 const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
-
+    {/**/}
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 640);
         checkMobile();
