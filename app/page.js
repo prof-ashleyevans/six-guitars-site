@@ -27,6 +27,8 @@ export default function Home() {
 
             <Reviews />
 
+            <IconRow />
+
             <AudienceReviews />
 
             <Tickets />

@@ -26,7 +26,7 @@ const IconRow = () => {
     return (
         <div
             ref={iconRef}
-            className={`relative z-10 flex flex-wrap justify-center gap-5 w-full max-w-screen-md px-4  mb-10  bg-transparent mx-auto text-center transition-all duration-700 ease-out
+            className={`relative z-10 flex flex-wrap justify-center gap-2 w-full max-w-screen-md px-4  mb-10  bg-transparent mx-auto text-center transition-all duration-700 ease-out
         ${isIconVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
     `}
         >
@@ -35,7 +35,7 @@ const IconRow = () => {
                 <img
                     src="/images/icons/guiar_icon.png"
                     alt="Guitar Icon"
-                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 object-contain"
                 />
                 <p className="text-md lg:text-xl leading-tight text-center">Live Music</p>
             </div>
@@ -45,7 +45,7 @@ const IconRow = () => {
                 <img
                     src="/images/icons/ticket_icon.png"
                     alt="Ticket Icon"
-                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 object-contain"
                 />
                 <p className="text-md lg:text-xl leading-tight text-center">Comedy</p>
             </div>
@@ -55,10 +55,10 @@ const IconRow = () => {
                 <img
                     src="/images/icons/comedy_mask_icon.png"
                     alt="Comedy Mask Icon"
-                    className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 object-contain"
                 />
                 <p className="text-md xl:text-xl lg:text-lg sm:text-md leading-tight text-center whitespace-normal">
-                    <span className="block">1000+ Shows </span>
+                    <span className="block">100,000+ Sold </span>
                     {/*<span className="block">Tickets Sold</span>*/}
                 </p>
             </div>
