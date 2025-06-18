@@ -9,7 +9,7 @@ const About = () => {
             {/* ✅ Background Image with Opacity */}
             {/* ✅ Background Image with Opacity */}
             <img
-                src="/images/about/Chase_Live_Show_Stage.jpg"
+                src="/images/about/image.jpg"
                 alt="Chase performing live"
                 className="absolute inset-0 w-full h-full object-cover opacity-40"
             />
