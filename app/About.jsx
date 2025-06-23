@@ -7,7 +7,6 @@ const About = () => {
     return (
         <section id="about" className="relative text-white overflow-hidden min-h-[700px]">
             {/* ✅ Background Image with Opacity */}
-            {/* ✅ Background Image with Opacity */}
             <img
                 src="/images/about/bg_image2.jpg"
                 alt="Chase performing live"
