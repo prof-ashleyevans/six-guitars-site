@@ -20,7 +20,7 @@ export default function HeaderNav() {
             <header className="text-white px-6 py-4 bg-[#000000] relative">
                 <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
                     {/* Left: Logo */}
-                    <div className="flex items-center">
+                    <div className="flex items-center -ml-1 sm:ml-0">
                         <a href="/">
                             <img
                                 src="/images/header_nav/logo.png"
@@ -29,6 +29,7 @@ export default function HeaderNav() {
                             />
                         </a>
                     </div>
+
 
 
                     {/* Center: BUY TICKETS button */}
