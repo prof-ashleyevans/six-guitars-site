@@ -31,6 +31,9 @@ const text_font = Oswald({subsets: ['latin'], weight: '400',variable: '--font-te
 export const metadata = {
     title: "6 Guitars",
     description: "Official site of Chase Padgett's award-winning show",
+    icons: {
+        icon: '/images/header_nav/favicon.ico',
+    },
 };
 
 export default function RootLayout({ children }) {
@@ -44,3 +47,4 @@ export default function RootLayout({ children }) {
         </html>
     );
 }
+
