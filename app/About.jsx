@@ -38,7 +38,7 @@ const About = () => {
                         </span>
                     </h1>
 
-                    <p className="[font-family:var(--font-text_font)] text-2xl mb-4 max-w-xl text-justify text-center">
+                    <p className="[font-family:var(--font-text_font)] text-2xl mb-4 max-w-xl text-justify text-right" data-aos="fade-up">
                         Actor, Singer, & Guitarist Chase Padgett delivers a stunning performance as he becomes six original guitar-playing characters —
                         each with their own voice, personality, and genre of music:
                     </p>
