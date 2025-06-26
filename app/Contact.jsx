@@ -39,7 +39,7 @@ export default function Contact() {
                 <h2 className="text-3xl font-bold mb-6 text-center">Contact Chase </h2>
                 <p className="text-center text-yellow-500"> Chase would love to hear from  you! Drop him a line here. </p>
                 {submitted ? (
-                    <p className="text-center text-green-500">Thanks for reaching out! We'll be in touch.</p>
+                    <p className="text-center text-green-500">Thanks for reaching out! </p>
                 ) : (
                     <form
                         action="https://formspree.io/f/xovwwoay"
