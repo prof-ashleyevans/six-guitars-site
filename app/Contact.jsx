@@ -3,9 +3,35 @@ import React, { useState } from 'react';
 
 export default function Contact() {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const formData = new FormData(e.target);
+
+        try {
+            const res = await fetch('https://formspree.io/f/xovwwoay', {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: formData,
+            });
+
+            if (res.ok) {
+                setSubmitted(true);
+            } else {
+                alert('Oops! Something went wrong.');
+            }
+        } catch (error) {
+            alert('Network error. Please try again later.');
+        }
+
+        setLoading(false);
+    };
 
     return (
-        <section id="contact" className="bg-black text-white px-6 py-16">
+        <section id="contact" className="bg-black text-white px-1 py-6">
             <div className="max-w-3xl mx-auto text-center">
                 <h2 className="text-4xl font-bold mb-8">Stay In The Loop</h2>
                 <p className="text-lg mb-0 text-yellow-400">
@@ -33,67 +59,52 @@ export default function Contact() {
                         />
                     </div>
                 </div>
-            </div>
 
-            <div className="max-w-xl mx-auto">
-                <h2 className="text-3xl font-bold mb-6 text-center">Contact Chase </h2>
-                <p className="text-center text-yellow-500"> Chase would love to hear from  you! Drop him a line here. </p>
-                {submitted ? (
-                    <p className="text-center text-green-500">Thanks for reaching out! </p>
-                ) : (
-                    <form
-                        action="https://formspree.io/f/xovwwoay"
-                        method="POST"
-                        onSubmit={() => setSubmitted(true)}
-                        className="space-y-6"
-                    >
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium">
-                                Name
-                            </label>
+                <div className="max-w-xl mx-auto">
+                    <h2 className="text-3xl font-bold mb-6 text-center">Contact Chase</h2>
+                    <p className="text-center text-yellow-500">
+                        Chase would love to hear from you! Drop him a line here.
+                    </p>
+
+                    {submitted ? (
+                        <p className="text-center text-green-500 mt-6">
+                            Thanks for reaching out!
+                        </p>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="space-y-6 mt-8">
                             <input
                                 type="text"
-                                id="name"
                                 name="name"
                                 required
+                                placeholder="Your Name"
                                 className="w-full px-4 py-2 mt-1 bg-gray-800 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                        </div>
-
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium">
-                                Email
-                            </label>
                             <input
                                 type="email"
-                                id="email"
-                                name="_replyto"
+                                name="email"
                                 required
+                                placeholder="Your Email"
                                 className="w-full px-4 py-2 mt-1 bg-gray-800 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                        </div>
-
-                        <div>
-                            <label htmlFor="message" className="block text-sm font-medium">
-                                Message
-                            </label>
                             <textarea
-                                id="message"
                                 name="message"
-                                rows="5"
                                 required
+                                rows={5}
+                                placeholder="Your Message"
                                 className="w-full px-4 py-2 mt-1 bg-gray-800 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            ></textarea>
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md transition"
-                        >
-                            Send Message
-                        </button>
-                    </form>
-                )}
+                            />
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className={`${
+                                    loading ? 'opacity-50 cursor-not-allowed' : ''
+                                } bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md transition`}
+                            >
+                                {loading ? 'Sending...' : 'Send Message'}
+                            </button>
+                        </form>
+                    )}
+                </div>
             </div>
         </section>
     );
