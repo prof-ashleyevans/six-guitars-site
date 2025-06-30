@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
-    "@heroicons/react": "^1.0.6",
+    "@heroicons/react": "^2.2.0",
     "aos": "^2.3.4",
     "keen-slider": "^6.8.6",
     "next": "15.3.1",

@@ -7,6 +7,11 @@ module.exports = {
     ],
     theme: {
         extend: {
+
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(circle at center, var(--tw-gradient-stops))',
+            },
+
             animation: {
                 'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
                 'fade-in': 'fadeIn 0.5s ease-out forwards',
@@ -38,5 +43,7 @@ module.exports = {
         },
     },
     plugins: [],
+
+
 
 }
