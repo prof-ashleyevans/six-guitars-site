@@ -76,7 +76,7 @@ export default function Contact() {
                 >
                     {/* 1. Centered heading */}
                     <h2 className="text-4xl font-bold mb-5 text-white text-center">
-                        Stay In The Loop
+                        Give Us a Shout
                     </h2>
 
                     {/* 2. Right-aligned on mobile, centered on desktop */}
