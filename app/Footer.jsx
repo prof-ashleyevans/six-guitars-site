@@ -14,7 +14,7 @@ export default function Footer() {
         <>
             <footer className="bg-black text-white px-6 py-8">
                 <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div className="text-sm text-center md:text-left">
+                    <div className="text-sm text-center md:text-center">
                         © {new Date().getFullYear()} 6 Guitars. All rights reserved.
                     </div>
 
