@@ -62,8 +62,29 @@ export default function Footer() {
 
             {/* Floating Ticket Button */}
             {/* Scroll-triggered Button */}
+            {/* ✅ Mobile version: full-width black bar at bottom */}
+            <div className="sm:hidden fixed bottom-0 left-0 w-full bg-black py-3 z-40">
+                <div className="mx-auto w-fit">
+                    <div
+                        className="inline-block bg-white/10 border border-white px-1 py-2 rounded-sm z-10"
+                        style={{
+                            animation: 'pulseGlow 5s ease-in-out infinite',
+                            boxShadow: '0 0 5px rgba(255, 255, 255, 0.5)',
+                        }}
+                    >
+                        <a
+                            href="#tickets"
+                            className="bg-[#8a828c] text-white px-3 py-2 rounded-sm font-semibold hover:bg-[#b01234] transition"
+                        >
+                            BUY TICKETS
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {/* ✅ Desktop version: floating centered button */}
             <div
-                className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-500 ${
+                className={`hidden sm:block fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-500 ${
                     showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
             >
@@ -82,6 +103,8 @@ export default function Footer() {
                     </a>
                 </div>
             </div>
+
+
 
             {/* Spacer */}
             <div className="h-20 md:h-16" />
