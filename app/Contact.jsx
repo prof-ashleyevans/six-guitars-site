@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -52,21 +53,28 @@ export default function Contact() {
         <section className="relative py-16">
             {/* ✅ Mobile Background (rotated or resized if needed) */}
             <div className="block sm:hidden absolute inset-0 overflow-hidden">
-                <div
-                    className="w-[140px] h-full origin-center bg-contain bg-no-repeat bg-center"
-                    style={{
-                        backgroundImage: "url('/images/guitar_only_small_mobile.png')",
-                    }}
-                ></div>
+                <div className="relative w-[140px] h-full">
+                    <Image
+                        src="/images/guitar_only_small_mobile.png"
+                        alt="Guitar background mobile"
+                        fill
+                        quality={75}
+                        className="object-contain object-center"
+                    />
+                </div>
             </div>
 
             {/* ✅ Desktop Background */}
-            <div
-                className="hidden sm:block absolute inset-0 bg-cover bg-[25%_center]"
-                style={{
-                    backgroundImage: "url('/images/guitar_only_shifted.png')",
-                }}
-            ></div>
+            <div className="hidden sm:block absolute inset-0">
+                <Image
+                    src="/images/guitar_only_shifted.png"
+                    alt="Guitar background"
+                    fill
+                    quality={75}
+                    className="object-cover"
+                    style={{ objectPosition: '25% center' }}
+                />
+            </div>
 
             {/* Overlay */}
             <div className="relative z-10 bg-black/30 py-12 px-4">

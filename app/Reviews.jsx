@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 
@@ -69,20 +70,39 @@ export default function Reviews() {
                         {reviews.map((review, index) => (
                             <div key={index} className="keen-slider__slide relative w-full h-full">
                                 {/* Background */}
-                                <div className="absolute inset-0 overflow-hidden z-0">
-                                    <img
+                                <div className="absolute inset-0 overflow-hidden z-0 opacity-20">
+                                    <Image
                                         src={review.characterImage}
                                         alt="Character"
-                                        className="w-full h-full object-cover opacity-20 scale-105"
+                                        fill
+                                        quality={70}
+                                        className="object-cover scale-105"
                                     />
                                 </div>
 
                                 {/* Content */}
                                 <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-                                    <img src="/images/5 Stars.png" alt="5 stars" className="h-10 md:h-10 mt-2 object-contain" />
+                                    <div className="relative h-10 w-auto">
+                                        <Image 
+                                            src="/images/5 Stars.png" 
+                                            alt="5 stars" 
+                                            width={150}
+                                            height={40}
+                                            quality={85}
+                                            className="h-10 w-auto mt-2 object-contain" 
+                                        />
+                                    </div>
                                     <p className="italic text-2xl md:text-2xl mb-12 pt-40 max-w-[200px]">"{review.quote}"</p>
                                     {/*} <p className="text-yellow-300 text-md mt-1">&ndash; {review.source}</p>*/}
-                                    <img src={review.logo} alt={review.source} className="h-24 mt-12 object-contain" />
+                                    <div className="relative h-24 w-full mt-12">
+                                        <Image 
+                                            src={review.logo} 
+                                            alt={review.source} 
+                                            fill
+                                            quality={85}
+                                            className="object-contain" 
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         ))}

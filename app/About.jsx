@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import Image from 'next/image';
 
 const About = () => {
     const [showTrailer, setShowTrailer] = useState(false);
@@ -7,11 +8,15 @@ const About = () => {
     return (
         <section id="about" className="relative text-white overflow-hidden min-h-[700px]">
             {/* ✅ Background Image with Opacity */}
-            <img
-                src="/images/about/bg_image2.jpg"
-                alt="Chase performing live"
-                className="absolute inset-0 w-full h-full object-cover opacity-40"
-            />
+            <div className="absolute inset-0 w-full h-full opacity-40">
+                <Image
+                    src="/images/about/bg_image2.jpg"
+                    alt="Chase performing live"
+                    fill
+                    quality={75}
+                    className="object-cover"
+                />
+            </div>
 
             {/* ✅ Top Fade Overlay */}
             <div className="absolute inset-0 z-10 pointer-events-none" style={{
@@ -66,11 +71,16 @@ const About = () => {
                         onClick={() => setShowTrailer(true)}
                         className="cursor-pointer mt-2 transition-transform hover:scale-105"
                     >
-                        <img
-                            src="/images/about/6g_trailer_thumb.jpg"
-                            alt="Watch the 6 Guitars Trailer"
-                            className="rounded-lg shadow-lg mb-5 mx-auto max-w-[320px]"
-                        />
+                        <div className="relative w-full max-w-[320px] aspect-video mx-auto">
+                            <Image
+                                src="/images/about/6g_trailer_thumb.jpg"
+                                alt="Watch the 6 Guitars Trailer"
+                                width={320}
+                                height={180}
+                                quality={80}
+                                className="rounded-lg shadow-lg mb-5"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import IconRow from "@/app/IconRow";
@@ -48,10 +49,19 @@ const HeroSection = () => {
     }, []);
 
     return (
-        <section
-            className="relative w-full bg-cover bg-center bg-no-repeat overflow-hidden"
-            style={{ backgroundImage: `url('/images/hero/pc/6G Hero 18x9 Plate.jpg')` }}
-        >
+        <section className="relative w-full overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/images/hero/pc/6G Hero 18x9 Plate.jpg"
+                    alt="Background plate"
+                    fill
+                    priority
+                    quality={90}
+                    className="object-cover object-center"
+                />
+            </div>
+
             <div className="relative w-full">
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
@@ -60,12 +70,16 @@ const HeroSection = () => {
                             <div
                                 key={char.id}
                                 className={`absolute z-[${char.zIndex}] ${char.style}`}
+                                data-aos="fade-up"
+                                data-aos-delay={char.delay || 0}
                             >
-                                <img
+                                <Image
                                     src={isMobile ? char.mobileSrc : char.desktopSrc}
                                     alt={char.alt}
-                                    data-aos="fade-up"
-                                    data-aos-delay={char.delay || 0}
+                                    width={2000}
+                                    height={1000}
+                                    priority={char.id === 'characters'}
+                                    quality={85}
                                     className="w-full h-full object-cover object-top"
                                 />
                                 {char.id === 'characters' && (
