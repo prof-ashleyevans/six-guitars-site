@@ -1,6 +1,7 @@
 // CharacterGridSection.jsx
 'use client';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import IconRow from "@/app/IconRow";
@@ -50,12 +51,17 @@ export default function CharacterGridSection() {
 
     return (
         <div className="flex flex-col w-full">
-            <section
-                className="relative w-full h-auto sm:min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat mt-5 pt-180 pb-4 sm:pt-0 sm:pb-0"
-                style={{
-                    backgroundImage: `url('/images/hero/pc/background.jpg')`,
-                }}
-            >
+            <section className="relative w-full h-auto sm:min-h-screen flex items-center justify-center mt-5 pt-180 pb-4 sm:pt-0 sm:pb-0">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/hero/pc/background.jpg"
+                        alt="Background"
+                        fill
+                        quality={75}
+                        className="object-cover object-center"
+                    />
+                </div>
 
                 {characterImages.map((char, i) => (
 
@@ -70,15 +76,18 @@ export default function CharacterGridSection() {
     `}
                         style={{ zIndex: char.zIndex }}
                     >
-                        <img
-                            data-aos={char.aos}
-                            data-aos-delay={char.delay}
-                            src={isMobile ? char.mobileSrc : char.desktopSrc}
-                            alt={char.alt}
-                            className={i === 0
-                                ? 'w-full h-auto sm:h-full sm:object-cover sm:object-top'
-                                : 'w-full h-auto object-contain'}
-                        />
+                        <div className="relative w-full h-full" data-aos={char.aos} data-aos-delay={char.delay}>
+                            <Image
+                                src={isMobile ? char.mobileSrc : char.desktopSrc}
+                                alt={char.alt}
+                                fill
+                                priority={i === 0}
+                                quality={85}
+                                className={i === 0
+                                    ? 'object-cover sm:object-top'
+                                    : 'object-contain'}
+                            />
+                        </div>
                     </div>
                 ))}
 

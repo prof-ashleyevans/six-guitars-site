@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -29,14 +30,17 @@ export default function AudienceReviews() {
             {/* Responsive background gradient mask */}
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-0" />
-            <div
-                className="relative w-full bg-no-repeat bg-center bg-cover bg-fixed audience-bg-mask"
-                style={{
-                    backgroundImage: "url('/images/audience_photo.jpg')",
-                    backgroundSize: '101% auto', // or '100% auto' if you prefer
-                    backgroundPosition: 'top center',
-                }}
-            >
+            <div className="relative w-full audience-bg-mask">
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/audience_photo.jpg"
+                        alt="Audience"
+                        fill
+                        quality={75}
+                        className="object-cover object-top"
+                    />
+                </div>
 
 
 

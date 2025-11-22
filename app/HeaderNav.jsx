@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function HeaderNav() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -22,11 +23,17 @@ export default function HeaderNav() {
                     {/* Left: Logo */}
                     <div className="flex items-center pl-[-10] sm:ml-0 sm:pl-0">
                         <a href="/">
-                            <img
-                                src="/images/header_nav/logo.png"
-                                alt="6 Guitars Logo"
-                                className="h-10 w-30"
-                            />
+                            <div className="relative h-10 w-30">
+                                <Image
+                                    src="/images/header_nav/logo.png"
+                                    alt="6 Guitars Logo"
+                                    width={120}
+                                    height={40}
+                                    priority
+                                    quality={90}
+                                    className="h-10 w-auto"
+                                />
+                            </div>
                         </a>
                     </div>
 

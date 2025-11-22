@@ -1,5 +1,6 @@
 'use client';
 import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const useInView = (options = {}) => {
     const ref = useRef(null);
@@ -32,31 +33,43 @@ const IconRow = () => {
         >
             {/* Icon 1 */}
             <div className="flex flex-col items-center w-22 sm:w-50 text-white">
-                <img
-                    src="/images/icons/guiar_icon.png"
-                    alt="Guitar Icon"
-                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 object-contain"
-                />
+                <div className="relative w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24">
+                    <Image
+                        src="/images/icons/guiar_icon.png"
+                        alt="Guitar Icon"
+                        fill
+                        quality={90}
+                        className="object-contain"
+                    />
+                </div>
                 <p className="text-md lg:text-xl leading-tight text-center">Live Music</p>
             </div>
 
             {/* Icon 2 */}
             <div className="flex flex-col items-center w-22 sm:w-50 text-white">
-                <img
-                    src="/images/icons/ticket_icon.png"
-                    alt="Ticket Icon"
-                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 object-contain"
-                />
+                <div className="relative w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24">
+                    <Image
+                        src="/images/icons/ticket_icon.png"
+                        alt="Ticket Icon"
+                        fill
+                        quality={90}
+                        className="object-contain"
+                    />
+                </div>
                 <p className="text-md lg:text-xl leading-tight text-center">Comedy</p>
             </div>
 
             {/* Icon 3 */}
             <div className="flex flex-col items-center w-22 sm:w-50 text-white">
-                <img
-                    src="/images/icons/comedy_mask_icon.png"
-                    alt="Comedy Mask Icon"
-                    className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 object-contain"
-                />
+                <div className="relative w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24">
+                    <Image
+                        src="/images/icons/comedy_mask_icon.png"
+                        alt="Comedy Mask Icon"
+                        fill
+                        quality={90}
+                        className="object-contain"
+                    />
+                </div>
                 <p className="text-md xl:text-xl lg:text-lg sm:text-md leading-tight text-center whitespace-normal">
                     <span className="block">100,000+ Sold </span>
                     {/*<span className="block">Tickets Sold</span>*/}
