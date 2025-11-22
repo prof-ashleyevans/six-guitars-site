@@ -38,7 +38,7 @@ export default function HeaderNav() {
                     >
                         <a
                             href="#tickets"
-                            className="inline-block bg-[#8a828c] text-white px-6 py-3 rounded-md text-lg font-bold hover:bg-[#b01234] transition border-2 border-white"
+                            className="inline-block bg-[#8a828c] text-white px-3 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-lg font-bold hover:bg-[#b01234] transition border-2 border-white"
                             style={{
                                 boxShadow: '0 0 5px rgba(255, 255, 255, 0.5)',
                             }}
