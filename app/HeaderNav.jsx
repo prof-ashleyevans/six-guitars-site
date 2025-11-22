@@ -4,16 +4,6 @@ import Image from 'next/image';
 
 export default function HeaderNav() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [showHeaderButton, setShowHeaderButton] = useState(true);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowHeaderButton(window.scrollY < 100); // Hide after scrolling 100px
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
         <>
@@ -40,22 +30,22 @@ export default function HeaderNav() {
 
 
                     {/* Center: BUY TICKETS button */}
-                    {showHeaderButton && (
-                        <div
-                            className="absolute left-1/2 transform -translate-x-1/2 border border-white px-1 py-1 rounded-sm z-10"
+                    <div
+                        className="absolute left-1/2 transform -translate-x-1/2 z-10"
+                        style={{
+                            animation: 'pulseGlow 5s ease-in-out infinite',
+                        }}
+                    >
+                        <a
+                            href="#tickets"
+                            className="inline-block bg-[#8a828c] text-white px-6 py-3 rounded-md text-lg font-bold hover:bg-[#b01234] transition border-2 border-white"
                             style={{
-                                animation: 'pulseGlow 5s ease-in-out infinite',
-                                boxShadow: '0 0 1px rgba(255, 255, 255, 0.5)',
+                                boxShadow: '0 0 5px rgba(255, 255, 255, 0.5)',
                             }}
                         >
-                            <a
-                                href="#tickets"
-                                className="bg-[#8a828c] text-white px-2 py-1 rounded-sm font-semibold hover:bg-[#b01234] transition"
-                            >
-                                BUY TICKETS
-                            </a>
-                        </div>
-                    )}
+                            BUY TICKETS
+                        </a>
+                    </div>
 
                     {/* Right-aligned Menu (Desktop) */}
                     <nav className="hidden md:flex ml-auto items-center space-x-6">

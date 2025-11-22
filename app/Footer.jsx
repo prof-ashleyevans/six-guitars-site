@@ -3,13 +3,10 @@ import { useEffect, useState } from 'react';
 
 export default function Footer() {
     const [showButton, setShowButton] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            const scrollY = window.scrollY;
-            setScrolled(scrollY > 40);       // Controls top vs bottom behavior
-            setShowButton(scrollY > 100);     // Original show/hide logic
+            setShowButton(window.scrollY > 100); // Show bottom button after scrolling 100px
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -17,20 +14,16 @@ export default function Footer() {
     }, []);
 
     const buttonContent = (
-        <div
-            className="inline-block bg-white/10 border border-white px-1 py-2 rounded-sm z-10"
+        <a
+            href="#tickets"
+            className="inline-block bg-[#8a828c] text-white px-6 py-3 rounded-md text-lg font-bold hover:bg-[#b01234] transition border-2 border-white"
             style={{
                 animation: 'pulseGlow 5s ease-in-out infinite',
                 boxShadow: '0 0 5px rgba(255, 255, 255, 0.5)',
             }}
         >
-            <a
-                href="#tickets"
-                className="bg-[#8a828c] text-white px-3 py-2 rounded-sm font-semibold hover:bg-[#b01234] transition"
-            >
-                BUY TICKETS
-            </a>
-        </div>
+            BUY TICKETS
+        </a>
     );
 
     return (
@@ -71,15 +64,8 @@ export default function Footer() {
                 </div>
             </footer>
 
-            {/* ✅ Button at top (before scroll) — all screen sizes */}
-            {!scrolled && (
-                <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-                    {buttonContent}
-                </div>
-            )}
-
             {/* ✅ Mobile: full-width bottom bar after scroll */}
-            {scrolled && (
+            {showButton && (
                 <div className="sm:hidden fixed bottom-0 left-0 w-full bg-black py-3 z-40">
                     <div className="mx-auto w-fit">{buttonContent}</div>
                 </div>
@@ -88,7 +74,7 @@ export default function Footer() {
             {/* ✅ Desktop: floating centered button after scroll */}
             <div
                 className={`hidden sm:block fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-500 ${
-                    scrolled && showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
             >
                 {buttonContent}
