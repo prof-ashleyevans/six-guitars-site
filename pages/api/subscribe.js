@@ -3,6 +3,10 @@ export default async function handler(req, res) {
 
     const { name, email } = req.body;
 
+    console.log('📧 Subscribe request received:', { name, email });
+    console.log('🔑 API Key exists:', !!process.env.BREVO_API_KEY);
+    console.log('📋 List ID:', process.env.BREVO_LIST_ID);
+
     try {
         const response = await fetch('https://api.brevo.com/v3/contacts', {
             method: 'POST',
@@ -19,12 +23,16 @@ export default async function handler(req, res) {
             }),
         });
 
+        const responseData = await response.json();
+        console.log('📬 Brevo response status:', response.status);
+        console.log('📬 Brevo response:', responseData);
+
         if (!response.ok) {
-            const error = await response.json();
-            console.error('Brevo error:', error);
-            return res.status(500).json({ error: 'Brevo failed' });
+            console.error('❌ Brevo error:', responseData);
+            return res.status(500).json({ error: 'Brevo failed', details: responseData });
         }
 
+        console.log('✅ Successfully subscribed:', email);
         return res.status(200).json({ message: 'Subscribed' });
     } catch (err) {
         console.error(err);
