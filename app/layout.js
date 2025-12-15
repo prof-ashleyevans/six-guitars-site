@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import {
     Freckle_Face,
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
             className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} ${text_font.variable}   antialiased`}
         >
         {children}
+        <Analytics />
         </body>
         </html>
     );
