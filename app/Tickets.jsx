@@ -163,10 +163,13 @@ function SingleShowCard({ show }) {
                     <span className="text-gray-400 uppercase">{dayShort}</span>
                 </div>
                 
-                {/* Location & Venue */}
+                {/* Location */}
                 <div>
                     <span className="text-yellow-400 font-bold uppercase">{show.location}</span>
-                    <span className="text-gray-300 mx-2">•</span>
+                </div>
+                
+                {/* Venue */}
+                <div>
                     <span>{show.venue}</span>
                 </div>
                 
