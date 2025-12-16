@@ -3,62 +3,158 @@ import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-// Toggle this flag to switch between dummy data and live API call
-const USE_DUMMY_DATA = true;
+// Ticket status colors and styles
+// Matches Airtable "Ticket Avail" field values
+const ticketStatusConfig = {
+    'available': {
+        bgColor: 'bg-green-600',
+        hoverColor: 'hover:bg-green-700',
+        borderColor: 'border-green-500',
+        text: 'Get Tickets',
+        clickable: true,
+    },
+    'coming soon': {
+        bgColor: 'bg-gray-500',
+        hoverColor: '',
+        borderColor: 'border-gray-400',
+        text: 'Coming Soon',
+        clickable: false,
+    },
+    'limited avail': {
+        bgColor: 'bg-yellow-500',
+        hoverColor: 'hover:bg-yellow-600',
+        borderColor: 'border-yellow-400',
+        text: 'Get Tickets - Limited Availability',
+        clickable: true,
+    },
+    'going fast': {
+        bgColor: 'bg-orange-500',
+        hoverColor: 'hover:bg-orange-600',
+        borderColor: 'border-orange-400',
+        text: 'Buy Now - Going Fast!',
+        clickable: true,
+    },
+    'sold out': {
+        bgColor: 'bg-red-600',
+        hoverColor: '',
+        borderColor: 'border-red-500',
+        text: 'Sold Out!',
+        clickable: false,
+    },
+    'sold out!': {
+        bgColor: 'bg-red-600',
+        hoverColor: '',
+        borderColor: 'border-red-500',
+        text: 'Sold Out!',
+        clickable: false,
+    },
+};
 
-// Dummy show data
-const dummyShows = [
-    {
-        date: '2025-07-15',
-        time: '8:00 PM',
-        venue: 'Apollo Theater',
-        location: 'New York, NY',
-        link: 'https://example.com/tickets/1',
-        fullBand: true,
-    },
-    {
-        date: '2025-07-22',
-        time: '7:30 PM',
-        venue: 'House of Blues',
-        location: 'Chicago, IL',
-        link: 'https://example.com/tickets/2',
-        fullBand: false,
-    },
-];
+function getTicketConfig(status) {
+    const normalizedStatus = (status || 'available').toLowerCase().trim();
+    return ticketStatusConfig[normalizedStatus] || ticketStatusConfig['available'];
+}
 
 export default function Tickets() {
     const [shows, setShows] = useState([]);
-    const [startAnimation, setStartAnimation] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (USE_DUMMY_DATA) {
-            setShows(dummyShows);
-        } else {
-            fetch('/api/shows')
-                .then((res) => res.json())
-                .then((data) => setShows(data))
-                .catch((err) => console.error('Failed to load shows:', err));
-        }
+        fetch('/api/shows')
+            .then((res) => res.json())
+            .then((data) => {
+                // Ensure data is an array, otherwise default to empty array
+                if (Array.isArray(data)) {
+                    setShows(data);
+                } else {
+                    console.error('API returned non-array:', data);
+                    setShows([]);
+                }
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error('Failed to load shows:', err);
+                setShows([]);
+                setLoading(false);
+            });
 
         AOS.init({ once: true });
-
-        const timer = setTimeout(() => {
-            setStartAnimation(true);
-        }, 1000);
-
-        return () => clearTimeout(timer);
     }, []);
 
-    function formatDate(show) {
-        const [year, month, day] = show.date.split('-');
-        const localDate = new Date(Number(year), Number(month) - 1, Number(day));
-        const datePart = localDate.toLocaleDateString(undefined, {
+    function parseDate(dateStr) {
+        if (!dateStr) return null;
+        
+        let date;
+        
+        if (dateStr.includes('T') || dateStr.includes('-')) {
+            // ISO format: 2025-01-12 or 2025-01-12T00:00:00.000Z
+            date = new Date(dateStr);
+        } else if (dateStr.includes('/')) {
+            // US format: 1/12/2026 or 12/7/2025
+            const parts = dateStr.split('/');
+            const month = parseInt(parts[0], 10) - 1;
+            const day = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+            date = new Date(year, month, day);
+        } else {
+            date = new Date(dateStr);
+        }
+        
+        if (isNaN(date.getTime())) return null;
+        return date;
+    }
+
+    function formatMonthDay(dateStr) {
+        const date = parseDate(dateStr);
+        if (!date) return 'TBD';
+        return date.toLocaleDateString(undefined, {
             month: 'short',
             day: 'numeric',
-            year: 'numeric',
         });
+    }
 
-        return show.time ? `${datePart} - ${show.time}` : datePart;
+    function formatDayOfWeek(dateStr) {
+        const date = parseDate(dateStr);
+        if (!date) return '';
+        return date.toLocaleDateString(undefined, {
+            weekday: 'long',
+        });
+    }
+
+    function TicketButton({ performance }) {
+        const config = getTicketConfig(performance.ticketAvail);
+        const link = performance.ticketLink || performance.link;
+        const fullLink = link?.startsWith('http') 
+            ? link 
+            : `https://${link}`;
+
+        const buttonContent = (
+            <>
+                <span className="font-semibold">{config.text}</span>
+                {config.clickable && <span className="ml-1">→</span>}
+            </>
+        );
+
+        if (config.clickable && link) {
+            return (
+                <a
+                    href={fullLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-4 py-2 min-h-[50px] flex items-center justify-center gap-1 rounded-full transition text-sm text-white text-center`}
+                >
+                    {buttonContent}
+                </a>
+            );
+        }
+
+        return (
+            <div
+                className={`${config.bgColor} border ${config.borderColor} px-4 py-2 min-h-[50px] flex items-center justify-center gap-1 rounded-full text-sm text-white text-center cursor-not-allowed opacity-80`}
+            >
+                {buttonContent}
+            </div>
+        );
     }
 
     return (
@@ -69,36 +165,68 @@ export default function Tickets() {
                     ⭐ = Performances with Full Band
                 </p>
 
-                {shows.length === 0 ? (
+                {loading ? (
+                    <p className="text-center text-gray-400">Loading shows...</p>
+                ) : shows.length === 0 ? (
                     <p className="text-center text-gray-400">No upcoming shows available.</p>
                 ) : (
-                    <div className="space-y-3">
+                    <div className="space-y-6">
                         {shows.map((show, index) => (
                             <div
-                                key={index}
-                                className="flex flex-col items-center md:flex-row md:items-center md:justify-between border-t border-white py-6 text-center md:text-left space-y-2 md:space-y-0"
+                                key={show.groupKey || index}
+                                className="bg-white/5 rounded-xl py-6 px-6"
                             >
-                                <div className="text-lg font-bold text-center md:text-left w-full md:w-1/4">
-                                    {formatDate(show)}
+                                {/* Header Row: Date, Day, Location, Venue */}
+                                <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 text-center md:text-left">
+                                    {/* Month & Day */}
+                                    <span className="text-2xl font-bold">
+                                        {formatMonthDay(show.date)}
+                                    </span>
+
+                                    {/* Day of Week */}
+                                    <span className="text-lg text-gray-400 uppercase">
+                                        {show.day || formatDayOfWeek(show.date)?.substring(0, 3).toUpperCase()}
+                                    </span>
+
+                                    {/* Location */}
+                                    <span className="text-lg font-bold uppercase text-yellow-400">
+                                        {show.location}
+                                    </span>
+
+                                    {/* Venue */}
+                                    <span className="text-lg">
+                                        {show.venue}
+                                    </span>
                                 </div>
 
-                                <div className="w-full md:w-1/2 flex flex-col items-center text-center">
-                                    <div className="uppercase font-semibold">{show.venue}</div>
-                                    <div>{show.location}</div>
-                                </div>
+                                {/* Performance Rows: Time, Discount, Button - below city name */}
+                                <div className="space-y-3 mt-4">
+                                    {show.performances.map((perf, perfIndex) => (
+                                        <div 
+                                            key={perfIndex}
+                                            className="flex flex-col md:flex-row md:items-center gap-3 md:gap-0 md:pl-8"
+                                        >
+                                            {/* Time */}
+                                            <div className="text-lg w-full md:w-[15%] text-center md:text-left">
+                                                {perf.time}
+                                                {perf.fullBand && <span className="text-yellow-400 ml-2">⭐</span>}
+                                            </div>
 
-                                <div className="w-full md:w-1/4 flex flex-col md:flex-row justify-center md:justify-end items-center gap-2 md:gap-4">
-                                    <a
-                                        href={show.link?.startsWith('http') ? show.link : `https://${show.link}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="border border-white px-4 py-2 h-[42px] flex items-center justify-center rounded-full hover:bg-white hover:text-black transition text-sm font-semibold text-center"
-                                    >
-                                        <span className="text-yellow-400 text-xl w-6 h-[42px] flex items-center justify-center">
-                                            {show.fullBand ? '⭐' : ''}
-                                        </span>
-                                        GET TICKETS →
-                                    </a>
+                                            {/* Discount Message */}
+                                            <div className="w-full md:w-[50%] text-center">
+                                                {perf.discountCode && perf.discountPercentage && (
+                                                    <span className="text-yellow-400 font-semibold">
+                                                        Use code {perf.discountCode} for {perf.discountPercentage}% off!
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            {/* Ticket Button */}
+                                            <div className="w-full md:w-[35%] flex justify-center md:justify-end">
+                                                <TicketButton performance={perf} />
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         ))}

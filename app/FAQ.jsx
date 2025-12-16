@@ -107,9 +107,9 @@ export default function FAQSection() {
 
             <div className="max-w-3xl mx-auto space-y-0">
                 {faqs.map((faq, index) => (
-                    <Disclosure key={index}>
+                    <Disclosure key={index} as="div">
                         {({ open }) => (
-                            <>
+                            <div>
                                 <Disclosure.Button
                                     onClick={() => setOpenIndex(open ? index : null)}
                                     className="w-full flex justify-between items-center bg-[#1a1a1a] px-5 py-4 rounded-lg text-left transition-all duration-300 hover:bg-[#2a2a2a] focus:outline-none"
@@ -143,7 +143,7 @@ export default function FAQSection() {
                                     </div>
                                 </Disclosure.Panel>
 
-                            </>
+                            </div>
                         )}
                     </Disclosure>
                 ))}
