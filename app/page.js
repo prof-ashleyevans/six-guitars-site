@@ -8,6 +8,7 @@ import About from "@/app/About";
 import Reviews from "@/app/Reviews";
 import HeaderNav from "@/app/HeaderNav";
 import Tickets from "@/app/Tickets";
+import PhotoGallery from "@/app/PhotoGallery";
 import Contact from "@/app/Contact";
 import Footer from "@/app/Footer";
 import CharacterGridSection from "@/app/CharacterGridSection";
@@ -25,11 +26,13 @@ export default function Home() {
 
             <About />
 
+            <Tickets />
+
+            <PhotoGallery />
+
             <Reviews />
 
             <AudienceReviews />
-
-            <Tickets />
 
             <FAQ />
 

@@ -91,9 +91,9 @@ const About = () => {
                     <div className="relative w-[90%] max-w-3xl aspect-video" onClick={(e) => e.stopPropagation()}>
                         <button className="absolute top-2 right-2 text-white text-3xl font-bold z-10" onClick={() => setShowTrailer(false)}>×</button>
                         <iframe
-                            src="https://www.youtube.com/embed/7f7KWksfxAc?autoplay=1"
+                            src="https://player.vimeo.com/video/1047706165?autoplay=1"
                             title="6 Guitars Trailer"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allow="autoplay; fullscreen; picture-in-picture"
                             allowFullScreen
                             className="w-full h-full rounded-lg"
                         />

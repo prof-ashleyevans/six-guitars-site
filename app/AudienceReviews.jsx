@@ -46,7 +46,7 @@ export default function AudienceReviews() {
 
                 {/* Content */}
                 <div className="relative z-10 bg-black/30 py-24 px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-3xl font-bold text-center text-white mb-12">Audience Reviews</h2>
+                    <h2 className="text-3xl font-bold text-center text-white mb-12">Audience Feedback</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {audienceReviews.map((src, index) => (
                             <div key={index} data-aos="fade-up" data-aos-delay={index * 50}>
