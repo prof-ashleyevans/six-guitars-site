@@ -3,13 +3,27 @@ import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 
 const galleryImages = [
-    { src: '/images/characters/chase.jpg', alt: 'Chase Padgett' },
-    { src: '/images/characters/rock.jpg', alt: 'Rock Character' },
-    { src: '/images/characters/jazz.jpg', alt: 'Jazz Character' },
-    { src: '/images/characters/blues.jpg', alt: 'Blues Character' },
-    { src: '/images/characters/country.jpg', alt: 'Country Character' },
-    { src: '/images/characters/folk.jpg', alt: 'Folk Character' },
-    { src: '/images/characters/classical.jpg', alt: 'Classical Character' },
+    { src: '/images/photo_gallery/6G Production 16x9-01.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-05.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-08.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-11.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-12.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-13.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-17.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-18.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-19.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-20.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-22.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-02.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-23.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-07.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-24.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-25.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-28.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-31.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/6G Production 16x9-32.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/2T0A5063.jpg', alt: '6 Guitars Production' },
+    { src: '/images/photo_gallery/2T0A5109.jpg', alt: '6 Guitars Production' },
 ];
 
 export default function PhotoGallery() {

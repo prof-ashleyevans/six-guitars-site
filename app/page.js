@@ -15,6 +15,7 @@ import CharacterGridSection from "@/app/CharacterGridSection";
 import FAQ from "@/app/FAQ";
 import AudienceReviews from "@/app/AudienceReviews";
 import IconRow from "@/app/IconRow";
+// import Experimental from "@/app/Experimental"; // Hidden for now
 
 export default function Home() {
 
@@ -35,6 +36,8 @@ export default function Home() {
             <AudienceReviews />
 
             <FAQ />
+
+            {/* <Experimental /> */}
 
             <Contact />
 
