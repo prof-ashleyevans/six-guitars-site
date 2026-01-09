@@ -7,23 +7,32 @@ export default function HeaderNav() {
 
     return (
         <>
-            {/* Header */}
-            <header className="text-white px-6 py-4 bg-[#000000] relative">
+            {/* Header - Sticky */}
+            <header className="text-white px-6 py-4 bg-[#000000] relative sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto w-full flex items-center justify-between relative">
                     {/* Left: Logo */}
-                    <div className="flex items-center pl-[-10] sm:ml-0 sm:pl-0">
+                    <div className="flex items-center">
                         <a href="/">
-                            <div className="relative h-10 w-30">
-                                <Image
-                                    src="/images/header_nav/logo.png"
-                                    alt="6 Guitars Logo"
-                                    width={120}
-                                    height={40}
-                                    priority
-                                    quality={90}
-                                    className="h-10 w-auto"
-                                />
-                            </div>
+                            {/* Mobile: Favicon */}
+                            <Image
+                                src="/images/header_nav/favicon.jpg"
+                                alt="6 Guitars"
+                                width={40}
+                                height={40}
+                                priority
+                                quality={90}
+                                className="md:hidden"
+                            />
+                            {/* Desktop: Full Logo */}
+                            <Image
+                                src="/images/header_nav/logo.png"
+                                alt="6 Guitars Logo"
+                                width={200}
+                                height={60}
+                                priority
+                                quality={90}
+                                className="hidden md:block"
+                            />
                         </a>
                     </div>
 

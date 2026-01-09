@@ -154,7 +154,7 @@ function SingleShowCard({ show }) {
     const dayShort = show.day || formatDayOfWeek(show.date, true);
 
     return (
-        <div className="bg-white/5 rounded-xl py-4 px-6">
+        <div className="bg-white/10 rounded-xl py-4 px-6">
             {/* Mobile Layout - Stacked */}
             <div className="flex flex-col gap-3 md:hidden text-center">
                 {/* Date & Day */}
@@ -232,7 +232,7 @@ function GroupedShowCard({ show }) {
     const dayShort = show.day || formatDayOfWeek(show.date, true);
 
     return (
-        <div className="bg-white/5 rounded-xl py-5 px-6">
+        <div className="bg-white/10 rounded-xl py-5 px-6">
             {/* Mobile Layout */}
             <div className="md:hidden">
                 {/* Header - Stacked */}
@@ -343,7 +343,7 @@ export default function Tickets() {
     return (
         <section id="tickets" className="bg-black text-white px-6 py-16">
             <div className="max-w-5xl mx-auto">
-                <h2 className="text-4xl font-bold text-center mb-4">Upcoming Shows</h2>
+                <h2 className="text-4xl font-bold text-center mb-4">Tour</h2>
                 <p className="text-center text-yellow-400 mb-8">
                     ⭐ = Performances with Full Band
                 </p>

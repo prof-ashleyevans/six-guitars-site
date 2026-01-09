@@ -51,18 +51,18 @@ const About = () => {
                     {/* Genre Slider Row 1 */}
                     <div className="w-full mb-0 bg-transparent py-6 px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
                         <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-3xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
-                            <span className="[font-family:var(--font-blues)] text-[#0562D7]" data-aos="fade-right">Blues</span>
-                            <span className="[font-family:var(--font-classical)] text-[#BD5217]" data-aos="fade-down">Classical</span>
-                            <span className="[font-family:var(--font-jazz)] text-[#BB6DEB]" data-aos="fade-left">Jazz</span>
+                            <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-right">Blues</span>
+                            <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-down">Classical</span>
+                            <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-left">Jazz</span>
                         </div>
                     </div>
 
                     {/* Genre Slider Row 2 */}
                     <div className="w-full mb-1 bg-transparent py-6 px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
                         <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-4xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
-                            <span className="[font-family:var(--font-rock)] text-[#D2153D]" data-aos="fade-right">Rock</span>
+                            <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-right">Rock</span>
                             <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-up">Folk</span>
-                            <span className="[font-family:var(--font-country)] text-[#10AD43]" data-aos="fade-left">Country</span>
+                            <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-left">Country</span>
                         </div>
                     </div>
 
@@ -91,9 +91,9 @@ const About = () => {
                     <div className="relative w-[90%] max-w-3xl aspect-video" onClick={(e) => e.stopPropagation()}>
                         <button className="absolute top-2 right-2 text-white text-3xl font-bold z-10" onClick={() => setShowTrailer(false)}>×</button>
                         <iframe
-                            src="https://www.youtube.com/embed/7f7KWksfxAc?autoplay=1"
+                            src="https://player.vimeo.com/video/1047706165?autoplay=1"
                             title="6 Guitars Trailer"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allow="autoplay; fullscreen; picture-in-picture"
                             allowFullScreen
                             className="w-full h-full rounded-lg"
                         />

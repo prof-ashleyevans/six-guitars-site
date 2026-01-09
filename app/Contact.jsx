@@ -11,7 +11,7 @@ export default function Contact() {
 
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [subscribe, setSubscribe] = useState(true); // checked by default
+    const [subscribe, setSubscribe] = useState(false); // unchecked by default
 
     const handleSubmit = async (e) => {
         e.preventDefault();
