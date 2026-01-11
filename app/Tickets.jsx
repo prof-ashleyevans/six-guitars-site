@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import NotifyMeModal from './NotifyMeModal';
 
 // Ticket status colors and styles
 // Matches Airtable "Ticket Avail" field values
@@ -47,6 +48,14 @@ const ticketStatusConfig = {
         borderColor: 'border-red-500',
         text: 'Sold Out!',
         clickable: false,
+    },
+    'notify me': {
+        bgColor: 'bg-blue-600',
+        hoverColor: 'hover:bg-blue-700',
+        borderColor: 'border-blue-500',
+        text: 'Notify Me',
+        clickable: true,
+        isNotify: true,
     },
 };
 
@@ -100,7 +109,7 @@ function formatDayOfWeek(dateStr, short = false) {
 // TICKET BUTTON COMPONENT
 // ============================================
 
-function TicketButton({ performance, compact = false }) {
+function TicketButton({ performance, show, onNotifyClick, compact = false }) {
     const config = getTicketConfig(performance.ticketAvail);
     const link = performance.ticketLink || performance.link;
     const fullLink = link?.startsWith('http') ? link : `https://${link}`;
@@ -116,6 +125,19 @@ function TicketButton({ performance, compact = false }) {
         ? `${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-3 py-1.5 flex items-center justify-center gap-1 rounded-full transition text-sm text-white text-center`
         : `${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-3 py-2 max-w-[180px] flex items-center justify-center gap-1 rounded-lg transition text-sm text-white text-center`;
 
+    // Handle "Notify Me" button
+    if (config.isNotify) {
+        return (
+            <button
+                onClick={() => onNotifyClick(performance, show)}
+                className={`${baseClasses} cursor-pointer`}
+            >
+                {buttonContent}
+            </button>
+        );
+    }
+
+    // Handle regular ticket links
     if (config.clickable && link) {
         return (
             <a href={fullLink} target="_blank" rel="noopener noreferrer" className={baseClasses}>
@@ -124,6 +146,7 @@ function TicketButton({ performance, compact = false }) {
         );
     }
 
+    // Non-clickable states
     return (
         <div className={`${baseClasses} cursor-not-allowed opacity-80`}>
             {buttonContent}
@@ -149,7 +172,7 @@ function DiscountMessage({ performance, className = '' }) {
 // SINGLE SHOW CARD - All info on one line
 // ============================================
 
-function SingleShowCard({ show }) {
+function SingleShowCard({ show, onNotifyClick }) {
     const perf = show.performances[0];
     const dayShort = show.day || formatDayOfWeek(show.date, true);
 
@@ -184,7 +207,7 @@ function SingleShowCard({ show }) {
                 
                 {/* Button */}
                 <div className="flex justify-center">
-                    <TicketButton performance={perf} />
+                    <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
                 </div>
             </div>
 
@@ -217,7 +240,7 @@ function SingleShowCard({ show }) {
                 
                 {/* Button */}
                 <div className="flex justify-end text-xl">
-                    <TicketButton performance={perf}  />
+                    <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
                 </div>
             </div>
         </div>
@@ -228,7 +251,7 @@ function SingleShowCard({ show }) {
 // GROUPED SHOW CARD - Header + Performance Rows
 // ============================================
 
-function GroupedShowCard({ show }) {
+function GroupedShowCard({ show, onNotifyClick }) {
     const dayShort = show.day || formatDayOfWeek(show.date, true);
 
     return (
@@ -259,7 +282,7 @@ function GroupedShowCard({ show }) {
                             </div>
                             <DiscountMessage performance={perf} className="text-sm" />
                             <div className="flex justify-center">
-                                <TicketButton performance={perf} />
+                                <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
                             </div>
                         </div>
                     ))}
@@ -298,7 +321,7 @@ function GroupedShowCard({ show }) {
 
                             {/* Button */}
                             <div className="flex justify-end text-xl">
-                                <TicketButton performance={perf} />
+                                <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
                             </div>
                         </div>
                     ))}
@@ -315,6 +338,7 @@ function GroupedShowCard({ show }) {
 export default function Tickets() {
     const [shows, setShows] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [modalShow, setModalShow] = useState(null);
 
     useEffect(() => {
         fetch('/api/shows')
@@ -337,6 +361,18 @@ export default function Tickets() {
         AOS.init({ once: true });
     }, []);
 
+    const handleNotifyClick = (performance, show) => {
+        setModalShow({
+            ...show,
+            time: performance.time,
+            showName: '6 Guitars',
+        });
+    };
+
+    const handleCloseModal = () => {
+        setModalShow(null);
+    };
+
     // Determine if a show is single or grouped
     const isSingleShow = (show) => show.performances.length === 1;
 
@@ -356,14 +392,17 @@ export default function Tickets() {
                     <div className="space-y-4">
                         {shows.map((show, index) => (
                             isSingleShow(show) ? (
-                                <SingleShowCard key={show.groupKey || index} show={show} />
+                                <SingleShowCard key={show.groupKey || index} show={show} onNotifyClick={handleNotifyClick} />
                             ) : (
-                                <GroupedShowCard key={show.groupKey || index} show={show} />
+                                <GroupedShowCard key={show.groupKey || index} show={show} onNotifyClick={handleNotifyClick} />
                             )
                         ))}
                     </div>
                 )}
             </div>
+
+            {/* Notify Me Modal */}
+            <NotifyMeModal show={modalShow} onClose={handleCloseModal} />
         </section>
     );
 }
