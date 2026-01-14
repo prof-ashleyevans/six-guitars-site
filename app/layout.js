@@ -35,6 +35,18 @@ export const metadata = {
     icons: {
         icon: '/images/header_nav/favicon.ico',
     },
+    openGraph: {
+        title: "6 Guitars",
+        description: "Official site of Chase Padgett's award-winning show",
+        images: ['/images/Thumbnail.png'],
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: "6 Guitars",
+        description: "Official site of Chase Padgett's award-winning show",
+        images: ['/images/Thumbnail.png'],
+    },
 };
 
 export default function RootLayout({ children }) {
