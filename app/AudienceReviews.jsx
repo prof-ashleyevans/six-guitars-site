@@ -142,13 +142,19 @@ export default function AudienceReviews() {
                 /* Mobile optimizations */
                 @media (max-width: 768px) {
                     .bg-first-photo {
-                        background-size: cover;
-                        background-position: center top;
+                        background-size: auto 80%;
+                        background-position: center;
+                        background-repeat: repeat;
+                        filter: blur(8px);
+                        -webkit-filter: blur(8px);
                     }
 
                     .bg-second-photo {
-                        background-size: cover;
+                        background-size: auto 80%;
                         background-position: center;
+                        background-repeat: repeat;
+                        filter: blur(8px);
+                        -webkit-filter: blur(8px);
                     }
                 }
             `}</style>
