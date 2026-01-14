@@ -20,7 +20,71 @@ export default function AudienceReviews() {
                 const response = await fetch('/api/audience-reviews');
                 if (response.ok) {
                     const data = await response.json();
-                    setReviews(data);
+                    
+                    // Estimate lines for each review (assuming ~60 chars per line)
+                    const reviewsWithLines = data.map(review => ({
+                        ...review,
+                        estimatedLines: Math.ceil((review.quote?.length || 0) / 60)
+                    }));
+                    
+                    // Group by estimated line count
+                    const groupedByLines = {};
+                    reviewsWithLines.forEach(review => {
+                        const lines = review.estimatedLines;
+                        if (!groupedByLines[lines]) {
+                            groupedByLines[lines] = [];
+                        }
+                        groupedByLines[lines].push(review);
+                    });
+                    
+                    // Create alternating pattern: 1-line, 2-line, 1-line, 3-line, etc.
+                    const sortedKeys = Object.keys(groupedByLines).map(Number).sort((a, b) => a - b);
+                    const reorderedReviews = [];
+                    const pattern = []; // Track which line-length to pull from next
+                    
+                    // Build pattern: alternate between shortest and progressively longer
+                    let shortIndex = 0;
+                    let longIndex = sortedKeys.length - 1;
+                    while (shortIndex <= longIndex) {
+                        if (shortIndex === longIndex) {
+                            pattern.push(sortedKeys[shortIndex]);
+                            break;
+                        }
+                        pattern.push(sortedKeys[shortIndex]);
+                        if (shortIndex + 1 <= longIndex) {
+                            pattern.push(sortedKeys[shortIndex + 1]);
+                        }
+                        shortIndex += 2;
+                    }
+                    
+                    // Distribute reviews following the pattern
+                    const groupIndexes = {};
+                    sortedKeys.forEach(key => groupIndexes[key] = 0);
+                    
+                    let patternIndex = 0;
+                    while (reorderedReviews.length < data.length) {
+                        const lineCount = pattern[patternIndex % pattern.length];
+                        const group = groupedByLines[lineCount];
+                        const index = groupIndexes[lineCount];
+                        
+                        if (group && index < group.length) {
+                            reorderedReviews.push(group[index]);
+                            groupIndexes[lineCount]++;
+                        }
+                        
+                        patternIndex++;
+                    }
+                    
+                    // Move John Cali's review to the end
+                    const johnCaliIndex = reorderedReviews.findIndex(r => 
+                        r.name?.toLowerCase().includes('john cali')
+                    );
+                    if (johnCaliIndex !== -1) {
+                        const [johnCaliReview] = reorderedReviews.splice(johnCaliIndex, 1);
+                        reorderedReviews.push(johnCaliReview);
+                    }
+                    
+                    setReviews(reorderedReviews);
                 } else {
                     console.error('Failed to fetch reviews');
                 }
