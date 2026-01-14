@@ -50,7 +50,7 @@ export default function Contact() {
     };
 
     return (
-        <section className="relative py-16">
+        <section id="contact" className="relative py-16">
             {/* ✅ Mobile Background (rotated or resized if needed) */}
             <div className="block sm:hidden absolute inset-0 overflow-hidden">
                 <div className="relative w-[140px] h-full">

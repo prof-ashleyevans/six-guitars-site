@@ -5,52 +5,46 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 const faqs = [
     {
-        question: "What is 6 Guitars?",
-        answer: "A pitch-perfect blend of music and storytelling featuring six characters, all played by one actor.",
+        question: "Is 6 Guitars a musical?",
+        answer: "It's a theatrical concert! Half the show is music. The other half is character based comedy and storytelling inspired by archetypes found in Blues, Jazz, Rock, Classical, Folk, & Country music.",
         color: 'bg-blue-950/60',
 
     },
     {
         question: "Is the show family-friendly?",
-        answer: "Absolutely — it's clean, funny, and accessible to all ages.",
+        answer: "Depends on the family. It's certainly more tame than the typical PG-13 movie these days in terms of content. Nothing is raunchy or edgy about the show. However, kids under 12 might not have the attention span.",
         color: 'bg-yellow-900/50',
 
     },
     {
-        question: "Are there really 6 different guitars in the show?",
-        answer: "No, the show is played by a single actor, using one guitar, embodying 6 different characters throughout the show.",
-        color: 'bg-emerald-900/50',
-
-    },
-
-    {
         question: "Where can I learn more about Chase Padgett?",
         answer: (
             <>
-                You can learn more about Chase and his repertoire of music, acting, and comedy&nbsp;
+                Head on over to&nbsp;
                 <a
                     href="https://www.chasepadgett.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-purple-400 underline hover:text-purple-300"
                 >
-                    here
-                </a>.
+                    chasepadgett.com
+                </a>
+                &nbsp;for all the background on Chase. He has other shows in addition to this one.
             </>
         ),
         color: 'bg-red-900/50',
 
     },
     {
-        question: "How long is the show typically?",
-        answer: "6 Guitars usually lasts two hours, with a 15-minute intermission.",
+        question: "How long is the show?",
+        answer: "2 hours with an intermission",
         color: 'bg-indigo-900/50',
 
     },
     {
-        question: "How can I purchase VIP seating?",
-        answer: "Specialized seating is available through the ticketing vendor's website.",
-        color: 'bg-purple-900/50',
+        question: "How long has the show been running?",
+        answer: "Since 2010 with nearly 800 performances to date. The show has toured extensively all over North America.",
+        color: 'bg-emerald-900/50',
 
     },
 ];

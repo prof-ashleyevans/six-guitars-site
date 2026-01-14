@@ -38,29 +38,29 @@ export default function HeaderNav() {
 
 
 
-                    {/* Center: BUY TICKETS button */}
-                    <div
-                        className="absolute left-1/2 transform -translate-x-1/2 z-10"
-                        style={{
-                            animation: 'pulseGlow 5s ease-in-out infinite',
-                        }}
-                    >
+                    {/* Center: TICKETS button */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
                         <a
                             href="#tickets"
-                            className="inline-block bg-[#8a828c] text-white px-3 py-2 sm:px-6 sm:py-3 rounded-md text-sm sm:text-lg font-bold hover:bg-[#b01234] transition border-2 border-white"
-                            style={{
-                                boxShadow: '0 0 5px rgba(255, 255, 255, 0.5)',
-                            }}
+                            className="inline-flex items-center gap-2 bg-[#8a828c] text-white px-5 py-2 sm:px-8 sm:py-3 rounded-md text-sm sm:text-lg font-bold hover:bg-[#b01234] transition border-2 border-white whitespace-nowrap"
                         >
-                            BUY TICKETS
+                            <Image
+                                src="/images/icons/Ticket Icon White.png"
+                                alt="Ticket"
+                                width={20}
+                                height={20}
+                                className="w-4 h-4 sm:w-5 sm:h-5"
+                            />
+                            TICKETS
                         </a>
                     </div>
 
                     {/* Right-aligned Menu (Desktop) */}
                     <nav className="hidden md:flex ml-auto items-center space-x-6">
-                        <a href="#about" className="hover:text-yellow-400">About</a>
-                        <a href="#contact" className="hover:text-yellow-400">Contact</a>
-                        <a href="#reviews" className="hover:text-yellow-400">Reviews</a>
+                        <a href="#about" className="hover:text-yellow-400 font-bold uppercase text-sm">About</a>
+                        <a href="#reviews" className="hover:text-yellow-400 font-bold uppercase text-sm">Reviews</a>
+                        <a href="#faq" className="hover:text-yellow-400 font-bold uppercase text-sm">FAQ</a>
+                        <a href="#contact" className="hover:text-yellow-400 font-bold uppercase text-sm">Contact</a>
                     </nav>
 
                     {/* Hamburger Icon - Mobile Only */}
@@ -89,11 +89,12 @@ export default function HeaderNav() {
 
             {/* Mobile Dropdown Menu */}
             {menuOpen && (
-                <nav className="bg-black text-white flex flex-col items-center space-y-4 py-4 md:hidden">
-                    <a href="#about" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>About</a>
-                    <a href="#contact" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>Contact</a>
-                    <a href="#reviews" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>Reviews</a>
-                    <a href="#tickets" className="hover:text-yellow-400" onClick={() => setMenuOpen(false)}>Tour</a>
+                <nav className="bg-black text-white flex flex-col items-center space-y-4 py-4 md:hidden sticky top-[72px] z-50">
+                    <a href="#about" className="hover:text-yellow-400 font-bold uppercase text-base" onClick={() => setMenuOpen(false)}>About</a>
+                    <a href="#reviews" className="hover:text-yellow-400 font-bold uppercase text-base" onClick={() => setMenuOpen(false)}>Reviews</a>
+                    <a href="#faq" className="hover:text-yellow-400 font-bold uppercase text-base" onClick={() => setMenuOpen(false)}>FAQ</a>
+                    <a href="#contact" className="hover:text-yellow-400 font-bold uppercase text-base" onClick={() => setMenuOpen(false)}>Contact</a>
+                    <a href="#tickets" className="hover:text-yellow-400 font-bold uppercase text-base" onClick={() => setMenuOpen(false)}>Tour</a>
 
                 </nav>
             )}
