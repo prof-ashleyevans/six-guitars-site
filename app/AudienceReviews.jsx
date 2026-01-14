@@ -140,16 +140,16 @@ export default function AudienceReviews() {
                     ) : reviews.length === 0 ? (
                         <div className="text-center text-white/70">No reviews available at this time.</div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-7xl mx-auto space-y-6">
                             {reviews.map((review, index) => (
                                 <div 
                                     key={review.id} 
                                     data-aos="fade-up" 
                                     data-aos-delay={index * 50}
-                                    className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+                                    className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 break-inside-avoid mb-6"
                                 >
                                     {/* Header with photo and name (Facebook style) */}
-                                    <div className="flex items-center gap-3 mb-4">
+                                    <div className="flex items-center gap-3 mb-3">
                                         {/* Circular profile photo */}
                                         <div className="flex-shrink-0">
                                             {review.photo ? (
@@ -177,7 +177,7 @@ export default function AudienceReviews() {
                                     </div>
                                     
                                     {/* Quote/Comment */}
-                                    <div className="text-gray-700 text-sm leading-relaxed">
+                                    <div className="text-gray-700 text-base leading-relaxed">
                                         {review.quote}
                                     </div>
                                 </div>
