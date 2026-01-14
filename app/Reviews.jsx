@@ -120,7 +120,7 @@ export default function Reviews() {
                                     <div className="relative z-10 h-full flex flex-col items-center px-6 text-center py-12">
                                         {/* Quote first - takes up available space */}
                                         <div className="flex-1 flex items-center justify-center">
-                                            <p className="italic text-2xl md:text-2xl max-w-[250px]">"{review.quote}"</p>
+                                            <p className="italic text-2xl md:text-2xl max-w-[250px] font-[family-name:var(--font-text_font)] tracking-wide">"{review.quote}"</p>
                                         </div>
                                         
                                         {/* Stars second (if any) - fixed spacing */}

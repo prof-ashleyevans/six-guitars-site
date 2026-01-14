@@ -68,6 +68,19 @@ function getTicketConfig(status) {
 // UTILITY FUNCTIONS
 // ============================================
 
+function formatLocation(location) {
+    if (!location) return '';
+    // Split location by last space to separate city from state
+    const parts = location.trim().split(' ');
+    if (parts.length < 2) return location;
+    
+    // Assume last part is state, everything before is city
+    const state = parts[parts.length - 1];
+    const city = parts.slice(0, -1).join(' ');
+    
+    return `${city}, ${state}`;
+}
+
 function parseDate(dateStr) {
     if (!dateStr) return null;
     
@@ -188,7 +201,7 @@ function SingleShowCard({ show, onNotifyClick }) {
                 
                 {/* Location */}
                 <div>
-                    <span className="text-yellow-400 font-bold uppercase">{show.location}</span>
+                    <span className="text-yellow-400 font-bold uppercase">{formatLocation(show.location)}</span>
                 </div>
                 
                 {/* Venue */}
@@ -220,7 +233,7 @@ function SingleShowCard({ show, onNotifyClick }) {
                 <span className="text-gray-400 text-xl mr-10 uppercase w-[40px]">{dayShort}</span>
                 
                 {/* Location */}
-                <span className="text-yellow-400 text-xl font-bold uppercase w-[175px]">{show.location}</span>
+                <span className="text-yellow-400 text-xl font-bold uppercase w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
                 
                 {/* Venue */}
                 <span className="text-xl w-[150px]">
@@ -265,7 +278,7 @@ function GroupedShowCard({ show, onNotifyClick }) {
                         <span className="text-lg text-gray-400 uppercase">{dayShort}</span>
                     </div>
                     <div>
-                        <span className="text-lg text-yellow-400 font-bold uppercase">{show.location}</span>
+                        <span className="text-lg text-yellow-400 font-bold uppercase">{formatLocation(show.location)}</span>
                     </div>
                     <div>
                         <span className="text-lg">{show.venue}</span>
@@ -295,7 +308,7 @@ function GroupedShowCard({ show, onNotifyClick }) {
                 <div className="flex items-center gap-10 mb-4">
                     <span className="text-xl font-bold w-[90px]">{formatMonthDay(show.date)}</span>
                     <span className="text-gray-400 text-xl mr-10 uppercase w-[40px]">{dayShort}</span>
-                    <span className="text-yellow-400 text-xl font-bold uppercase w-[175px]">{show.location}</span>
+                    <span className="text-yellow-400 text-xl font-bold uppercase w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
                     <span className="text-xl w-[150px]">{show.venue}</span>
                 </div>
 
@@ -309,7 +322,7 @@ function GroupedShowCard({ show, onNotifyClick }) {
                             <span className="w-[40px] mr-10"></span>
                             
                             {/* Time - aligned below Location */}
-                            <span className="text-xl w-[175px]">
+                            <span className="text-xl w-[220px]">
                                 {perf.time}
                                 {perf.fullBand && <span className="text-yellow-400 ml-2">⭐</span>}
                             </span>

@@ -9,7 +9,7 @@ export default function Footer() {
                 <div className="flex space-x-6 text-white">
                     {/* Facebook */}
                     <a
-                        href="https://www.facebook.com/chasepadgettperformer"
+                        href="https://www.facebook.com/chasethatpadgett/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-yellow-400 transition"
