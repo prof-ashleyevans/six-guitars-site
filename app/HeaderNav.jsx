@@ -22,6 +22,7 @@ export default function HeaderNav() {
                                 priority
                                 quality={90}
                                 className="md:hidden"
+                                unoptimized
                             />
                             {/* Desktop: Full Logo */}
                             <Image
