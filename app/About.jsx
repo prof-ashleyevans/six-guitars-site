@@ -7,50 +7,48 @@ const About = () => {
 
     return (
         <section id="about" className="relative text-white overflow-hidden min-h-[700px]">
-            {/* ✅ Background Image with Opacity */}
-            <div className="absolute inset-0 w-full h-full opacity-40">
+            {/* ✅ Background Image - Mobile */}
+            <div className="absolute inset-0 w-full h-full lg:hidden">
                 <Image
-                    src="/images/about/bg_image2.jpg"
+                    src="/images/about/About Section BG - Mobile.png"
                     alt="Chase performing live"
                     fill
-                    quality={75}
+                    quality={100}
                     className="object-cover"
                 />
             </div>
 
-            {/* ✅ Top Fade Overlay */}
-            <div className="absolute inset-0 z-10 pointer-events-none" style={{
-                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 40%)'
-            }} />
+            {/* ✅ Background Image - Desktop */}
+            <div className="absolute inset-0 w-full h-full hidden lg:block">
+                <Image
+                    src="/images/about/6G About Page BG.jpg"
+                    alt="Chase performing live"
+                    fill
+                    quality={100}
+                    className="object-cover"
+                />
+            </div>
 
-            <div
-                className="absolute bottom-0 left-0 w-full h-1/3 rounded-b-lg pointer-events-none"
-                style={{
-                    background: 'linear-gradient(to bottom, rgba(26,26,26,0) 0%, #000000 100%)'
-                }}
-            />
+            {/* ✅ Mobile Overlay for Text Readability */}
+            <div className="absolute inset-0 bg-black/30 z-[5] lg:hidden" />
 
             {/* ✅ Main Content */}
             <div className="relative pt-20 z-10 w-full max-w-screen-xl mx-auto px-4 sm:px-10 min-h-[700px] grid grid-cols-1 lg:grid-cols-2 items-center">
-                {/* Left Column (empty) */}
-                <div className="hidden lg:block" />
-
-                {/* Right Column */}
-                <div className="flex flex-col justify-center items-center text-center">
-                    <h1 className="text-4xl sm:text-5xl font-bold mt-5 mb-6 tracking-wider">
+                {/* Left Column - Content */}
+                <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
+                    <h1 className="text-4xl sm:text-5xl font-bold mt-5 mb-6 tracking-wider text-center lg:text-left w-full">
                         <span className="[font-family:var(--font-text_font)] text-[#FFFFFF]" data-aos="fade-right">
                             1 MAN - 6 CHARACTERS
                         </span>
                     </h1>
 
-                    <p className="[font-family:var(--font-text_font)] text-2xl mb-4 max-w-xl text-justify text-center" data-aos="fade-up">
-                        Actor, Singer, & Guitarist Chase Padgett delivers a stunning performance as he becomes six original guitar-playing characters —
-                        each with their own voice, personality, and genre of music:
+                    <p className="[font-family:var(--font-text_font)] text-2xl mb-4 max-w-xl text-center lg:text-left" data-aos="fade-up">
+                        6 Guitars is a joyful, laugh-out-loud, and unexpectedly moving theatrical concert. Created by virtuoso guitarist and storyteller Chase Padgett, the show moves seamlessly between 6 original characters that each represent their own style of music:
                     </p>
 
                     {/* Genre Slider Row 1 */}
-                    <div className="w-full mb-0 bg-transparent py-6 px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-                        <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-3xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
+                    <div className="w-full max-w-xl mb-0 bg-transparent py-6 px-4 lg:px-0 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                        <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-5xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
                             <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-right">Blues</span>
                             <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-down">Classical</span>
                             <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-left">Jazz</span>
@@ -58,31 +56,40 @@ const About = () => {
                     </div>
 
                     {/* Genre Slider Row 2 */}
-                    <div className="w-full mb-1 bg-transparent py-6 px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-                        <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-4xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
+                    <div className="w-full max-w-xl mb-1 bg-transparent py-6 px-4 lg:px-0 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                        <div className="inline-flex gap-8 justify-center min-w-full font-extrabold text-5xl sm:text-6xl lg:text-6xl leading-tight tracking-tight">
                             <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-right">Rock</span>
                             <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-up">Folk</span>
                             <span className="[font-family:var(--font-folk)] text-[#E09608]" data-aos="fade-left">Country</span>
                         </div>
                     </div>
 
+                    <p className="[font-family:var(--font-text_font)] text-2xl mb-6 max-w-xl text-center lg:text-left mt-8" data-aos="fade-up">
+                        As the show unfolds we learn the true meaning of music and how it brings all humanity together in song. It's part concert, part theatre, part stand-up, and entirely unforgettable.
+                    </p>
+
                     {/* ✅ Trailer Button */}
-                    <div
-                        onClick={() => setShowTrailer(true)}
-                        className="cursor-pointer mt-2 transition-transform hover:scale-105"
-                    >
-                        <div className="relative w-full max-w-[320px] aspect-video mx-auto">
-                            <Image
-                                src="/images/about/6g_trailer_thumb.jpg"
-                                alt="Watch the 6 Guitars Trailer"
-                                width={320}
-                                height={180}
-                                quality={80}
-                                className="rounded-lg shadow-lg mb-5"
-                            />
+                    <div className="w-full max-w-xl flex justify-center">
+                        <div
+                            onClick={() => setShowTrailer(true)}
+                            className="cursor-pointer mt-2 transition-transform hover:scale-105"
+                        >
+                            <div className="relative w-full max-w-[320px] aspect-video">
+                                <Image
+                                    src="/images/about/6g_trailer_thumb.jpg"
+                                    alt="Watch the 6 Guitars Trailer"
+                                    width={320}
+                                    height={180}
+                                    quality={80}
+                                    className="rounded-lg shadow-lg mb-5"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                {/* Right Column (empty) */}
+                <div className="hidden lg:block" />
             </div>
 
             {/* ✅ Trailer Modal */}
