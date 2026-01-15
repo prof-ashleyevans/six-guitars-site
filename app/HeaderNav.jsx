@@ -15,13 +15,14 @@ export default function HeaderNav() {
                         <a href="/">
                             {/* Mobile: Favicon */}
                             <Image
-                                src="/images/header_nav/favicon.ico?v=2"
+                                src="/images/header_nav/favicon.ico"
                                 alt="6 Guitars"
                                 width={40}
                                 height={40}
                                 priority
                                 quality={90}
                                 className="md:hidden"
+                                unoptimized
                             />
                             {/* Desktop: Full Logo */}
                             <Image
