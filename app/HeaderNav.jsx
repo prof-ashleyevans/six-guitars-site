@@ -15,7 +15,7 @@ export default function HeaderNav() {
                         <a href="/">
                             {/* Mobile: Favicon */}
                             <Image
-                                src="/images/header_nav/favicon.jpg"
+                                src="/images/header_nav/favicon.ico"
                                 alt="6 Guitars"
                                 width={40}
                                 height={40}
