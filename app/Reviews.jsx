@@ -93,15 +93,15 @@ export default function Reviews() {
                 <h2 className="text-4xl font-bold mb-8">Reviews</h2>
 
                 {loading ? (
-                    <div className="h-[600px] flex items-center justify-center">
+                    <div className="h-[400px] flex items-center justify-center">
                         <p className="text-xl">Loading reviews...</p>
                     </div>
                 ) : reviews.length === 0 ? (
-                    <div className="h-[600px] flex items-center justify-center">
+                    <div className="h-[400px] flex items-center justify-center">
                         <p className="text-xl">No reviews available</p>
                     </div>
                 ) : (
-                    <div className="relative w-full h-[600px] overflow-hidden">
+                    <div className="relative w-full h-[400px] overflow-hidden">
                         <div ref={sliderRef} className="keen-slider h-full">
                             {reviews.map((review, index) => (
                                 <div key={review.id || index} className="keen-slider__slide relative w-full h-full">

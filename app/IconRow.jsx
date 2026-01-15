@@ -27,7 +27,7 @@ const IconRow = () => {
     return (
         <div
             ref={iconRef}
-            className={`relative z-10 flex flex-wrap justify-center gap-2 w-full max-w-screen-md px-4  mb-10  bg-transparent mx-auto text-center transition-all duration-700 ease-out
+            className={`relative z-10 flex flex-wrap justify-center gap-2 w-full max-w-screen-md px-4 mb-10 mt-8 md:mt-0 bg-transparent mx-auto text-center transition-all duration-700 ease-out
         ${isIconVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
     `}
         >
@@ -61,19 +61,16 @@ const IconRow = () => {
 
             {/* Icon 3 */}
             <div className="flex flex-col items-center w-22 sm:w-50 text-white">
-                <div className="relative w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24">
+                <div className="relative w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 ml-5">
                     <Image
-                        src="/images/icons/comedy_mask_icon.png"
-                        alt="Comedy Mask Icon"
+                        src="/images/icons/Stories Icon.png"
+                        alt="Stories Icon"
                         fill
                         quality={90}
                         className="object-contain"
                     />
                 </div>
-                <p className="text-md xl:text-xl lg:text-lg sm:text-md leading-tight text-center whitespace-normal">
-                    <span className="block">100,000+ Sold </span>
-                    {/*<span className="block">Tickets Sold</span>*/}
-                </p>
+                <p className="text-md lg:text-xl leading-tight text-center w-full">Storytelling</p>
             </div>
         </div>
     );
