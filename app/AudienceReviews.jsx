@@ -153,7 +153,7 @@ export default function AudienceReviews() {
                                         {/* Circular profile photo */}
                                         <div className="flex-shrink-0">
                                             {review.photo ? (
-                                                <Image
+                                <Image
                                                     src={review.photo}
                                                     alt={review.name}
                                                     width={48}
@@ -180,9 +180,9 @@ export default function AudienceReviews() {
                                     <div className="text-gray-700 text-base leading-relaxed">
                                         {review.quote}
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
+                    </div>
                     )}
                 </div>
             </div>
