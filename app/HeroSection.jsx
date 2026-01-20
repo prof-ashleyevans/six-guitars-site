@@ -16,11 +16,11 @@ const characterImages = [
     },
     {
         id: 'chase',
-        desktopSrc: '/images/hero/pc/6G Hero 18x9 Chase.png',
+        desktopSrc: '/images/hero/pc/6G Hero Chase 18x9_V4.png',
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Chase.png',
         alt: 'Hero Chase',
         zIndex: 20,
-        style: 'w-[100%] sm:w-[75%] h-[100%] sm:h-[90%] bottom-[0%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[100%] sm:w-[75%] h-[100%] sm:h-[95%] bottom-[0%] left-1/2 transform -translate-x-1/2',
         delay: 400,
     },
     {
@@ -29,7 +29,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[90%] sm:w-[90%] top-[-5%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[90%] sm:w-[90%] top-[15%] sm:top-[-5%] left-1/2 transform -translate-x-1/2',
         delay: 800,
     },
 ];
