@@ -41,14 +41,14 @@ export const metadata = {
     openGraph: {
         title: "6 Guitars",
         description: "Official site of Chase Padgett's award-winning show",
-        images: ['/images/Thumbnail.png'],
+        images: ['/images/6G Hero 18x9_V2.jpg'],
         type: 'website',
     },
     twitter: {
         card: 'summary_large_image',
         title: "6 Guitars",
         description: "Official site of Chase Padgett's award-winning show",
-        images: ['/images/Thumbnail.png'],
+        images: ['/images/6G Hero 18x9_V2.jpg'],
     },
 };
 
