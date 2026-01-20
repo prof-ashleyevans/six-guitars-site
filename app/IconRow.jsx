@@ -1,34 +1,23 @@
 'use client';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-const useInView = (options = {}) => {
-    const ref = useRef(null);
+const IconRow = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                setIsVisible(true);
-                observer.disconnect();
-            }
-        }, options);
+        // Animate icon row at the same time as logo (800ms delay)
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 800);
 
-        if (ref.current) observer.observe(ref.current);
-        return () => observer.disconnect();
-    }, [ref, options]);
-
-    return [ref, isVisible];
-};
-
-const IconRow = () => {
-    const [iconRef, isIconVisible] = useInView({ threshold: 0.2 });
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div
-            ref={iconRef}
-            className={`relative z-10 flex flex-wrap justify-center gap-2 w-full max-w-screen-md px-4 mb-4 mt-8 md:mt-0 bg-transparent mx-auto text-center transition-all duration-700 ease-out
-        ${isIconVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
+            className={`relative z-10 flex flex-wrap justify-center gap-2 w-full max-w-screen-md px-4 mb-4 mt-8 md:mt-0 bg-transparent mx-auto text-center transition-opacity duration-1800 ease-out
+        ${isVisible ? 'opacity-100' : 'opacity-0'}
     `}
         >
             {/* Icon 1 */}
