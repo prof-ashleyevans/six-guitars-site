@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import {
     Freckle_Face,
-    //Bebas_Neue,
+    Bebas_Neue,
     //Playfair_Display,
     //Sacramento,
     Pinyon_Script,
@@ -16,6 +16,7 @@ import {
     Roboto_Condensed,
     Michroma,
     Oswald,
+    Montserrat,
 
 } from "next/font/google";
 
@@ -28,6 +29,8 @@ const bluesFont = Limelight({ weight: "400", subsets: ["latin"], variable: "--fo
 const folkFont = Rancho({ weight: "400", subsets: ["latin"], variable: "--font-folk" });
 const countryFont = Fredericka_the_Great({ weight: "400", subsets: ["latin"], variable: "--font-country" });
 const text_font = Oswald({subsets: ['latin'], weight: '400',variable: '--font-text_font'});
+const bebasFont = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas" });
+const montserratFont = Montserrat({ weight: "400", subsets: ["latin"], variable: "--font-montserrat" });
 
 export const metadata = {
     title: "6 Guitars",
@@ -64,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {/* End Google Tag Manager */}
         </head>
         <body
-            className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} ${text_font.variable}   antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} ${text_font.variable} ${bebasFont.variable} ${montserratFont.variable}   antialiased`}
         >
         {/* Google Tag Manager (noscript) */}
         <noscript>
