@@ -25,14 +25,14 @@ const ticketStatusConfig = {
         bgColor: 'bg-yellow-500',
         hoverColor: 'hover:bg-yellow-600',
         borderColor: 'border-yellow-400',
-        text: 'Get Tickets - Limited Availability',
+        text: 'Limited Avail',
         clickable: true,
     },
     'going fast': {
         bgColor: 'bg-orange-500',
         hoverColor: 'hover:bg-orange-600',
         borderColor: 'border-orange-400',
-        text: 'Buy Now - Going Fast!',
+        text: 'Going Fast!',
         clickable: true,
     },
     'sold out': {
@@ -136,7 +136,7 @@ function TicketButton({ performance, show, onNotifyClick, compact = false }) {
 
     const baseClasses = compact
         ? `${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-3 py-1.5 flex items-center justify-center gap-1 rounded-full transition text-sm text-white text-center`
-        : `${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-3 py-2 max-w-[180px] flex items-center justify-center gap-1 rounded-lg transition text-sm text-white text-center`;
+        : `${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-4 py-2 min-w-[140px] max-w-[140px] flex items-center justify-center gap-1 rounded-lg transition text-sm text-white text-center whitespace-nowrap`;
 
     // Handle "Notify Me" button
     if (config.isNotify) {
@@ -225,34 +225,36 @@ function SingleShowCard({ show, onNotifyClick }) {
             </div>
 
             {/* Desktop Layout - Single Line */}
-            <div className="hidden md:flex md:items-center md:gap-10">
-                {/* Date */}
-                <span className="text-xl font-bold w-[90px]">{formatMonthDay(show.date)}</span>
-                
-                {/* Day */}
-                <span className="text-gray-400 text-xl mr-10 uppercase w-[40px]">{dayShort}</span>
+            <div className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8">
+                {/* Date & Day Stacked */}
+                <div className="flex flex-col w-[70px] lg:w-[80px]">
+                    <span className="text-lg lg:text-xl font-bold">{formatMonthDay(show.date)}</span>
+                    <span className="text-gray-400 text-sm uppercase">{dayShort}</span>
+                </div>
                 
                 {/* Location */}
-                <span className="text-yellow-400 text-xl font-bold uppercase w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
+                <span className="text-yellow-400 text-lg lg:text-xl font-bold uppercase w-[180px] lg:w-[200px] xl:w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
                 
                 {/* Venue */}
-                <span className="text-xl w-[150px]">
+                <span className="text-lg lg:text-xl flex-1 min-w-[150px]">
                     {show.venue}
                 </span>
                 
                 {/* Time */}
-                <span className="text-xl w-[100px]">
+                <span className="text-lg lg:text-xl w-[90px] lg:w-[100px]">
                     {perf.time}
-                    {perf.fullBand && <span className="text-yellow-400 ml-2">⭐</span>}
+                    {perf.fullBand && <span className="text-yellow-400 ml-1">⭐</span>}
                 </span>
                 
-                {/* Discount */}
-                <div className="flex-1 text-center text-md">
-                    <DiscountMessage performance={perf} />
-                </div>
+                {/* Discount - only show if exists */}
+                {(perf.discountCode || perf.discountPercentage) && (
+                    <div className="text-center text-sm w-[120px] lg:w-[140px]">
+                        <DiscountMessage performance={perf} />
+                    </div>
+                )}
                 
                 {/* Button */}
-                <div className="flex justify-end text-xl">
+                <div className="flex justify-end">
                     <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
                 </div>
             </div>
@@ -305,35 +307,44 @@ function GroupedShowCard({ show, onNotifyClick }) {
             {/* Desktop Layout */}
             <div className="hidden md:block">
                 {/* Header Row - same spacing as SingleShowCard */}
-                <div className="flex items-center gap-10 mb-4">
-                    <span className="text-xl font-bold w-[90px]">{formatMonthDay(show.date)}</span>
-                    <span className="text-gray-400 text-xl mr-10 uppercase w-[40px]">{dayShort}</span>
-                    <span className="text-yellow-400 text-xl font-bold uppercase w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
-                    <span className="text-xl w-[150px]">{show.venue}</span>
+                <div className="flex items-center gap-4 lg:gap-6 xl:gap-8 mb-4">
+                    {/* Date & Day Stacked */}
+                    <div className="flex flex-col w-[70px] lg:w-[80px]">
+                        <span className="text-lg lg:text-xl font-bold">{formatMonthDay(show.date)}</span>
+                        <span className="text-gray-400 text-sm uppercase">{dayShort}</span>
+                    </div>
+                    
+                    <span className="text-yellow-400 text-lg lg:text-xl font-bold uppercase w-[180px] lg:w-[200px] xl:w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
+                    <span className="text-lg lg:text-xl flex-1 min-w-[150px]">{show.venue}</span>
                 </div>
 
-                {/* Performance Rows - Time aligned below Location */}
+                {/* Performance Rows */}
                 <div className="space-y-3">
                     {show.performances.map((perf, idx) => (
-                        <div key={idx} className="flex items-center gap-10">
-                            {/* Spacer for Date */}
-                            <span className="w-[90px]"></span>
-                            {/* Spacer for Day + mr-10 */}
-                            <span className="w-[40px] mr-10"></span>
+                        <div key={idx} className="flex items-center gap-4 lg:gap-6 xl:gap-8">
+                            {/* Spacer for Date/Day */}
+                            <span className="w-[70px] lg:w-[80px]"></span>
                             
                             {/* Time - aligned below Location */}
-                            <span className="text-xl w-[220px]">
+                            <span className="text-lg lg:text-xl w-[180px] lg:w-[200px] xl:w-[220px]">
                                 {perf.time}
-                                {perf.fullBand && <span className="text-yellow-400 ml-2">⭐</span>}
+                                {perf.fullBand && <span className="text-yellow-400 ml-1">⭐</span>}
                             </span>
 
-                            {/* Discount */}
-                            <div className="flex-1 text-center text-md">
-                                <DiscountMessage performance={perf} />
-                            </div>
+                            {/* Spacer to align with venue */}
+                            <span className="flex-1 min-w-[150px]"></span>
+
+                            {/* Discount - only show if exists */}
+                            {(perf.discountCode || perf.discountPercentage) ? (
+                                <div className="text-center text-sm w-[120px] lg:w-[140px]">
+                                    <DiscountMessage performance={perf} />
+                                </div>
+                            ) : (
+                                <span className="w-[120px] lg:w-[140px]"></span>
+                            )}
 
                             {/* Button */}
-                            <div className="flex justify-end text-xl">
+                            <div className="flex justify-end">
                                 <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
                             </div>
                         </div>
