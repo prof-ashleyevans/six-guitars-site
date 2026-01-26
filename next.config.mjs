@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    formats: ['image/webp'], // Reduced from avif+webp to just webp (50% fewer transformations)
+    deviceSizes: [640, 828, 1080, 1920], // Reduced from 8 to 4 sizes
+    imageSizes: [32, 64, 128, 256], // Reduced from 8 to 4 sizes
+    minimumCacheTTL: 2678400, // 31 days (was 60 seconds)
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

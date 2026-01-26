@@ -29,6 +29,7 @@ const IconRow = () => {
                         fill
                         quality={90}
                         className="object-contain"
+                        unoptimized
                     />
                 </div>
                 <p className="text-md lg:text-xl leading-tight text-center">Live Music</p>
@@ -43,6 +44,7 @@ const IconRow = () => {
                         fill
                         quality={90}
                         className="object-contain"
+                        unoptimized
                     />
                 </div>
                 <p className="text-md lg:text-xl leading-tight text-center">Comedy</p>
@@ -57,6 +59,7 @@ const IconRow = () => {
                         fill
                         quality={90}
                         className="object-contain"
+                        unoptimized
                     />
                 </div>
                 <p className="text-md lg:text-xl leading-tight text-center w-full">Storytelling</p>
