@@ -65,7 +65,7 @@ const HeroSection = () => {
             <div className="relative w-full">
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
-                    <div className="relative w-full" style={{ aspectRatio: isMobile ? '1 / 1' : '20 / 9' }}>
+                    <div className="relative w-full aspect-square sm:aspect-[16/9] md:aspect-[18/9] lg:aspect-[20/9]">
                         {characterImages.map((char) => (
                             <div
                                 key={char.id}
