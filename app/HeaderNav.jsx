@@ -32,7 +32,9 @@ export default function HeaderNav() {
                                 height={60}
                                 priority
                                 quality={90}
+                                sizes="200px"
                                 className="hidden md:block"
+                                unoptimized
                             />
                         </a>
                     </div>
@@ -50,7 +52,9 @@ export default function HeaderNav() {
                                 alt="Ticket"
                                 width={20}
                                 height={20}
+                                sizes="20px"
                                 className="w-4 h-4 sm:w-5 sm:h-5"
+                                unoptimized
                             />
                             TICKETS
                         </a>

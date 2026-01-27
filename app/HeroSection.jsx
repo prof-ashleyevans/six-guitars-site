@@ -57,7 +57,7 @@ const HeroSection = () => {
                     alt="Background plate"
                     fill
                     priority
-                    quality={90}
+                    quality={85}
                     sizes="100vw"
                     className="object-cover object-center"
                 />
