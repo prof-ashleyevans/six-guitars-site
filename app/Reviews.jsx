@@ -36,6 +36,10 @@ export default function Reviews() {
         slideChanged(slider) {
             setCurrentSlide(slider.track.details.abs);
         },
+        created(slider) {
+            // Initialize current slide on creation
+            setCurrentSlide(slider.track.details.abs);
+        },
     });
 
     // Fetch reviews from API
@@ -110,7 +114,8 @@ export default function Reviews() {
                             {reviews.map((review, index) => {
                                 // Only load images for visible slides + 1 adjacent on each side
                                 // Keen Slider shows 1 on mobile, 3 on desktop
-                                const shouldLoad = Math.abs(index - currentSlide) <= 2; // Load current + 2 adjacent
+                                // Load current slide + 2 adjacent (covers mobile=1, desktop=3)
+                                const shouldLoad = Math.abs(index - currentSlide) <= 2;
                                 
                                 return (
                                     <div key={review.id || index} className="keen-slider__slide relative w-full h-full">
@@ -139,16 +144,16 @@ export default function Reviews() {
                                             {/* Stars second (if any) - fixed spacing */}
                                             <div className="h-16 flex items-center justify-center mb-6">
                                                 {review.status === 5 && shouldLoad && (
-                                                    <Image 
-                                                        src="/images/5 Stars.png" 
-                                                        alt="5 stars" 
-                                                        width={150}
-                                                        height={40}
-                                                        quality={75}
-                                                        sizes="150px"
-                                                        className="h-10 w-auto object-contain" 
-                                                        loading="lazy"
-                                                    />
+                                                <Image 
+                                                    src="/images/5 Stars.png" 
+                                                    alt="5 stars" 
+                                                    width={150}
+                                                    height={40}
+                                                    sizes="150px"
+                                                    className="h-10 w-auto object-contain" 
+                                                    loading="lazy"
+                                                    unoptimized
+                                                />
                                                 )}
                                             </div>
                                             

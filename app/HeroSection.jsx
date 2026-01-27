@@ -74,16 +74,18 @@ const HeroSection = () => {
                                 data-aos="fade-up"
                                 data-aos-delay={char.delay || 0}
                             >
-                                <Image
-                                    src={isMobile ? char.mobileSrc : char.desktopSrc}
-                                    alt={char.alt}
-                                    width={2000}
-                                    height={1000}
-                                    priority={char.id === 'characters'}
-                                    quality={85}
-                                    sizes="100vw"
-                                    className="w-full h-full object-cover object-top"
-                                />
+                                {isMobile !== null && (
+                                    <Image
+                                        src={isMobile ? char.mobileSrc : char.desktopSrc}
+                                        alt={char.alt}
+                                        width={2000}
+                                        height={1000}
+                                        priority={char.id === 'characters'}
+                                        quality={85}
+                                        sizes="100vw"
+                                        className="w-full h-full object-cover object-top"
+                                    />
+                                )}
                                 {char.id === 'characters' && (
                                     <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
                                 )}
