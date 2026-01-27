@@ -58,6 +58,7 @@ const HeroSection = () => {
                     fill
                     priority
                     quality={90}
+                    sizes="100vw"
                     className="object-cover object-center"
                 />
             </div>
@@ -80,6 +81,7 @@ const HeroSection = () => {
                                     height={1000}
                                     priority={char.id === 'characters'}
                                     quality={85}
+                                    sizes="100vw"
                                     className="w-full h-full object-cover object-top"
                                 />
                                 {char.id === 'characters' && (

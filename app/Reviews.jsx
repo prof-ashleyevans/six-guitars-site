@@ -112,7 +112,9 @@ export default function Reviews() {
                                             alt="Character"
                                             fill
                                             quality={70}
+                                            sizes="(max-width: 768px) 100vw, 33vw"
                                             className="object-cover scale-105"
+                                            loading="lazy"
                                         />
                                     </div>
 
@@ -132,7 +134,9 @@ export default function Reviews() {
                                                     width={150}
                                                     height={40}
                                                     quality={85}
+                                                    sizes="150px"
                                                     className="h-10 w-auto object-contain" 
+                                                    loading="lazy"
                                                 />
                                             )}
                                         </div>
@@ -146,7 +150,9 @@ export default function Reviews() {
                                                         alt={review.name} 
                                                         fill
                                                         quality={85}
+                                                        sizes="(max-width: 768px) 100vw, 300px"
                                                         className="object-contain" 
+                                                        loading="lazy"
                                                     />
                                                 </div>
                                             )}

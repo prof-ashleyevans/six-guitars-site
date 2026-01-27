@@ -59,7 +59,9 @@ export default function Contact() {
                         alt="Guitar background mobile"
                         fill
                         quality={75}
+                        sizes="140px"
                         className="object-contain object-center"
+                        loading="lazy"
                     />
                 </div>
             </div>
@@ -71,8 +73,10 @@ export default function Contact() {
                     alt="Guitar background"
                     fill
                     quality={75}
+                    sizes="100vw"
                     className="object-cover"
                     style={{ objectPosition: '25% center' }}
+                    loading="lazy"
                 />
             </div>
 

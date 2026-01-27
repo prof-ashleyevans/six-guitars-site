@@ -158,7 +158,9 @@ export default function AudienceReviews() {
                                                     alt={review.name}
                                                     width={48}
                                                     height={48}
+                                                    sizes="48px"
                                                     className="rounded-full object-cover w-12 h-12"
+                                                    loading="lazy"
                                                 />
                                             ) : (
                                                 // Fallback avatar if no photo

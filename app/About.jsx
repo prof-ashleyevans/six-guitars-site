@@ -17,6 +17,7 @@ const About = () => {
                     alt="Chase performing live"
                     fill
                     quality={100}
+                    sizes="100vw"
                     className="object-cover object-top"
                 />
             </div>
@@ -28,6 +29,7 @@ const About = () => {
                     alt="Chase performing live"
                     fill
                     quality={100}
+                    sizes="100vw"
                     className="object-cover"
                 />
             </div>
@@ -85,6 +87,7 @@ const About = () => {
                                     width={320}
                                     height={180}
                                     quality={80}
+                                    sizes="(max-width: 768px) 320px, 400px"
                                     className="rounded-lg shadow-lg mb-5"
                                 />
                             </div>
@@ -105,6 +108,7 @@ const About = () => {
                                 width={400}
                                 height={225}
                                 quality={80}
+                                sizes="400px"
                                 className="rounded-lg shadow-lg"
                             />
                         </div>
