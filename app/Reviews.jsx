@@ -17,6 +17,7 @@ const characterImages = [
 export default function Reviews() {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentSlide, setCurrentSlide] = useState(0);
     
     const [sliderRef, slider] = useKeenSlider({
         loop: true,
@@ -31,6 +32,9 @@ export default function Reviews() {
                     spacing: 40,
                 },
             },
+        },
+        slideChanged(slider) {
+            setCurrentSlide(slider.track.details.abs);
         },
     });
 
@@ -103,63 +107,71 @@ export default function Reviews() {
                 ) : (
                     <div className="relative w-full h-[400px] overflow-hidden">
                         <div ref={sliderRef} className="keen-slider h-full">
-                            {reviews.map((review, index) => (
-                                <div key={review.id || index} className="keen-slider__slide relative w-full h-full">
-                                    {/* Background */}
-                                    <div className="absolute inset-0 overflow-hidden z-0 opacity-20">
-                                        <Image
-                                            src={review.characterImage}
-                                            alt="Character"
-                                            fill
-                                            quality={70}
-                                            sizes="(max-width: 768px) 100vw, 33vw"
-                                            className="object-cover scale-105"
-                                            loading="lazy"
-                                        />
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="relative z-10 h-full flex flex-col items-center px-6 text-center py-12">
-                                        {/* Quote first - takes up available space */}
-                                        <div className="flex-1 flex items-center justify-center">
-                                            <p className="italic text-2xl md:text-2xl max-w-[250px] font-[family-name:var(--font-text_font)] tracking-wide">"{review.quote}"</p>
-                                        </div>
-                                        
-                                        {/* Stars second (if any) - fixed spacing */}
-                                        <div className="h-16 flex items-center justify-center mb-6">
-                                            {review.status === 5 && (
-                                                <Image 
-                                                    src="/images/5 Stars.png" 
-                                                    alt="5 stars" 
-                                                    width={150}
-                                                    height={40}
-                                                    quality={85}
-                                                    sizes="150px"
-                                                    className="h-10 w-auto object-contain" 
+                            {reviews.map((review, index) => {
+                                // Only load images for visible slides + 1 adjacent on each side
+                                // Keen Slider shows 1 on mobile, 3 on desktop
+                                const shouldLoad = Math.abs(index - currentSlide) <= 2; // Load current + 2 adjacent
+                                
+                                return (
+                                    <div key={review.id || index} className="keen-slider__slide relative w-full h-full">
+                                        {/* Background */}
+                                        <div className="absolute inset-0 overflow-hidden z-0 opacity-20">
+                                            {shouldLoad && (
+                                                <Image
+                                                    src={review.characterImage}
+                                                    alt="Character"
+                                                    fill
+                                                    quality={70}
+                                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                                    className="object-cover scale-105"
                                                     loading="lazy"
                                                 />
                                             )}
                                         </div>
-                                        
-                                        {/* Publication logo - always at same vertical position */}
-                                        <div className="h-24 w-full flex items-center justify-center">
-                                            {review.logo && (
-                                                <div className="relative h-full w-full max-w-[300px]">
+
+                                        {/* Content */}
+                                        <div className="relative z-10 h-full flex flex-col items-center px-6 text-center py-12">
+                                            {/* Quote first - takes up available space */}
+                                            <div className="flex-1 flex items-center justify-center">
+                                                <p className="italic text-2xl md:text-2xl max-w-[250px] font-[family-name:var(--font-text_font)] tracking-wide">"{review.quote}"</p>
+                                            </div>
+                                            
+                                            {/* Stars second (if any) - fixed spacing */}
+                                            <div className="h-16 flex items-center justify-center mb-6">
+                                                {review.status === 5 && shouldLoad && (
                                                     <Image 
-                                                        src={review.logo} 
-                                                        alt={review.name} 
-                                                        fill
-                                                        quality={85}
-                                                        sizes="(max-width: 768px) 100vw, 300px"
-                                                        className="object-contain" 
+                                                        src="/images/5 Stars.png" 
+                                                        alt="5 stars" 
+                                                        width={150}
+                                                        height={40}
+                                                        quality={75}
+                                                        sizes="150px"
+                                                        className="h-10 w-auto object-contain" 
                                                         loading="lazy"
                                                     />
-                                                </div>
-                                            )}
+                                                )}
+                                            </div>
+                                            
+                                            {/* Publication logo - always at same vertical position */}
+                                            <div className="h-24 w-full flex items-center justify-center">
+                                                {review.logo && shouldLoad && (
+                                                    <div className="relative h-full w-full max-w-[300px]">
+                                                        <Image 
+                                                            src={review.logo} 
+                                                            alt={review.name} 
+                                                            fill
+                                                            quality={75}
+                                                            sizes="(max-width: 768px) 100vw, 300px"
+                                                            className="object-contain" 
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
 
                         {/* Arrows */}

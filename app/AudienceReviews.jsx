@@ -159,6 +159,7 @@ export default function AudienceReviews() {
                                                     width={48}
                                                     height={48}
                                                     sizes="48px"
+                                                    quality={75}
                                                     className="rounded-full object-cover w-12 h-12"
                                                     loading="lazy"
                                                 />

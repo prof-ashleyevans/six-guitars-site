@@ -16,7 +16,7 @@ const About = () => {
                     src="/images/about/6G About Page Mobile V2. BGjpg.jpg"
                     alt="Chase performing live"
                     fill
-                    quality={100}
+                    quality={85}
                     sizes="100vw"
                     className="object-cover object-top"
                 />
@@ -28,7 +28,7 @@ const About = () => {
                     src="/images/about/6G About Page V2 BG.jpg"
                     alt="Chase performing live"
                     fill
-                    quality={100}
+                    quality={85}
                     sizes="100vw"
                     className="object-cover"
                 />
