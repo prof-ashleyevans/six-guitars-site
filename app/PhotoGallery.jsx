@@ -51,23 +51,32 @@ export default function PhotoGallery() {
                 <div className="relative">
                     {/* Image Container */}
                     <div className="relative aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-xl">
-                        {galleryImages.map((image, index) => (
-                            <div
-                                key={index}
-                                className={`absolute inset-0 transition-opacity duration-500 ${
-                                    index === currentIndex ? 'opacity-100' : 'opacity-0'
-                                }`}
-                            >
-                                <Image
-                                    src={image.src}
-                                    alt={image.alt}
-                                    fill
-                                    quality={85}
-                                    className="object-cover"
-                                    priority={index === 0}
-                                />
-                            </div>
-                        ))}
+                        {galleryImages.map((image, index) => {
+                            // Only load current image + 1 adjacent on each side for smooth transitions
+                            const shouldLoad = Math.abs(index - currentIndex) <= 1;
+                            
+                            return (
+                                <div
+                                    key={index}
+                                    className={`absolute inset-0 transition-opacity duration-500 ${
+                                        index === currentIndex ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                >
+                                    {shouldLoad && (
+                                        <Image
+                                            src={image.src}
+                                            alt={image.alt}
+                                            fill
+                                            quality={85}
+                                            sizes="(max-width: 768px) 100vw, 1024px"
+                                            className="object-cover"
+                                            priority={index === 0}
+                                            loading={index === 0 ? undefined : 'lazy'}
+                                        />
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
 
                     {/* Left Arrow */}

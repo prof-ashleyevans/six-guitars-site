@@ -59,6 +59,7 @@ export default function CharacterGridSection() {
                         alt="Background"
                         fill
                         quality={75}
+                        sizes="100vw"
                         className="object-cover object-center"
                     />
                 </div>
@@ -83,6 +84,7 @@ export default function CharacterGridSection() {
                                 fill
                                 priority={i === 0}
                                 quality={85}
+                                sizes="100vw"
                                 className={i === 0
                                     ? 'object-cover sm:object-top'
                                     : 'object-contain'}
