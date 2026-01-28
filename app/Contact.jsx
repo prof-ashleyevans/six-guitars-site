@@ -58,10 +58,10 @@ export default function Contact() {
                         src="/images/guitar_only_small_mobile.png"
                         alt="Guitar background mobile"
                         fill
-                        quality={75}
                         sizes="140px"
                         className="object-contain object-center"
                         loading="lazy"
+                        unoptimized
                     />
                 </div>
             </div>
@@ -72,11 +72,11 @@ export default function Contact() {
                     src="/images/guitar_only_shifted.png"
                     alt="Guitar background"
                     fill
-                    quality={75}
                     sizes="100vw"
                     className="object-cover"
                     style={{ objectPosition: '25% center' }}
                     loading="lazy"
+                    unoptimized
                 />
             </div>
 

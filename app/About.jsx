@@ -16,9 +16,9 @@ const About = () => {
                     src="/images/about/6G About Page Mobile V2. BGjpg.jpg"
                     alt="Chase performing live"
                     fill
-                    quality={85}
                     sizes="100vw"
                     className="object-cover object-top"
+                    unoptimized
                 />
             </div>
 
@@ -28,9 +28,9 @@ const About = () => {
                     src="/images/about/6G About Page V2 BG.jpg"
                     alt="Chase performing live"
                     fill
-                    quality={85}
                     sizes="100vw"
                     className="object-cover"
+                    unoptimized
                 />
             </div>
 
@@ -86,9 +86,9 @@ const About = () => {
                                     alt="Watch the 6 Guitars Trailer"
                                     width={320}
                                     height={180}
-                                    quality={80}
                                     sizes="(max-width: 768px) 320px, 400px"
                                     className="rounded-lg shadow-lg mb-5"
+                                    unoptimized
                                 />
                             </div>
                         </div>
@@ -107,9 +107,9 @@ const About = () => {
                                 alt="Watch the 6 Guitars Trailer"
                                 width={400}
                                 height={225}
-                                quality={80}
                                 sizes="400px"
                                 className="rounded-lg shadow-lg"
+                                unoptimized
                             />
                         </div>
                     </div>
