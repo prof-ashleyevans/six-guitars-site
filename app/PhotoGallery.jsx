@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 
 const galleryImages = [
@@ -28,6 +28,8 @@ const galleryImages = [
 
 export default function PhotoGallery() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isVisible, setIsVisible] = useState(true); // Start as true, IntersectionObserver will update
+    const galleryRef = useRef(null);
 
     const goToNext = useCallback(() => {
         setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
@@ -37,46 +39,81 @@ export default function PhotoGallery() {
         setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
     }, []);
 
-    // Auto-advance every 3 seconds
+    // Pause auto-advance when gallery is not visible in viewport
     useEffect(() => {
-        const interval = setInterval(goToNext, 3000);
-        return () => clearInterval(interval);
-    }, [goToNext]);
+        if (!galleryRef.current) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    setIsVisible(entry.isIntersecting);
+                });
+            },
+            { threshold: 0.3 } // Consider visible when 30% is in viewport
+        );
+
+        observer.observe(galleryRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    // Auto-advance every 3 seconds - but pause when page is hidden OR gallery is not visible
+    useEffect(() => {
+        let interval = null;
+        
+        const startInterval = () => {
+            if (!document.hidden && isVisible && !interval) {
+                interval = setInterval(goToNext, 3000);
+            }
+        };
+
+        const stopInterval = () => {
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+            }
+        };
+
+        const handleVisibilityChange = () => {
+            stopInterval();
+            if (!document.hidden && isVisible) {
+                startInterval();
+            }
+        };
+        
+        // Stop any existing interval first
+        stopInterval();
+        
+        // Start interval if both conditions are met
+        if (!document.hidden && isVisible) {
+            startInterval();
+        }
+        
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            stopInterval();
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, [goToNext, isVisible]);
 
     return (
-        <section id="gallery" className="bg-black text-white px-6 py-16">
+        <section id="gallery" ref={galleryRef} className="bg-black text-white px-6 py-16">
             <div className="max-w-4xl mx-auto">
                 <h2 className="text-4xl font-bold text-center mb-12">Photo Gallery</h2>
                 
                 <div className="relative">
                     {/* Image Container */}
                     <div className="relative aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-xl">
-                        {galleryImages.map((image, index) => {
-                            // Only load current image + 1 adjacent on each side for smooth transitions
-                            const shouldLoad = Math.abs(index - currentIndex) <= 1;
-                            
-                            return (
-                                <div
-                                    key={index}
-                                    className={`absolute inset-0 transition-opacity duration-500 ${
-                                        index === currentIndex ? 'opacity-100' : 'opacity-0'
-                                    }`}
-                                >
-                                    {shouldLoad && (
-                                        <Image
-                                            src={image.src}
-                                            alt={image.alt}
-                                            fill
-                                            quality={85}
-                                            sizes="(max-width: 768px) 100vw, 1024px"
-                                            className="object-cover"
-                                            priority={index === 0}
-                                            loading={index === 0 ? undefined : 'lazy'}
-                                        />
-                                    )}
-                                </div>
-                            );
-                        })}
+                        {/* Only load the current image - matches Christmas site approach */}
+                        <Image
+                            src={galleryImages[currentIndex].src}
+                            alt={galleryImages[currentIndex].alt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 1024px"
+                            className="object-cover transition-opacity duration-500"
+                            priority={currentIndex === 0}
+                            loading={currentIndex === 0 ? undefined : 'lazy'}
+                            unoptimized
+                        />
                     </div>
 
                     {/* Left Arrow */}

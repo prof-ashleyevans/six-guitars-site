@@ -85,14 +85,33 @@ export default function Reviews() {
         loadReviews();
     }, []);
 
-    // Auto-rotate every 4 seconds
+    // Auto-rotate every 4 seconds - but pause when page is not visible
     useEffect(() => {
         if (reviews.length === 0) return;
         
-        const interval = setInterval(() => {
-            slider.current?.next();
-        }, 4000);
-        return () => clearInterval(interval);
+        let interval;
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                clearInterval(interval);
+            } else {
+                interval = setInterval(() => {
+                    slider.current?.next();
+                }, 4000);
+            }
+        };
+        
+        // Only auto-rotate if page is visible
+        if (!document.hidden) {
+            interval = setInterval(() => {
+                slider.current?.next();
+            }, 4000);
+        }
+        
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+            clearInterval(interval);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
     }, [slider, reviews]);
 
     return (
@@ -126,10 +145,10 @@ export default function Reviews() {
                                                     src={review.characterImage}
                                                     alt="Character"
                                                     fill
-                                                    quality={70}
                                                     sizes="(max-width: 768px) 100vw, 33vw"
                                                     className="object-cover scale-105"
                                                     loading="lazy"
+                                                    unoptimized
                                                 />
                                             )}
                                         </div>
@@ -165,10 +184,10 @@ export default function Reviews() {
                                                             src={review.logo} 
                                                             alt={review.name} 
                                                             fill
-                                                            quality={75}
                                                             sizes="(max-width: 768px) 100vw, 300px"
                                                             className="object-contain" 
                                                             loading="lazy"
+                                                            unoptimized
                                                         />
                                                     </div>
                                                 )}

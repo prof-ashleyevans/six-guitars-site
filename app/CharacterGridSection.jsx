@@ -58,9 +58,9 @@ export default function CharacterGridSection() {
                         src="/images/hero/pc/background.jpg"
                         alt="Background"
                         fill
-                        quality={75}
                         sizes="100vw"
                         className="object-cover object-center"
+                        unoptimized
                     />
                 </div>
 
@@ -83,11 +83,11 @@ export default function CharacterGridSection() {
                                 alt={char.alt}
                                 fill
                                 priority={i === 0}
-                                quality={85}
                                 sizes="100vw"
                                 className={i === 0
                                     ? 'object-cover sm:object-top'
                                     : 'object-contain'}
+                                unoptimized
                             />
                         </div>
                     </div>
