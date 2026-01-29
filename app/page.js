@@ -4,6 +4,7 @@ import 'keen-slider/keen-slider.min.css';
 import 'aos/dist/aos.css';
 import './globals.css';
 import HeroSection from "@/app/HeroSection";
+import QuoteSection from "@/app/QuoteSection";
 import About from "@/app/About";
 import Reviews from "@/app/Reviews";
 import HeaderNav from "@/app/HeaderNav";
@@ -24,6 +25,8 @@ export default function Home() {
             <HeaderNav />
 
             <HeroSection />
+
+            <QuoteSection />
 
             <About />
 
