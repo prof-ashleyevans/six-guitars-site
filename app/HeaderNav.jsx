@@ -45,7 +45,7 @@ export default function HeaderNav() {
                     <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
                         <a
                             href="#tickets"
-                            className="inline-flex items-center gap-2 bg-[#8a828c] text-white px-5 py-2 sm:px-8 sm:py-3 rounded-md text-sm sm:text-lg font-bold hover:bg-[#b01234] transition border-2 border-white whitespace-nowrap"
+                            className="inline-flex items-center gap-2 bg-[#b01234] text-white px-5 py-2 sm:px-8 sm:py-3 rounded-md text-sm sm:text-lg font-bold hover:bg-[#8a828c] transition whitespace-nowrap"
                         >
                             <Image
                                 src="/images/icons/Ticket Icon White.png"

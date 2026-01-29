@@ -17,6 +17,8 @@ import {
     Michroma,
     Oswald,
     Montserrat,
+    Alumni_Sans_Pinstripe,
+    Barlow,
 
 } from "next/font/google";
 
@@ -31,6 +33,8 @@ const countryFont = Fredericka_the_Great({ weight: "400", subsets: ["latin"], va
 const text_font = Oswald({subsets: ['latin'], weight: '400',variable: '--font-text_font'});
 const bebasFont = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas" });
 const montserratFont = Montserrat({ weight: "400", subsets: ["latin"], variable: "--font-montserrat" });
+const alumniPinstripeFont = Alumni_Sans_Pinstripe({ weight: "400", subsets: ["latin"], variable: "--font-alumni-pinstripe" });
+const barlowLightFont = Barlow({ weight: "300", subsets: ["latin"], variable: "--font-barlow-light" });
 
 export const metadata = {
     title: "6 Guitars",
@@ -67,7 +71,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {/* End Google Tag Manager */}
         </head>
         <body
-            className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} ${text_font.variable} ${bebasFont.variable} ${montserratFont.variable}   antialiased`}
+            className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} ${text_font.variable} ${bebasFont.variable} ${montserratFont.variable} ${alumniPinstripeFont.variable} ${barlowLightFont.variable}   antialiased`}
         >
         {/* Google Tag Manager (noscript) */}
         <noscript>

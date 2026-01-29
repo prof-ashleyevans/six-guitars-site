@@ -135,8 +135,8 @@ function TicketButton({ performance, show, onNotifyClick, compact = false }) {
     );
 
     const baseClasses = compact
-        ? `${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-3 py-1.5 flex items-center justify-center gap-1 rounded-full transition text-sm text-white text-center`
-        : `${config.bgColor} ${config.hoverColor} border ${config.borderColor} px-4 py-2 min-w-[140px] max-w-[140px] flex items-center justify-center gap-1 rounded-lg transition text-sm text-white text-center whitespace-nowrap`;
+        ? `${config.bgColor} ${config.hoverColor} px-5 py-2 flex items-center justify-center gap-1 rounded-md transition text-sm text-white text-center font-bold`
+        : `${config.bgColor} ${config.hoverColor} px-5 py-2 sm:px-8 sm:py-3 min-w-[140px] max-w-[140px] flex items-center justify-center gap-1 rounded-md transition text-sm sm:text-lg text-white text-center whitespace-nowrap font-bold`;
 
     // Handle "Notify Me" button
     if (config.isNotify) {

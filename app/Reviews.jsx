@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import Image from 'next/image';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
@@ -17,7 +17,24 @@ const characterImages = [
 export default function Reviews() {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    
+    // Check if mobile on mount and resize
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+    
+    // Calculate how many reviews to show on mobile (1/3)
+    const mobileReviewCount = useMemo(() => {
+        if (!isMobile || reviews.length === 0) return reviews.length;
+        return Math.ceil(reviews.length / 3);
+    }, [isMobile, reviews.length]);
     
     const [sliderRef, slider] = useKeenSlider({
         loop: true,
@@ -32,13 +49,6 @@ export default function Reviews() {
                     spacing: 40,
                 },
             },
-        },
-        slideChanged(slider) {
-            setCurrentSlide(slider.track.details.abs);
-        },
-        created(slider) {
-            // Initialize current slide on creation
-            setCurrentSlide(slider.track.details.abs);
         },
     });
 
@@ -87,7 +97,8 @@ export default function Reviews() {
 
     // Auto-rotate every 4 seconds - but pause when page is not visible
     useEffect(() => {
-        if (reviews.length === 0) return;
+        const reviewCount = isMobile ? mobileReviewCount : reviews.length;
+        if (reviewCount === 0) return;
         
         let interval;
         const handleVisibilityChange = () => {
@@ -112,7 +123,7 @@ export default function Reviews() {
             clearInterval(interval);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, [slider, reviews]);
+    }, [slider, isMobile, mobileReviewCount, reviews.length]);
 
     return (
         <section id="reviews" className="text-white px-6 py-16 bg-[#1a1a1a]">
@@ -130,27 +141,25 @@ export default function Reviews() {
                 ) : (
                     <div className="relative w-full h-[400px] overflow-hidden">
                         <div ref={sliderRef} className="keen-slider h-full">
-                            {reviews.map((review, index) => {
-                                // Only load images for visible slides + 1 adjacent on each side
-                                // Keen Slider shows 1 on mobile, 3 on desktop
-                                // Load current slide + 2 adjacent (covers mobile=1, desktop=3)
-                                const shouldLoad = Math.abs(index - currentSlide) <= 2;
-                                
+                            {(isMobile ? reviews.slice(0, mobileReviewCount) : reviews).map((review, index) => {
+                                // Load all images - since they're unoptimized, no transformation cost
+                                // This ensures graphics stay visible as slider advances
                                 return (
-                                    <div key={review.id || index} className="keen-slider__slide relative w-full h-full">
+                                    <div 
+                                        key={review.id || index} 
+                                        className="keen-slider__slide relative w-full h-full"
+                                    >
                                         {/* Background */}
                                         <div className="absolute inset-0 overflow-hidden z-0 opacity-20">
-                                            {shouldLoad && (
-                                                <Image
-                                                    src={review.characterImage}
-                                                    alt="Character"
-                                                    fill
-                                                    sizes="(max-width: 768px) 100vw, 33vw"
-                                                    className="object-cover scale-105"
-                                                    loading="lazy"
-                                                    unoptimized
-                                                />
-                                            )}
+                                            <Image
+                                                src={review.characterImage}
+                                                alt="Character"
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, 33vw"
+                                                className="object-cover scale-105"
+                                                loading="lazy"
+                                                unoptimized
+                                            />
                                         </div>
 
                                         {/* Content */}
@@ -162,7 +171,7 @@ export default function Reviews() {
                                             
                                             {/* Stars second (if any) - fixed spacing */}
                                             <div className="h-16 flex items-center justify-center mb-6">
-                                                {review.status === 5 && shouldLoad && (
+                                                {review.status === 5 && (
                                                 <Image 
                                                     src="/images/5 Stars.png" 
                                                     alt="5 stars" 
@@ -178,7 +187,7 @@ export default function Reviews() {
                                             
                                             {/* Publication logo - always at same vertical position */}
                                             <div className="h-24 w-full flex items-center justify-center">
-                                                {review.logo && shouldLoad && (
+                                                {review.logo && (
                                                     <div className="relative h-full w-full max-w-[300px]">
                                                         <Image 
                                                             src={review.logo} 

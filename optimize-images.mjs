@@ -36,10 +36,10 @@ const CONFIG = {
       withoutEnlargement: true
     }
   },
-  // About section images
+  // About section images - higher quality for better visual appearance
   about: {
     jpeg: {
-      quality: 85,
+      quality: 95,
       progressive: true,
       mozjpeg: true
     },

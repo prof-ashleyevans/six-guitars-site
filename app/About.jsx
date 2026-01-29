@@ -17,7 +17,7 @@ const About = () => {
                     alt="Chase performing live"
                     fill
                     sizes="100vw"
-                    className="object-cover object-top"
+                    className="object-cover object-bottom"
                     unoptimized
                 />
             </div>
@@ -29,7 +29,7 @@ const About = () => {
                     alt="Chase performing live"
                     fill
                     sizes="100vw"
-                    className="object-cover"
+                    className="object-cover object-bottom"
                     unoptimized
                 />
             </div>
@@ -101,13 +101,13 @@ const About = () => {
                         onClick={() => setShowTrailer(true)}
                         className="cursor-pointer transition-transform hover:scale-105"
                     >
-                        <div className="relative w-full max-w-[400px] aspect-video">
+                        <div className="relative w-full max-w-[480px] aspect-video">
                             <Image
                                 src="/images/about/6g_trailer_thumb.jpg"
                                 alt="Watch the 6 Guitars Trailer"
-                                width={400}
-                                height={225}
-                                sizes="400px"
+                                width={480}
+                                height={270}
+                                sizes="480px"
                                 className="rounded-lg shadow-lg"
                                 unoptimized
                             />
