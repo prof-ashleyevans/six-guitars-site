@@ -128,14 +128,14 @@ export default function Contact() {
                                 placeholder="Your Message"
                                 className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
                             />
-                            <label className="flex items-center justify-center space-x-2 text-sm sm:text-base">
+                            <label className="flex items-center justify-center space-x-2 text-sm sm:text-base text-white">
                                 <input
                                     type="checkbox"
                                     checked={subscribe}
                                     onChange={() => setSubscribe(!subscribe)}
                                     className="accent-yellow-400"
                                 />
-                                <span>Subscribe to Chase Padgett's email list</span>
+                                <span className="text-white">Subscribe to Chase Padgett's email list</span>
                             </label>
                             <button
                                 type="submit"
