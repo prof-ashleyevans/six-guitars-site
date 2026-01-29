@@ -29,7 +29,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[90%] sm:w-[90%] top-[15%] sm:top-[-5%] md:top-[-7%] lg:top-[-5%] xl:top-[-8%] 2xl:top-[-10%] left-1/2 -translate-x-1/2',
+        style: 'w-[90%] sm:w-[90%] top-[15%] sm:top-[-5%] md:top-[-10%] lg:top-[-8%] xl:top-[-8%] 2xl:top-[-10%] left-1/2 -translate-x-1/2',
         delay: 800,
     },
 ];
