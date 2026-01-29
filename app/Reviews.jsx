@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
@@ -29,12 +29,6 @@ export default function Reviews() {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
-    
-    // Calculate how many reviews to show on mobile (1/3)
-    const mobileReviewCount = useMemo(() => {
-        if (!isMobile || reviews.length === 0) return reviews.length;
-        return Math.ceil(reviews.length / 3);
-    }, [isMobile, reviews.length]);
     
     const [sliderRef, slider] = useKeenSlider({
         loop: true,
@@ -97,8 +91,7 @@ export default function Reviews() {
 
     // Auto-rotate every 4 seconds - but pause when page is not visible
     useEffect(() => {
-        const reviewCount = isMobile ? mobileReviewCount : reviews.length;
-        if (reviewCount === 0) return;
+        if (reviews.length === 0) return;
         
         let interval;
         const handleVisibilityChange = () => {
@@ -123,7 +116,7 @@ export default function Reviews() {
             clearInterval(interval);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, [slider, isMobile, mobileReviewCount, reviews.length]);
+    }, [slider, reviews.length]);
 
     return (
         <section id="reviews" className="text-white px-6 py-16 bg-[#1a1a1a]">
@@ -141,7 +134,7 @@ export default function Reviews() {
                 ) : (
                     <div className="relative w-full h-[400px] overflow-hidden">
                         <div ref={sliderRef} className="keen-slider h-full">
-                            {(isMobile ? reviews.slice(0, mobileReviewCount) : reviews).map((review, index) => {
+                            {reviews.map((review, index) => {
                                 // Load all images - since they're unoptimized, no transformation cost
                                 // This ensures graphics stay visible as slider advances
                                 return (

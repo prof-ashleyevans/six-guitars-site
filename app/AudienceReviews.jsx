@@ -7,6 +7,45 @@ import { useEffect, useState } from 'react';
 export default function AudienceReviews() {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
+    const [reviewsToShow, setReviewsToShow] = useState(6); // Start with 6 reviews on mobile
+    
+    // Check if mobile on mount and resize
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            // Reset reviews to show when switching between mobile/desktop
+            if (!mobile && reviews.length > 0) {
+                setReviewsToShow(reviews.length);
+            } else if (mobile) {
+                setReviewsToShow(6);
+            }
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, [reviews.length]);
+    
+    // Update reviewsToShow when reviews are loaded
+    useEffect(() => {
+        if (reviews.length > 0) {
+            if (!isMobile) {
+                setReviewsToShow(reviews.length);
+            } else {
+                setReviewsToShow(6);
+            }
+        }
+    }, [reviews.length, isMobile]);
+    
+    const handleSeeMore = () => {
+        setReviewsToShow(prev => Math.min(prev + 6, reviews.length));
+        // Refresh AOS after showing more reviews
+        setTimeout(() => AOS.refresh(), 100);
+    };
+    
+    const displayedReviews = isMobile ? reviews.slice(0, reviewsToShow) : reviews;
+    const hasMoreReviews = isMobile && reviewsToShow < reviews.length;
 
     useEffect(() => {
         AOS.init({
@@ -109,7 +148,7 @@ export default function AudienceReviews() {
     }, []);
 
     return (
-        <section id="audience-reviews" className="relative py-16 px-4 bg-black text-white overflow-hidden">
+        <section id="audience-reviews" className="relative pt-16 pb-0 sm:pb-16 px-4 bg-black text-white overflow-hidden">
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-0" />
             <div className="relative w-full">
@@ -140,52 +179,66 @@ export default function AudienceReviews() {
                     ) : reviews.length === 0 ? (
                         <div className="text-center text-white/70">No reviews available at this time.</div>
                     ) : (
-                        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-7xl mx-auto space-y-6">
-                            {reviews.map((review, index) => (
-                                <div 
-                                    key={review.id} 
-                                    data-aos="fade-up" 
-                                    data-aos-delay={index * 50}
-                                    className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 break-inside-avoid mb-6"
-                                >
-                                    {/* Header with photo and name (Facebook style) */}
-                                    <div className="flex items-center gap-3 mb-3">
-                                        {/* Circular profile photo */}
-                                        <div className="flex-shrink-0">
-                                            {review.photo ? (
-                                <Image
-                                                    src={review.photo}
-                                                    alt={review.name}
-                                                    width={48}
-                                                    height={48}
-                                                    sizes="48px"
-                                                    className="rounded-full object-cover w-12 h-12"
-                                                    loading="lazy"
-                                                    unoptimized
-                                                />
-                                            ) : (
-                                                // Fallback avatar if no photo
-                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
-                                                    {review.name.charAt(0).toUpperCase()}
-                                                </div>
-                                            )}
+                        <>
+                            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-7xl mx-auto space-y-6">
+                                {displayedReviews.map((review, index) => (
+                                    <div 
+                                        key={review.id} 
+                                        data-aos="fade-up" 
+                                        data-aos-delay={index * 50}
+                                        className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300 break-inside-avoid mb-6"
+                                    >
+                                        {/* Header with photo and name (Facebook style) */}
+                                        <div className="flex items-center gap-3 mb-3">
+                                            {/* Circular profile photo */}
+                                            <div className="flex-shrink-0">
+                                                {review.photo ? (
+                                    <Image
+                                                        src={review.photo}
+                                                        alt={review.name}
+                                                        width={48}
+                                                        height={48}
+                                                        sizes="48px"
+                                                        className="rounded-full object-cover w-12 h-12"
+                                                        loading="lazy"
+                                                        unoptimized
+                                                    />
+                                                ) : (
+                                                    // Fallback avatar if no photo
+                                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                                                        {review.name.charAt(0).toUpperCase()}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            
+                                            {/* Name */}
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="font-semibold text-gray-900 text-base">
+                                                    {review.name}
+                                                </h3>
+                                            </div>
                                         </div>
                                         
-                                        {/* Name */}
-                                        <div className="flex-1 min-w-0">
-                                            <h3 className="font-semibold text-gray-900 text-base">
-                                                {review.name}
-                                            </h3>
+                                        {/* Quote/Comment */}
+                                        <div className="text-gray-700 text-base leading-relaxed">
+                                            {review.quote}
                                         </div>
-                                    </div>
-                                    
-                                    {/* Quote/Comment */}
-                                    <div className="text-gray-700 text-base leading-relaxed">
-                                        {review.quote}
-                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        {/* See More button - mobile only */}
+                        {hasMoreReviews && (
+                            <div className="flex justify-center mt-8 sm:hidden">
+                                <button
+                                    onClick={handleSeeMore}
+                                    className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 px-8 rounded-md transition-colors duration-200"
+                                >
+                                    See More
+                                </button>
                             </div>
-                        ))}
-                    </div>
+                        )}
+                    </>
                     )}
                 </div>
             </div>
