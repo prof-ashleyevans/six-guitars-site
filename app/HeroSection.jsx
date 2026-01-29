@@ -29,7 +29,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[90%] sm:w-[90%] top-[15%] sm:top-[-5%] left-1/2 transform -translate-x-1/2',
+        style: 'w-[90%] sm:w-[90%] top-[15%] sm:top-[-5%] md:top-[-7%] lg:top-[-5%] xl:top-[-8%] 2xl:top-[-10%] left-1/2 -translate-x-1/2',
         delay: 800,
     },
 ];
@@ -93,8 +93,8 @@ const HeroSection = () => {
                 </div>
 
                 {/* Absolutely positioned Icon Row overlapping bottom of character image */}
-                <div className="absolute bottom-0 left-0 w-full z-30">
-                    <div className="w-full px-4 pointer-events-auto">
+                <div className="absolute bottom-0 left-0 w-full z-30" style={{ minHeight: 'clamp(120px, 15vh, 200px)' }}>
+                    <div className="w-full px-4 pointer-events-auto" style={{ paddingTop: 'clamp(40px, 8vh, 80px)' }}>
                         <IconRow />
                     </div>
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black z-[-1] pointer-events-none" />
