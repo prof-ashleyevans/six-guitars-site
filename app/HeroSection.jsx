@@ -93,8 +93,8 @@ const HeroSection = () => {
                 </div>
 
                 {/* Absolutely positioned Icon Row overlapping bottom of character image */}
-                <div className="absolute bottom-0 left-0 w-full z-30">
-                    <div className="w-full px-4 pointer-events-auto">
+                <div className="absolute bottom-0 left-0 w-full z-30" style={{ minHeight: 'clamp(120px, 15vh, 200px)' }}>
+                    <div className="w-full px-4 pointer-events-auto" style={{ paddingTop: 'clamp(40px, 8vh, 80px)' }}>
                         <IconRow />
                     </div>
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black z-[-1] pointer-events-none" />
