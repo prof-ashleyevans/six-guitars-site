@@ -10,10 +10,13 @@ export default function AudienceReviews() {
     const [isMobile, setIsMobile] = useState(false);
     const [reviewsToShow, setReviewsToShow] = useState(6); // Start with 6 reviews on mobile
     
-    // Check if mobile on mount and resize
+    // Check if mobile on mount and resize (including landscape)
     useEffect(() => {
         const checkMobile = () => {
-            const mobile = window.innerWidth < 768;
+            // Mobile if width < 768 OR if it's a mobile device in landscape (height < 900px and width < 1024px)
+            const isPortraitMobile = window.innerWidth < 768;
+            const isLandscapeMobile = window.innerHeight < 900 && window.innerWidth < 1024 && window.innerWidth >= 768;
+            const mobile = isPortraitMobile || isLandscapeMobile;
             setIsMobile(mobile);
             // Reset reviews to show when switching between mobile/desktop
             if (!mobile && reviews.length > 0) {
@@ -24,7 +27,11 @@ export default function AudienceReviews() {
         };
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        window.addEventListener('orientationchange', checkMobile);
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            window.removeEventListener('orientationchange', checkMobile);
+        };
     }, [reviews.length]);
     
     // Update reviewsToShow when reviews are loaded
@@ -227,9 +234,9 @@ export default function AudienceReviews() {
                             ))}
                         </div>
                         
-                        {/* See More button - mobile only */}
+                        {/* See More button - mobile only (portrait and landscape) */}
                         {hasMoreReviews && (
-                            <div className="flex justify-center mt-8 sm:hidden">
+                            <div className="flex justify-center mt-8" style={{ display: isMobile ? 'flex' : 'none' }}>
                                 <button
                                     onClick={handleSeeMore}
                                     className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 px-8 rounded-md transition-colors duration-200"
