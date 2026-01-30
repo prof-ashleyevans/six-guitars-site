@@ -11,14 +11,14 @@ import IconRow from "@/app/IconRow";
 
 const characterImages = [
     {
-        desktopSrc: '/images/hero/pc/Hero 16x9 Characters.png',
+        desktopSrc: '/images/hero/pc/Hero 16x9 Characters.jpg',
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Characters.png',
         alt: 'Hero Characters',
         aos: 'fade',
         zIndex: 10,
     },
     {
-        desktopSrc: '/images/hero/pc/Hero 16x9 Chase.png',
+        desktopSrc: '/images/hero/pc/Hero 16x9 Chase.jpg',
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Chase.png',
         alt: 'Hero Chase',
         aos: 'fade-up',
@@ -26,7 +26,7 @@ const characterImages = [
         delay: 400,
     },
     {
-        desktopSrc: '/images/hero/pc/Hero 16x9 Logo.png',
+        desktopSrc: '/images/hero/pc/Hero 16x9 Logo.jpg',
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         aos: 'fade-up',

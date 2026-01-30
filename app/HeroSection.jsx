@@ -70,7 +70,8 @@ const HeroSection = () => {
                         {characterImages.map((char) => (
                             <div
                                 key={char.id}
-                                className={`absolute z-[${char.zIndex}] ${char.style}`}
+                                className={`absolute ${char.style}`}
+                                style={{ zIndex: char.zIndex }}
                                 data-aos="fade-up"
                                 data-aos-delay={char.delay || 0}
                             >
