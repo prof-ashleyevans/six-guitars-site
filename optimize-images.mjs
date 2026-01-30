@@ -8,19 +8,20 @@ const BACKUP_DIR = './public/images-original';
 
 // Configuration for different image types
 const CONFIG = {
-  // Hero images - high quality, large
+  // Hero images - optimize PNGs but keep format (preserve transparency)
   hero: {
-    jpeg: {
+    png: {
+      compressionLevel: 9,
       quality: 85,
-      progressive: true,
-      mozjpeg: true
+      palette: true // Use palette for better compression
     },
     resize: {
       width: 1920,
       height: 1080,
       fit: 'inside',
       withoutEnlargement: true
-    }
+    },
+    convertPngToJpeg: false // Keep PNG format to preserve transparency
   },
   // Gallery images - high quality but compressed
   gallery: {
@@ -142,17 +143,52 @@ async function optimizeImage(inputPath, outputPath) {
       image = image.resize(config.resize);
     }
     
+    // Determine output format and path
+    let finalOutputPath = outputPath;
+    let shouldConvertToJpeg = false;
+    const tempOutputPath = join(dirname(outputPath), `.temp_${basename(outputPath)}`);
+    
+    // Convert PNG to JPEG for hero images if configured
+    if (ext === '.png' && config.convertPngToJpeg) {
+      shouldConvertToJpeg = true;
+      // Change output path from .png to .jpg
+      finalOutputPath = outputPath.replace(/\.png$/i, '.jpg');
+    }
+    
     // Convert and optimize based on file type
-    if (ext === '.png' && config.png) {
+    if (shouldConvertToJpeg) {
+      // Convert PNG to JPEG
+      image = image.jpeg(config.jpeg || CONFIG.default.jpeg);
+    } else if (ext === '.png' && config.png) {
       image = image.png(config.png);
     } else if (['.jpg', '.jpeg'].includes(ext) && config.jpeg) {
       image = image.jpeg(config.jpeg);
     }
     
-    // Save the optimized image
-    await image.toFile(outputPath);
+    // Save to temp file first (Sharp can't write to same file it's reading)
+    await image.toFile(tempOutputPath);
     
-    const optimizedSize = await getFileSize(outputPath);
+    // Move temp file to final location
+    const { rename, unlink } = await import('fs/promises');
+    try {
+      // If converting PNG to JPEG, delete original PNG first
+      if (shouldConvertToJpeg && finalOutputPath !== outputPath) {
+        await unlink(inputPath);
+        console.log(`   🔄 Converted PNG to JPEG: ${basename(inputPath)} → ${basename(finalOutputPath)}`);
+      }
+      // Move temp file to final location
+      await rename(tempOutputPath, finalOutputPath);
+    } catch (err) {
+      // Clean up temp file if rename fails
+      try {
+        await unlink(tempOutputPath);
+      } catch (cleanupErr) {
+        // Ignore cleanup errors
+      }
+      throw err;
+    }
+    
+    const optimizedSize = await getFileSize(finalOutputPath);
     const savedBytes = originalSize - optimizedSize;
     const savedPercent = ((savedBytes / originalSize) * 100).toFixed(1);
     
