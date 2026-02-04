@@ -32,7 +32,7 @@ const IconRow = () => {
                         unoptimized
                     />
                 </div>
-                <p className="text-md lg:text-xl leading-tight text-center">Live Music</p>
+                <p className="text-md lg:text-xl leading-tight text-center">Music</p>
             </div>
 
             {/* Icon 2 */}
