@@ -152,8 +152,9 @@ function TicketButton({ performance, show, onNotifyClick, compact = false }) {
 
     // Handle regular ticket links
     if (config.clickable && link) {
+        const trackingClass = config.text === 'Get Tickets' ? 'track-get-tickets' : '';
         return (
-            <a href={fullLink} target="_blank" rel="noopener noreferrer" className={baseClasses}>
+            <a href={fullLink} target="_blank" rel="noopener noreferrer" className={`${baseClasses} ${trackingClass}`.trim()}>
                 {buttonContent}
             </a>
         );
