@@ -16,7 +16,6 @@ import CharacterGridSection from "@/app/CharacterGridSection";
 import FAQ from "@/app/FAQ";
 import AudienceReviews from "@/app/AudienceReviews";
 import IconRow from "@/app/IconRow";
-import FloatingCTA from "@/app/FloatingCTA";
 import HeroCTA from "@/app/HeroCTA";
 // import Experimental from "@/app/Experimental"; // Hidden for now
 
@@ -25,7 +24,6 @@ export default function Home() {
    return (
         <>
             <HeaderNav />
-            <FloatingCTA />
 
             <HeroSection />
             <HeroCTA />
