@@ -119,10 +119,8 @@ export default function Reviews() {
     }, [slider, reviews.length]);
 
     return (
-        <section id="reviews" className="text-white px-6 py-16 bg-[#1a1a1a]">
+        <section id="reviews" className="text-white px-6 pt-4 pb-16 sm:py-16 bg-[#1a1a1a]">
             <div className="max-w-6xl mx-auto text-center">
-                <h2 className="text-4xl font-bold mb-8">Reviews</h2>
-
                 {loading ? (
                     <div className="h-[400px] flex items-center justify-center">
                         <p className="text-xl">Loading reviews...</p>
