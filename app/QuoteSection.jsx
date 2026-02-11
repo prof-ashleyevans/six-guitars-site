@@ -40,6 +40,16 @@ export default function QuoteSection() {
                 >
                     Orlando Sentinel
                 </p>
+                
+                {/* CTA Button - Mobile Only */}
+                <div className="mt-8 sm:hidden" data-aos="fade-up" data-aos-delay="400">
+                    <a
+                        href="#tickets"
+                        className="inline-block bg-yellow-400 hover:bg-yellow-300 text-black px-8 py-3 rounded-lg font-bold text-lg transition-colors"
+                    >
+                        See Upcoming Shows →
+                    </a>
+                </div>
             </div>
         </section>
     );

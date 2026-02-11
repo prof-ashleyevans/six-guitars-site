@@ -29,7 +29,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[90%] sm:w-[90%] top-[15%] sm:top-[-5%] md:top-[-10%] lg:top-[-8%] xl:top-[-8%] 2xl:top-[-10%] left-1/2 -translate-x-1/2',
+        style: 'w-[90%] sm:w-[90%] top-[6%] sm:top-[-5%] md:top-[-8%] lg:top-[-6%] xl:top-[-6%] 2xl:top-[-8%] left-1/2 -translate-x-1/2',
         delay: 800,
     },
 ];
@@ -66,7 +66,7 @@ const HeroSection = () => {
             <div className="relative w-full">
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
-                    <div className="relative w-full aspect-square sm:aspect-[16/9] md:aspect-[18/9] lg:aspect-[20/9]">
+                    <div className="relative w-full h-[80vw] sm:h-auto sm:aspect-[16/9] md:aspect-[18/9] lg:aspect-[20/9] overflow-hidden">
                         {characterImages.map((char) => (
                             <div
                                 key={char.id}
@@ -83,6 +83,11 @@ const HeroSection = () => {
                                     priority={char.id === 'characters'}
                                     sizes="100vw"
                                     className="w-full h-full object-cover object-top"
+                                    style={isMobile ? { 
+                                        objectPosition: 'top center',
+                                        height: '125%',
+                                        top: 0
+                                    } : {}}
                                     unoptimized
                                 />
                                 {char.id === 'characters' && (
@@ -94,8 +99,8 @@ const HeroSection = () => {
                 </div>
 
                 {/* Absolutely positioned Icon Row overlapping bottom of character image */}
-                <div className="absolute bottom-0 left-0 w-full z-30" style={{ minHeight: 'clamp(120px, 15vh, 200px)' }}>
-                    <div className="w-full px-4 pointer-events-auto" style={{ paddingTop: 'clamp(40px, 8vh, 80px)' }}>
+                <div className="absolute bottom-0 left-0 w-full z-30 sm:min-h-[clamp(120px,15vh,200px)]" style={{ minHeight: 'clamp(80px, 10vh, 140px)' }}>
+                    <div className="w-full px-4 pointer-events-auto sm:pt-[clamp(40px,8vh,80px)]" style={{ paddingTop: 'clamp(20px, 5vh, 50px)' }}>
                         <IconRow />
                     </div>
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black z-[-1] pointer-events-none" />
