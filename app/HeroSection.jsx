@@ -181,8 +181,6 @@ const HeroSection = () => {
                     <div className="w-full px-4 pointer-events-auto sm:pt-[clamp(40px,8vh,80px)]" style={{ paddingTop: 'clamp(20px, 5vh, 50px)' }}>
                         <IconRow />
                     </div>
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black z-[-1] pointer-events-none" />
-
                 </div>
             </div>
         </section>
