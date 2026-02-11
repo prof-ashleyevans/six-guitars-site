@@ -50,8 +50,8 @@ const HeroSection = () => {
 
     return (
         <section className="relative w-full overflow-hidden">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0">
+            {/* Background Image - Desktop only */}
+            <div className="absolute inset-0 z-0 hidden sm:block">
                 <Image
                     src="/images/hero/pc/6G Hero 18x9 Plate.jpg"
                     alt="Background plate"
@@ -66,11 +66,31 @@ const HeroSection = () => {
             <div className="relative w-full">
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
-                    <div className="relative w-full h-[80vw] sm:h-auto sm:aspect-[16/9] md:aspect-[18/9] lg:aspect-[20/9] overflow-hidden">
+                    <div className="relative w-full h-[120vw] sm:h-auto sm:aspect-[16/13.5] md:aspect-[18/13.5] lg:aspect-[20/13.5] overflow-hidden">
+                        {/* Mobile Video Background */}
+                        <div className="absolute inset-0 z-0 sm:hidden">
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover object-top"
+                                style={{ 
+                                    objectPosition: 'top center',
+                                    height: '125%',
+                                    top: 0
+                                }}
+                            >
+                                <source src="/videos/hero/Hero Loop 9x16_2.mp4" type="video/mp4" />
+                            </video>
+                            <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
+                        </div>
+
+                        {/* Desktop Character Images */}
                         {characterImages.map((char) => (
                             <div
                                 key={char.id}
-                                className={`absolute ${char.style}`}
+                                className={`absolute ${char.style} ${isMobile ? 'hidden' : ''}`}
                                 style={{ zIndex: char.zIndex }}
                                 data-aos="fade-up"
                                 data-aos-delay={char.delay || 0}
@@ -99,7 +119,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Absolutely positioned Icon Row overlapping bottom of character image */}
-                <div className="absolute bottom-0 left-0 w-full z-30 sm:min-h-[clamp(120px,15vh,200px)]" style={{ minHeight: 'clamp(80px, 10vh, 140px)' }}>
+                <div className="absolute bottom-[10%] left-0 w-full z-30 sm:min-h-[clamp(120px,15vh,200px)]" style={{ minHeight: 'clamp(80px, 10vh, 140px)' }}>
                     <div className="w-full px-4 pointer-events-auto sm:pt-[clamp(40px,8vh,80px)]" style={{ paddingTop: 'clamp(20px, 5vh, 50px)' }}>
                         <IconRow />
                     </div>
