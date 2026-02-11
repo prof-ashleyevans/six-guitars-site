@@ -37,6 +37,7 @@ const characterImages = [
 const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [videoError, setVideoError] = useState(false);
+    const [videoLoaded, setVideoLoaded] = useState(false);
     const videoRef = useRef(null);
     
     useEffect(() => {
@@ -47,14 +48,25 @@ const HeroSection = () => {
     }, []);
 
     useEffect(() => {
-        if (isMobile && videoRef.current && !videoError) {
+        if (isMobile && videoRef.current) {
             const video = videoRef.current;
-            video.play().catch((error) => {
-                console.error('Video autoplay failed:', error);
-                setVideoError(true);
-            });
+            
+            // Try to play when video can play
+            const handleCanPlay = () => {
+                setVideoLoaded(true);
+                video.play().catch((error) => {
+                    console.log('Video autoplay prevented (normal on some browsers):', error);
+                    // Don't set error - video loaded successfully, just can't autoplay
+                });
+            };
+            
+            video.addEventListener('canplay', handleCanPlay);
+            
+            return () => {
+                video.removeEventListener('canplay', handleCanPlay);
+            };
         }
-    }, [isMobile, videoError]);
+    }, [isMobile]);
 
     useEffect(() => {
         AOS.init({ duration: 1800, once: true });
@@ -80,8 +92,8 @@ const HeroSection = () => {
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
                     <div className="relative w-full h-[120vw] sm:h-auto sm:aspect-[16/13.5] md:aspect-[18/13.5] lg:aspect-[20/13.5] overflow-hidden">
                         {/* Mobile Video Background */}
-                        {isMobile && !videoError && (
-                            <div className="absolute inset-0 z-0 sm:hidden bg-black" style={{ width: '100%', height: '100%' }}>
+                        {isMobile && (
+                            <div className={`absolute inset-0 z-0 sm:hidden bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
                                 <video
                                     ref={videoRef}
                                     autoPlay
@@ -97,17 +109,21 @@ const HeroSection = () => {
                                         position: 'absolute',
                                         top: 0,
                                         left: 0,
-                                        zIndex: 1
+                                        zIndex: videoError ? -1 : 1
                                     }}
                                     onError={(e) => {
                                         console.error('Video error:', e);
                                         setVideoError(true);
                                     }}
-                                    onLoadStart={() => {
-                                        // Check if video can actually play
+                                    onLoadedData={() => {
+                                        setVideoLoaded(true);
+                                    }}
+                                    onCanPlay={() => {
+                                        setVideoLoaded(true);
                                         if (videoRef.current) {
-                                            videoRef.current.play().catch(() => {
-                                                setVideoError(true);
+                                            videoRef.current.play().catch((err) => {
+                                                console.log('Autoplay prevented, but video loaded:', err);
+                                                // Don't set error - video is loaded, just can't autoplay
                                             });
                                         }
                                     }}
