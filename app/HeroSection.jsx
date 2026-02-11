@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -36,13 +36,25 @@ const characterImages = [
 
 const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
-    {/**/}
+    const [videoError, setVideoError] = useState(false);
+    const videoRef = useRef(null);
+    
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 640);
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    useEffect(() => {
+        if (isMobile && videoRef.current && !videoError) {
+            const video = videoRef.current;
+            video.play().catch((error) => {
+                console.error('Video autoplay failed:', error);
+                setVideoError(true);
+            });
+        }
+    }, [isMobile, videoError]);
 
     useEffect(() => {
         AOS.init({ duration: 1800, once: true });
@@ -68,31 +80,60 @@ const HeroSection = () => {
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
                     <div className="relative w-full h-[120vw] sm:h-auto sm:aspect-[16/13.5] md:aspect-[18/13.5] lg:aspect-[20/13.5] overflow-hidden">
                         {/* Mobile Video Background */}
-                        <div className="absolute inset-0 z-0 sm:hidden">
-                            <video
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="w-full h-full object-cover object-top"
-                                style={{ 
-                                    objectPosition: 'top center',
-                                    height: '125%',
-                                    top: 0
-                                }}
-                            >
-                                <source src="/videos/hero/Hero Loop 9x16_2.mp4" type="video/mp4" />
-                            </video>
-                            <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
-                        </div>
+                        {isMobile && !videoError && (
+                            <div className="absolute inset-0 z-0 sm:hidden bg-black" style={{ width: '100%', height: '100%' }}>
+                                <video
+                                    ref={videoRef}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    preload="auto"
+                                    className="w-full h-full object-cover"
+                                    style={{ 
+                                        objectPosition: 'top center',
+                                        width: '100%',
+                                        height: '125%',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        zIndex: 1
+                                    }}
+                                    onError={(e) => {
+                                        console.error('Video error:', e);
+                                        setVideoError(true);
+                                    }}
+                                    onLoadStart={() => {
+                                        // Check if video can actually play
+                                        if (videoRef.current) {
+                                            videoRef.current.play().catch(() => {
+                                                setVideoError(true);
+                                            });
+                                        }
+                                    }}
+                                >
+                                    <source src="/videos/hero/Hero Loop 9x16_2.mp4" type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                </video>
+                                <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none z-10" />
+                            </div>
+                        )}
 
-                        {/* Desktop Character Images */}
-                        {characterImages.map((char) => (
+                        {/* Mobile Fallback Images - Show if video fails or on desktop */}
+                        {characterImages.map((char) => {
+                            // Show logic:
+                            // - Desktop: always show
+                            // - Mobile with video working: hide all (video shows instead)
+                            // - Mobile with video error: show characters and chase, but not logo
+                            const shouldShow = !isMobile || (isMobile && videoError && char.id !== 'logo');
+                            const shouldHide = isMobile && !videoError;
+                            
+                            return (
                             <div
                                 key={char.id}
-                                className={`absolute ${char.style} ${isMobile ? 'hidden' : ''}`}
+                                className={`absolute ${char.style} ${shouldHide ? 'hidden' : ''}`}
                                 style={{ zIndex: char.zIndex }}
-                                data-aos="fade-up"
+                                data-aos={shouldShow ? "fade-up" : ""}
                                 data-aos-delay={char.delay || 0}
                             >
                                 <Image
@@ -114,7 +155,8 @@ const HeroSection = () => {
                                     <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none" />
                                 )}
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
 
