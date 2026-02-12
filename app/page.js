@@ -26,11 +26,14 @@ export default function Home() {
             <HeaderNav />
 
             <HeroSection />
+            <div className="sm:hidden bg-black pb-0" style={{ marginTop: '-40px' }}>
+                <IconRow />
+            </div>
             <HeroCTA />
 
             <Reviews />
 
-            <QuoteSection />
+            {/* <QuoteSection /> */}
 
             <About />
 

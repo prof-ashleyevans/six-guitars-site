@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import IconRow from "@/app/IconRow";
 
 const characterImages = [
     {
@@ -73,7 +72,7 @@ const HeroSection = () => {
     }, []);
 
     return (
-        <section className="relative w-full overflow-hidden">
+        <section className="relative w-full overflow-hidden" style={{ marginBottom: 0, paddingBottom: 0 }}>
             {/* Background Image - Desktop only */}
             <div className="absolute inset-0 z-0 hidden sm:block">
                 <Image
@@ -87,10 +86,10 @@ const HeroSection = () => {
                 />
             </div>
 
-            <div className="relative w-full">
+            <div className="relative w-full" style={{ marginBottom: 0, paddingBottom: 0 }}>
                 {/* Grid with just the Hero Image Row */}
-                <div className="grid w-full" style={{ gridTemplateRows: 'auto' }}>
-                    <div className="relative w-full h-[120vw] sm:h-auto sm:aspect-[16/13.5] md:aspect-[18/13.5] lg:aspect-[20/13.5] overflow-hidden">
+                <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginBottom: 0, paddingBottom: 0 }}>
+                    <div className="relative w-full h-[137vw] sm:h-auto sm:aspect-[16/13.5] md:aspect-[18/13.5] lg:aspect-[20/13.5] overflow-hidden" style={{ marginBottom: 0, paddingBottom: 0 }}>
                         {/* Mobile Video Background */}
                         {isMobile && (
                             <div className={`absolute inset-0 z-0 sm:hidden bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
@@ -105,7 +104,7 @@ const HeroSection = () => {
                                     style={{ 
                                         objectPosition: 'top center',
                                         width: '100%',
-                                        height: '125%',
+                                        height: '105%',
                                         position: 'absolute',
                                         top: 0,
                                         left: 0,
@@ -128,7 +127,7 @@ const HeroSection = () => {
                                         }
                                     }}
                                 >
-                                    <source src="/videos/hero/Hero Loop 9x16_2.mp4" type="video/mp4" />
+                                    <source src="/videos/Hero Loop 9x13_1.mp4" type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                                 <div className="absolute bottom-0 left-0 w-full h-42 bg-gradient-to-b from-transparent to-black pointer-events-none z-10" />
@@ -176,12 +175,6 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* Absolutely positioned Icon Row overlapping bottom of character image */}
-                <div className="absolute bottom-[-10px] left-0 w-full z-30 sm:min-h-[clamp(120px,15vh,200px)]" style={{ minHeight: 'clamp(80px, 10vh, 140px)' }}>
-                    <div className="w-full px-4 pointer-events-auto sm:pt-[clamp(40px,8vh,80px)]" style={{ paddingTop: 'clamp(20px, 5vh, 50px)' }}>
-                        <IconRow />
-                    </div>
-                </div>
             </div>
         </section>
 

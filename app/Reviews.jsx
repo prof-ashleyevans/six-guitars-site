@@ -107,8 +107,8 @@ export default function Reviews() {
         // Only auto-rotate if page is visible
         if (!document.hidden) {
             interval = setInterval(() => {
-                slider.current?.next();
-            }, 4000);
+            slider.current?.next();
+        }, 4000);
         }
         
         document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -138,31 +138,31 @@ export default function Reviews() {
                                 return (
                                     <div 
                                         key={review.id || index} 
-                                        className="keen-slider__slide relative w-full h-full"
+                                        className="keen-slider__slide relative w-full h-full border-4 border-red-500"
                                     >
-                                        {/* Background */}
-                                        <div className="absolute inset-0 overflow-hidden z-0 opacity-20">
-                                            <Image
-                                                src={review.characterImage}
-                                                alt="Character"
-                                                fill
+                                    {/* Background */}
+                                    <div className="absolute inset-0 overflow-hidden z-0 opacity-20">
+                                        <Image
+                                            src={review.characterImage}
+                                            alt="Character"
+                                            fill
                                                 sizes="(max-width: 768px) 100vw, 33vw"
-                                                className="object-cover scale-105"
+                                            className="object-cover scale-105"
                                                 loading="lazy"
                                                 unoptimized
-                                            />
-                                        </div>
+                                        />
+                                    </div>
 
-                                        {/* Content */}
-                                        <div className="relative z-10 h-full flex flex-col items-center px-6 text-center py-12">
-                                            {/* Quote first - takes up available space */}
-                                            <div className="flex-1 flex items-center justify-center">
+                                    {/* Content */}
+                                    <div className="relative z-10 h-full flex flex-col items-center px-6 text-center py-12">
+                                        {/* Quote first - takes up available space */}
+                                        <div className="flex-1 flex items-center justify-center">
                                                 <p className="italic text-2xl md:text-2xl max-w-[250px] font-[family-name:var(--font-text_font)] tracking-wide">"{review.quote}"</p>
-                                            </div>
-                                            
-                                            {/* Stars second (if any) - fixed spacing */}
-                                            <div className="h-16 flex items-center justify-center mb-6">
-                                                {review.status === 5 && (
+                                        </div>
+                                        
+                                        {/* Stars second (if any) - fixed spacing */}
+                                        <div className="h-16 flex items-center justify-center mb-6">
+                                            {review.status === 5 && (
                                                 <Image 
                                                     src="/images/5 Stars.png" 
                                                     alt="5 stars" 
@@ -173,27 +173,27 @@ export default function Reviews() {
                                                     loading="lazy"
                                                     unoptimized
                                                 />
-                                                )}
-                                            </div>
-                                            
-                                            {/* Publication logo - always at same vertical position */}
-                                            <div className="h-24 w-full flex items-center justify-center">
-                                                {review.logo && (
-                                                    <div className="relative h-full w-full max-w-[300px]">
-                                                        <Image 
-                                                            src={review.logo} 
-                                                            alt={review.name} 
-                                                            fill
+                                            )}
+                                        </div>
+                                        
+                                        {/* Publication logo - always at same vertical position */}
+                                        <div className="h-24 w-full flex items-center justify-center">
+                                            {review.logo && (
+                                                <div className="relative h-full w-full max-w-[300px]">
+                                                    <Image 
+                                                        src={review.logo} 
+                                                        alt={review.name} 
+                                                        fill
                                                             sizes="(max-width: 768px) 100vw, 300px"
-                                                            className="object-contain" 
+                                                        className="object-contain" 
                                                             loading="lazy"
                                                             unoptimized
-                                                        />
-                                                    </div>
-                                                )}
-                                            </div>
+                                                    />
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
+                                </div>
                                 );
                             })}
                         </div>

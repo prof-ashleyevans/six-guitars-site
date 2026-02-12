@@ -52,7 +52,7 @@ export default function HeroCTA() {
                         nextShow?.ticketAvail?.toLowerCase() === 'going fast';
 
     return (
-        <section className="bg-black text-white pt-2 pb-3 px-4 sm:hidden">
+        <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden" style={{ marginTop: 0 }}>
             <div className="max-w-md mx-auto">
                 {/* Get Tickets Button */}
                 <a
