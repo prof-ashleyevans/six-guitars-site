@@ -38,7 +38,10 @@ const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [videoError, setVideoError] = useState(false);
     const [videoLoaded, setVideoLoaded] = useState(false);
+    const [desktopVideoError, setDesktopVideoError] = useState(false);
+    const [desktopVideoLoaded, setDesktopVideoLoaded] = useState(false);
     const videoRef = useRef(null);
+    const desktopVideoRef = useRef(null);
     
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 640);
@@ -69,28 +72,104 @@ const HeroSection = () => {
     }, [isMobile]);
 
     useEffect(() => {
+        if (!isMobile && desktopVideoRef.current) {
+            const video = desktopVideoRef.current;
+            
+            // Try to play when video can play
+            const handleCanPlay = () => {
+                setDesktopVideoLoaded(true);
+                video.play().catch((error) => {
+                    console.log('Desktop video autoplay prevented (normal on some browsers):', error);
+                    // Don't set error - video loaded successfully, just can't autoplay
+                });
+            };
+            
+            video.addEventListener('canplay', handleCanPlay);
+            
+            return () => {
+                video.removeEventListener('canplay', handleCanPlay);
+            };
+        }
+    }, [isMobile]);
+
+    useEffect(() => {
         AOS.init({ duration: 1800, once: true });
     }, []);
 
     return (
-        <section className="relative w-full overflow-hidden" style={{ marginBottom: 0, paddingBottom: 0 }}>
-            {/* Background Image - Desktop only */}
-            <div className="absolute inset-0 z-0 hidden sm:block">
-                <Image
-                    src="/images/hero/pc/6G Hero 18x9 Plate.jpg"
-                    alt="Background plate"
-                    fill
-                    priority
-                    sizes="100vw"
-                    className="object-cover object-center"
-                    unoptimized
-                />
-            </div>
+        <section className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
+            {/* Desktop Video Background */}
+            {!isMobile && (
+                <div className={`absolute inset-0 z-0 hidden sm:block bg-black ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100vh', top: 0, left: 0, right: 0, bottom: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
+                    <video
+                        ref={desktopVideoRef}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className="w-full h-full object-contain"
+                        style={{ 
+                            objectPosition: 'top center',
+                            width: '100%',
+                            height: '100%',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            margin: 0,
+                            padding: 0,
+                            zIndex: desktopVideoError ? -1 : 1
+                        }}
+                        onError={(e) => {
+                            console.error('Desktop video error:', e);
+                            setDesktopVideoError(true);
+                        }}
+                        onLoadedData={() => {
+                            setDesktopVideoLoaded(true);
+                        }}
+                        onCanPlay={() => {
+                            setDesktopVideoLoaded(true);
+                            if (desktopVideoRef.current) {
+                                desktopVideoRef.current.play().catch((err) => {
+                                    console.log('Desktop video autoplay prevented, but video loaded:', err);
+                                });
+                            }
+                        }}
+                        onEnded={() => {
+                            // Seamless loop - immediately restart without lag
+                            if (desktopVideoRef.current) {
+                                desktopVideoRef.current.currentTime = 0;
+                                desktopVideoRef.current.play().catch(() => {
+                                    // Ignore play errors on loop
+                                });
+                            }
+                        }}
+                    >
+                        <source src="/videos/Hero Loop 1920x720.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            )}
 
-            <div className="relative w-full" style={{ marginBottom: 0, paddingBottom: 0 }}>
+            {/* Background Image - Desktop fallback only */}
+            {!isMobile && desktopVideoError && (
+                <div className="absolute inset-0 z-0 hidden sm:block">
+                    <Image
+                        src="/images/hero/pc/6G Hero 18x9 Plate.jpg"
+                        alt="Background plate"
+                        fill
+                        priority
+                        sizes="100vw"
+                        className="object-cover object-center"
+                        unoptimized
+                    />
+                </div>
+            )}
+
+            <div className="relative w-full" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                 {/* Grid with just the Hero Image Row */}
-                <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginBottom: 0, paddingBottom: 0 }}>
-                    <div className="relative w-full h-[137vw] sm:h-auto sm:aspect-[16/13.5] md:aspect-[18/13.5] lg:aspect-[20/13.5] overflow-hidden" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
+                    <div className="relative w-full h-[137vw] sm:h-[100vh] sm:aspect-auto overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                         {/* Mobile Video Background */}
                         {isMobile && (
                             <div className={`absolute inset-0 z-0 sm:hidden bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
@@ -135,14 +214,14 @@ const HeroSection = () => {
                             </div>
                         )}
 
-                        {/* Mobile Fallback Images - Show if video fails or on desktop */}
+                        {/* Fallback Images - Show if video fails */}
                         {characterImages.map((char) => {
                             // Show logic:
-                            // - Desktop: always show
+                            // - Desktop: show only if desktop video fails
                             // - Mobile with video working: hide all (video shows instead)
                             // - Mobile with video error: show characters and chase, but not logo
-                            const shouldShow = !isMobile || (isMobile && videoError && char.id !== 'logo');
-                            const shouldHide = isMobile && !videoError;
+                            const shouldShow = (!isMobile && desktopVideoError) || (isMobile && videoError && char.id !== 'logo');
+                            const shouldHide = (isMobile && !videoError) || (!isMobile && !desktopVideoError);
                             
                             return (
                             <div
@@ -177,8 +256,8 @@ const HeroSection = () => {
                 </div>
 
                 {/* Icon Row - Desktop only */}
-                <div className="hidden sm:block absolute bottom-0 left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]">
-                    <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]">
+                <div className="hidden sm:block absolute bottom-[18%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                    <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                         <IconRow />
                     </div>
                 </div>
