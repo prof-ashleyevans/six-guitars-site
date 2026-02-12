@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import IconRow from "@/app/IconRow";
 
 const characterImages = [
     {
@@ -28,7 +29,7 @@ const characterImages = [
         mobileSrc: '/images/hero/mobile/6G Hero 1x1 Logo.png',
         alt: '6 Guitars Logo',
         zIndex: 30,
-        style: 'w-[90%] sm:w-[90%] top-[1%] sm:top-[-5%] md:top-[-8%] lg:top-[-6%] xl:top-[-6%] 2xl:top-[-8%] left-1/2 -translate-x-1/2',
+        style: 'w-[90%] sm:w-[90%] top-[1%] sm:top-[6%] md:top-[12%] lg:top-[18%] xl:top-[18%] 2xl:top-[24%] left-1/2 -translate-x-1/2',
         delay: 800,
     },
 ];
@@ -172,6 +173,13 @@ const HeroSection = () => {
                             </div>
                             );
                         })}
+                    </div>
+                </div>
+
+                {/* Icon Row - Desktop only */}
+                <div className="hidden sm:block absolute bottom-0 left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]">
+                    <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]">
+                        <IconRow />
                     </div>
                 </div>
 
