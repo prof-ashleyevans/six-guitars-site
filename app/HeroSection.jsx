@@ -38,6 +38,7 @@ const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallViewportHeight, setIsSmallViewportHeight] = useState(false);
     const [isMobilePortrait, setIsMobilePortrait] = useState(false);
+    const [isPortraitOrientation, setIsPortraitOrientation] = useState(false);
     const [videoError, setVideoError] = useState(false);
     const [videoLoaded, setVideoLoaded] = useState(false);
     const [desktopVideoError, setDesktopVideoError] = useState(false);
@@ -57,6 +58,15 @@ const HeroSection = () => {
         checkViewport();
         window.addEventListener('resize', checkViewport);
         return () => window.removeEventListener('resize', checkViewport);
+    }, []);
+
+    // Detect device orientation (portrait vs landscape) - for desktop video on phone in portrait
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(orientation: portrait)');
+        const handleChange = (e) => setIsPortraitOrientation(e.matches);
+        setIsPortraitOrientation(mediaQuery.matches);
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
 
     useEffect(() => {
@@ -117,7 +127,7 @@ const HeroSection = () => {
                         muted
                         playsInline
                         preload="auto"
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full ${isPortraitOrientation ? 'object-contain' : 'object-cover'}`}
                         style={{ 
                             objectPosition: 'top center',
                             width: '100%',
