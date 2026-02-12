@@ -37,6 +37,7 @@ const characterImages = [
 const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallViewportHeight, setIsSmallViewportHeight] = useState(false);
+    const [isMobilePortrait, setIsMobilePortrait] = useState(false);
     const [videoError, setVideoError] = useState(false);
     const [videoLoaded, setVideoLoaded] = useState(false);
     const [desktopVideoError, setDesktopVideoError] = useState(false);
@@ -50,6 +51,8 @@ const HeroSection = () => {
             checkMobile();
             // Detect small viewport height (like phone landscape) - less than 600px height
             setIsSmallViewportHeight(window.innerHeight < 600 && window.innerWidth >= 640);
+            // Detect mobile portrait (narrow + tall) - use less zoomed video
+            setIsMobilePortrait(window.innerWidth < 640 && window.innerHeight > window.innerWidth);
         };
         checkViewport();
         window.addEventListener('resize', checkViewport);
@@ -186,11 +189,11 @@ const HeroSection = () => {
                                     muted
                                     playsInline
                                     preload="auto"
-                                    className="w-full h-full object-cover"
+                                    className={`w-full h-full ${isMobilePortrait ? 'object-contain' : 'object-cover'}`}
                                     style={{ 
                                         objectPosition: 'top center',
                                         width: '100%',
-                                        height: '105%',
+                                        height: isMobilePortrait ? '100%' : '105%',
                                         position: 'absolute',
                                         top: 0,
                                         left: 0,
