@@ -36,6 +36,7 @@ const characterImages = [
 
 const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
+    const [isSmallViewportHeight, setIsSmallViewportHeight] = useState(false);
     const [videoError, setVideoError] = useState(false);
     const [videoLoaded, setVideoLoaded] = useState(false);
     const [desktopVideoError, setDesktopVideoError] = useState(false);
@@ -45,9 +46,14 @@ const HeroSection = () => {
     
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 640);
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        const checkViewport = () => {
+            checkMobile();
+            // Detect small viewport height (like phone landscape) - less than 600px height
+            setIsSmallViewportHeight(window.innerHeight < 600 && window.innerWidth >= 640);
+        };
+        checkViewport();
+        window.addEventListener('resize', checkViewport);
+        return () => window.removeEventListener('resize', checkViewport);
     }, []);
 
     useEffect(() => {
@@ -100,7 +106,7 @@ const HeroSection = () => {
         <section className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
             {/* Desktop Video Background */}
             {!isMobile && (
-                <div className={`absolute z-0 hidden sm:block bg-black sm:h-[39vh] md:h-[51vh] lg:h-[62vh] xl:h-[70vh] 2xl:h-[77vh] ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', top: 0, left: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
+                <div className={`absolute z-0 hidden sm:block bg-black ${isSmallViewportHeight ? 'sm:h-[60vh] md:h-[70vh] lg:h-[75vh] xl:h-[80vh] 2xl:h-[77vh]' : 'sm:h-[39vh] md:h-[51vh] lg:h-[62vh] xl:h-[70vh] 2xl:h-[77vh]'} ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', top: 0, left: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
                     <video
                         ref={desktopVideoRef}
                         autoPlay
@@ -169,7 +175,7 @@ const HeroSection = () => {
             <div className="relative w-full" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
-                    <div className="relative w-full h-[137vw] sm:h-[39vh] md:h-[51vh] lg:h-[62vh] xl:h-[70vh] 2xl:h-[77vh] sm:aspect-auto overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
+                    <div className={`relative w-full h-[137vw] ${isSmallViewportHeight ? 'sm:h-[60vh] md:h-[70vh] lg:h-[75vh] xl:h-[80vh] 2xl:h-[77vh]' : 'sm:h-[39vh] md:h-[51vh] lg:h-[62vh] xl:h-[70vh] 2xl:h-[77vh]'} sm:aspect-auto overflow-hidden`} style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                         {/* Mobile Video Background */}
                         {isMobile && (
                             <div className={`absolute inset-0 z-0 sm:hidden bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
@@ -258,7 +264,7 @@ const HeroSection = () => {
                 {/* Icon Row - Desktop only */}
                 <div className="hidden sm:block absolute bottom-[3%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                     <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
-                        <IconRow />
+                        <IconRow isSmallViewportHeight={isSmallViewportHeight} />
                     </div>
                 </div>
 

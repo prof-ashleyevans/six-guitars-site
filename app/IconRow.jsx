@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-const IconRow = () => {
+const IconRow = ({ isSmallViewportHeight = false }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -14,9 +14,17 @@ const IconRow = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    // Adjust margin-top for small viewport heights (like phone landscape)
+    const getMarginTop = () => {
+        if (isSmallViewportHeight) {
+            return 'md:mt-8 lg:mt-12 xl:mt-16 2xl:mt-20';
+        }
+        return 'md:mt-12 lg:mt-24 xl:mt-30 2xl:mt-30';
+    };
+
     return (
         <div
-            className={`relative z-10 flex flex-nowrap justify-center gap-2 w-full max-w-screen-md px-4 mb-4 md:mt-12 lg:mt-22 xl:mt-28 2xl:mt-30 bg-transparent mx-auto text-center transition-opacity duration-1800 ease-out
+            className={`relative z-10 flex flex-nowrap justify-center gap-2 w-full max-w-screen-md px-4 mb-4 ${getMarginTop()} bg-transparent mx-auto text-center transition-opacity duration-1800 ease-out
         ${isVisible ? 'opacity-100' : 'opacity-0'}
     `}
         >
