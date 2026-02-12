@@ -100,7 +100,7 @@ const HeroSection = () => {
         <section className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
             {/* Desktop Video Background */}
             {!isMobile && (
-                <div className={`absolute inset-0 z-0 hidden sm:block bg-black ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100vh', top: 0, left: 0, right: 0, bottom: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
+                <div className={`absolute inset-0 z-0 hidden sm:block bg-black ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', height: '77vh', top: 0, left: 0, right: 0, bottom: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
                     <video
                         ref={desktopVideoRef}
                         autoPlay
@@ -169,7 +169,7 @@ const HeroSection = () => {
             <div className="relative w-full" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
-                    <div className="relative w-full h-[137vw] sm:h-[100vh] sm:aspect-auto overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
+                    <div className="relative w-full h-[137vw] sm:h-[77vh] sm:aspect-auto overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                         {/* Mobile Video Background */}
                         {isMobile && (
                             <div className={`absolute inset-0 z-0 sm:hidden bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
@@ -256,7 +256,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Icon Row - Desktop only */}
-                <div className="hidden sm:block absolute bottom-[18%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                <div className="hidden sm:block absolute bottom-[3%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                     <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                         <IconRow />
                     </div>
