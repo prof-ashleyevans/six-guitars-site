@@ -127,6 +127,7 @@ const HeroSection = () => {
                         muted
                         playsInline
                         preload="auto"
+                        poster="/images/hero/Static_Hero_Video_Screenshot.png"
                         className={`w-full h-full ${isPortraitOrientation ? 'object-contain' : 'object-cover'}`}
                         style={{ 
                             objectPosition: 'top center',
@@ -199,6 +200,7 @@ const HeroSection = () => {
                                     muted
                                     playsInline
                                     preload="auto"
+                                    poster="/images/hero/Static_Hero_Video_Screenshot.png"
                                     className={`w-full h-full ${isMobilePortrait ? 'object-contain' : 'object-cover'}`}
                                     style={{ 
                                         objectPosition: 'top center',
