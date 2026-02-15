@@ -24,6 +24,11 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* space for sticky header so sections aren't hidden */
+}
+
 html, body {
   font-family: 'Roboto Flex', sans-serif;
   background: var(--background);
