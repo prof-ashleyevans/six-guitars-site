@@ -142,16 +142,6 @@ export default function AudienceReviews() {
         }
 
         loadReviews();
-
-        // Trigger refresh on scroll stop
-        let timeout;
-        const handleScroll = () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => AOS.refresh(), 100);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
