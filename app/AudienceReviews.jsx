@@ -2,13 +2,14 @@
 import Image from "next/image";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function AudienceReviews() {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
     const [reviewsToShow, setReviewsToShow] = useState(6); // Start with 6 reviews on mobile
+    const sectionContentRef = useRef(null);
     
     // Check if mobile on mount and resize (including landscape)
     useEffect(() => {
@@ -47,8 +48,11 @@ export default function AudienceReviews() {
     
     const handleSeeMore = () => {
         setReviewsToShow(prev => Math.min(prev + 6, reviews.length));
-        // Refresh AOS after showing more reviews
-        setTimeout(() => AOS.refresh(), 100);
+        // Keep focus in this section so the browser doesn't scroll to the next focusable
+        // element (e.g. FAQ Disclosure buttons), which was causing auto-advance to FAQ.
+        setTimeout(() => {
+            sectionContentRef.current?.focus({ preventScroll: true });
+        }, 0);
     };
     
     const displayedReviews = isMobile ? reviews.slice(0, reviewsToShow) : reviews;
@@ -167,8 +171,8 @@ export default function AudienceReviews() {
                     </div>
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 bg-black/30 py-24 px-4 sm:px-6 lg:px-8">
+                {/* Content - ref + tabIndex so we can keep focus here after See More (prevents scroll jump to FAQ) */}
+                <div ref={sectionContentRef} tabIndex={-1} className="relative z-10 bg-black/30 py-24 px-4 sm:px-6 lg:px-8" style={{ outline: 'none' }}>
                     <h2 className="text-3xl font-bold text-center text-white mb-12">Audience Feedback</h2>
                     
                     {loading ? (
