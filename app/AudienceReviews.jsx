@@ -47,8 +47,8 @@ export default function AudienceReviews() {
     
     const handleSeeMore = () => {
         setReviewsToShow(prev => Math.min(prev + 6, reviews.length));
-        // Refresh AOS after showing more reviews
-        setTimeout(() => AOS.refresh(), 100);
+        // Do not call AOS.refresh() here - it recalculates all elements page-wide
+        // and can cause scroll to jump to FAQ or other sections on mobile.
     };
     
     const displayedReviews = isMobile ? reviews.slice(0, reviewsToShow) : reviews;
