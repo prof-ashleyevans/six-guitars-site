@@ -10,7 +10,6 @@ export default function AudienceReviews() {
     const [isMobile, setIsMobile] = useState(false);
     const [reviewsToShow, setReviewsToShow] = useState(6); // Start with 6 reviews on mobile
     const sectionContentRef = useRef(null);
-    const didFocusAfterAllShownRef = useRef(false);
     
     // Check if mobile on mount and resize (including landscape)
     useEffect(() => {
@@ -48,20 +47,7 @@ export default function AudienceReviews() {
     }, [reviews.length, isMobile]);
     
     const handleSeeMore = () => {
-        setReviewsToShow(prev => {
-            const next = Math.min(prev + 6, reviews.length);
-            // When we're about to show all reviews, the "See More" button will unmount and
-            // focus can jump to Contact. Schedule focus to stay in this section.
-            if (next >= reviews.length) {
-                setTimeout(() => {
-                    sectionContentRef.current?.focus({ preventScroll: true });
-                }, 0);
-                requestAnimationFrame(() => {
-                    sectionContentRef.current?.focus({ preventScroll: true });
-                });
-            }
-            return next;
-        });
+        setReviewsToShow(prev => Math.min(prev + 6, reviews.length));
         // Keep focus in this section so the browser doesn't scroll to the next focusable
         // element (e.g. FAQ Disclosure buttons), which was causing auto-advance to FAQ.
         setTimeout(() => {
@@ -71,31 +57,6 @@ export default function AudienceReviews() {
     
     const displayedReviews = isMobile ? reviews.slice(0, reviewsToShow) : reviews;
     const hasMoreReviews = isMobile && reviewsToShow < reviews.length;
-
-    // When we've just shown all reviews, "See More" unmounts and focus can jump to Contact.
-    // Keep focus in this section and restore scroll so the page doesn't jump to contact.
-    const sectionRef = useRef(null);
-    useEffect(() => {
-        if (isMobile && reviews.length > 0 && reviewsToShow >= reviews.length && !didFocusAfterAllShownRef.current) {
-            didFocusAfterAllShownRef.current = true;
-            const restoreFocusAndScroll = () => {
-                const contactHadFocus = document.activeElement?.closest?.('#contact');
-                sectionContentRef.current?.focus({ preventScroll: true });
-                if (contactHadFocus && sectionRef.current) {
-                    sectionRef.current.scrollIntoView({ block: 'start', behavior: 'auto' });
-                }
-            };
-            const t1 = setTimeout(restoreFocusAndScroll, 0);
-            const t2 = setTimeout(restoreFocusAndScroll, 80);
-            return () => {
-                clearTimeout(t1);
-                clearTimeout(t2);
-            };
-        }
-        if (reviewsToShow < reviews.length) {
-            didFocusAfterAllShownRef.current = false;
-        }
-    }, [isMobile, reviews.length, reviewsToShow]);
 
     useEffect(() => {
         AOS.init({
@@ -188,7 +149,7 @@ export default function AudienceReviews() {
     }, []);
 
     return (
-        <section id="audience-reviews" ref={sectionRef} className="relative pt-16 pb-0 sm:pb-16 px-4 bg-black text-white overflow-hidden">
+        <section id="audience-reviews" className="relative pt-16 pb-0 sm:pb-16 px-4 bg-black text-white overflow-hidden">
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60 z-0" />
             <div className="relative w-full">
