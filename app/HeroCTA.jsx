@@ -52,12 +52,13 @@ export default function HeroCTA() {
                         nextShow?.ticketAvail?.toLowerCase() === 'going fast';
 
     return (
-        <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden" style={{ marginTop: 0 }}>
+        <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden relative z-20" style={{ marginTop: 0 }}>
             <div className="max-w-md mx-auto">
-                {/* Get Tickets Button */}
+                {/* Get Tour Dates Button */}
                 <a
+                    id="hero-get-tour-dates"
                     href="#tickets"
-                    className="block bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-4 rounded-lg shadow-xl flex items-center justify-center gap-2 font-bold text-lg transition-all"
+                    className="hero-get-tour-dates track-get-tour-dates block bg-[#b01234] hover:bg-[#8a0e28] text-white px-6 py-4 rounded-lg shadow-xl flex items-center justify-center gap-2 font-bold text-2xl sm:text-3xl transition-all"
                 >
                     <Image
                         src="/images/icons/Ticket Icon White.png"
@@ -66,10 +67,9 @@ export default function HeroCTA() {
                         height={20}
                         sizes="20px"
                         className="w-5 h-5"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(9%) sepia(100%) saturate(7479%) hue-rotate(0deg) brightness(95%) contrast(118%)' }}
                         unoptimized
                     />
-                    <span>Get Tickets</span>
+                    <span>Get Tour Dates</span>
                 </a>
             </div>
         </section>
