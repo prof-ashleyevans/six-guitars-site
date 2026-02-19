@@ -110,39 +110,24 @@ export default function Contact() {
                             onSubmit={handleSubmit}
                             className="space-y-3 mt-8 w-[90%] max-w-[280px] sm:max-w-md mx-auto text-center"
                         >
-                            <p className="text-white/80 text-sm mb-1">Required fields marked with *</p>
-                            <div className="text-left">
-                                <label htmlFor="contact-name" className="block text-white text-sm mb-0.5">Your Name</label>
-                                <input
-                                    id="contact-name"
-                                    type="text"
-                                    name="name"
-                                    placeholder="Your Name"
-                                    className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
-                                />
-                            </div>
-                            <div className="text-left">
-                                <label htmlFor="contact-email" className="block text-white text-sm mb-0.5">Your Email *</label>
-                                <input
-                                    id="contact-email"
-                                    type="email"
-                                    name="email"
-                                    placeholder="Your Email"
-                                    required
-                                    className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
-                                />
-                            </div>
-                            <div className="text-left">
-                                <label htmlFor="contact-message" className="block text-white text-sm mb-0.5">Your Message *</label>
-                                <textarea
-                                    id="contact-message"
-                                    name="message"
-                                    rows={5}
-                                    placeholder="Your Message"
-                                    required
-                                    className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
-                                />
-                            </div>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Your Name"
+                                className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
+                            />
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Your Email"
+                                className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
+                            />
+                            <textarea
+                                name="message"
+                                rows={5}
+                                placeholder="Your Message"
+                                className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
+                            />
                             <label className="flex items-center justify-center space-x-2 text-sm sm:text-base text-white">
                                 <input
                                     type="checkbox"

@@ -26,7 +26,7 @@ export default function Home() {
             <HeaderNav />
 
             <HeroSection />
-            <div className="sm:hidden bg-black pb-0" style={{ marginTop: '-140px' }}>
+            <div className="sm:hidden bg-transparent pb-0 relative z-10" style={{ marginTop: '-150px' }}>
                 <IconRow />
             </div>
             <HeroCTA />
