@@ -78,6 +78,18 @@ When Airtable is back online, the site will use Airtable again automatically; yo
 
 ---
 
+## Admin dashboard (no Airtable)
+
+You can manage tour dates in the browser at **`/admin`** (e.g. `https://yoursite.com/admin`).
+
+1. **Set a password:** Add `ADMIN_PASSWORD=your-secret-password` to your environment (e.g. in Vercel → Project → Settings → Environment Variables).
+2. Open `/admin`, sign in with that password, then add, edit, or delete shows. Changes are saved to the same data the site uses when Airtable is down.
+3. **Use only the admin list (no Airtable):** Set `USE_LOCAL_SHOWS=true`. The public site will then always show the shows from the admin dashboard instead of calling Airtable.
+
+**On Vercel:** The serverless filesystem is read-only in production, so admin edits in the browser won’t persist there. Use the admin dashboard locally (or on a host with writable disk), then commit and push the updated `data/tour-dates-fallback.json` so the site shows the new dates.
+
+---
+
 ## Critic reviews fallback
 
 When Airtable is down or returns no critic reviews, the site uses **`data/reviews-fallback.json`**. Each object needs: `id`, `name`, `quote`, `status` (use `5` to show 5 stars), and `logo` (path like `/images/edmonton-sun-logo.jpg`). When Airtable is working again, the API will serve from Airtable automatically—no code change needed.
