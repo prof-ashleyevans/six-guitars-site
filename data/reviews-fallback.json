@@ -1,0 +1,44 @@
+[
+  {
+    "id": "fallback-edmonton-sun",
+    "name": "Edmonton Sun",
+    "quote": "Nothing short of a masterpiece",
+    "status": 5,
+    "logo": "/images/Critic%20Reviews/Edmonton%20Sun.jpg"
+  },
+  {
+    "id": "fallback-georgia-straight",
+    "name": "Georgia Straight",
+    "quote": "So virtuosic it had me on my feet",
+    "status": 5,
+    "logo": "/images/Critic%20Reviews/Georgia%20Straight.jpg"
+  },
+  {
+    "id": "fallback-vue-weekly",
+    "name": "VUE Weekly",
+    "quote": "A captivating entertainer",
+    "status": 5,
+    "logo": "/images/Critic%20Reviews/Vue%20Weekly.jpg"
+  },
+  {
+    "id": "fallback-ottawa-citizen",
+    "name": "Ottawa Citizen",
+    "quote": "6 Guitars is note perfect",
+    "status": 5,
+    "logo": "/images/Critic%20Reviews/Ottawa%20Citizen.jpg"
+  },
+  {
+    "id": "fallback-winnipeg-free-press",
+    "name": "Winnipeg Free Press",
+    "quote": "Superb, funny, & flat out stunning",
+    "status": 5,
+    "logo": "/images/Critic%20Reviews/Winnipeg%20Free%20Press.jpg"
+  },
+  {
+    "id": "fallback-austin-post",
+    "name": "Austin Post",
+    "quote": "A stunning performance",
+    "status": 5,
+    "logo": "/images/Critic%20Reviews/Austin%20Post.jpg"
+  }
+]

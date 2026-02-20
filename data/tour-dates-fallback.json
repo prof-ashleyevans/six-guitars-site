@@ -1,0 +1,97 @@
+[
+  {
+    "groupKey": "2026-03-04|Mesa Arts Center",
+    "date": "2026-03-04",
+    "day": "Tuesday",
+    "venue": "Mesa Arts Center",
+    "location": "Mesa AZ",
+    "performances": [
+      {
+        "id": "fallback-mesa-2025",
+        "time": "7:00 PM",
+        "fullBand": true,
+        "ticketAvail": "available",
+        "ticketLink": "https://www.mesaartscenter.com/show-details/6-guitars-presented-by-chase-padgett-music-comedy-characters",
+        "onSaleDate": "",
+        "discountCode": "",
+        "discountPercentage": ""
+      }
+    ]
+  },
+  {
+    "groupKey": "2026-03-12|Scottsdale Center for the Performing Arts",
+    "date": "2026-03-12",
+    "day": "Wednesday",
+    "venue": "Scottsdale Center for the Performing Arts",
+    "location": "Scottsdale AZ",
+    "performances": [
+      {
+        "id": "fallback-scottsdale-2025",
+        "time": "7:00 PM",
+        "fullBand": true,
+        "ticketAvail": "available",
+        "ticketLink": "https://scottsdalearts.org/whats-on/events/6-guitars/seats/",
+        "onSaleDate": "",
+        "discountCode": "",
+        "discountPercentage": ""
+      }
+    ]
+  },
+  {
+    "groupKey": "2026-03-21|Broward Center",
+    "date": "2026-03-21",
+    "day": "Friday",
+    "venue": "Broward Center",
+    "location": "Ft. Lauderdale FL",
+    "performances": [
+      {
+        "id": "fallback-broward-2025",
+        "time": "7:00 PM",
+        "fullBand": true,
+        "ticketAvail": "available",
+        "ticketLink": "https://www.ticketmaster.com/event/0D00635C9A044384?brand=broward&camefrom=cfc_broward_web&_gl=1*17dbp3k*_gcl_aw*R0NMLjE3NzE2MTQzNzkuQ2owS0NRaUFxZURNQmhEY0FSSXNBSkViVTlRbjVWUThPaXdUTG84aHdnVXRVcVFaWUlPMkwzX3pCUy1RNWJ0SWlLS2czLTZEZ0pFYkhIWWFBdkFxRUFMd193Y0I.*_gcl_au*MTQzOTU5NTQyNS4xNzY3NzE2MjIy*_ga*MTc4Njg5NDM1MC4xNzY3NzE2MjIy*_ga_1GYKRQEESB*czE3NzE2MTQzNzMkbzUkZzEkdDE3NzE2MTQzODQkajQ5JGwwJGgw*_ga_73J7007JDZ*czE3NzE2MTQzNzMkbzUkZzEkdDE3NzE2MTQzODQkajQ5JGwwJGgw",
+        "onSaleDate": "",
+        "discountCode": "",
+        "discountPercentage": ""
+      }
+    ]
+  },
+  {
+    "groupKey": "2026-04-10|Winter Haven",
+    "date": "2026-04-10",
+    "day": "Thursday",
+    "venue": "Winter Haven",
+    "location": "Winter Haven FL",
+    "performances": [
+      {
+        "id": "fallback-winterhaven-2025",
+        "time": "7:00 PM",
+        "fullBand": true,
+        "ticketAvail": "available",
+        "ticketLink": "https://app.arts-people.com/index.php?show=308477",
+        "onSaleDate": "",
+        "discountCode": "",
+        "discountPercentage": ""
+      }
+    ]
+  },
+  {
+    "groupKey": "2026-05-02|Ruth Eckerd Hall",
+    "date": "2026-05-02",
+    "day": "Friday",
+    "venue": "Ruth Eckerd Hall",
+    "location": "Clearwater FL",
+    "performances": [
+      {
+        "id": "fallback-clearwater-2025",
+        "time": "7:00 PM",
+        "fullBand": true,
+        "ticketAvail": "available",
+        "ticketLink": "https://secure.rutheckerdhall.com/33136/33137?_gl=1*1ly4762*_gcl_aw*R0NMLjE3Njk3ODgxMTUuQ2owS0NRaUF5dkhMQmhEbEFSSXNBSHhsNnhwbnY4UmQzeUpocFVyMVFNUG5BWWlKeURhc0tXd3p6U0tFbHBOZEozZ2MxUVJ5akk5c0c5c2FBcjFWRUFMd193Y0I.*_gcl_au*OTY3ODI0NjU5LjE3NzAzMDc2MzI.*_ga*MTQzOTUwNzMxNy4xNzY3NjM1Nzg1*_ga_YGMBTHEY0R*czE3NzE2MTQ1MTEkbzYkZzAkdDE3NzE2MTQ1MTEkajYwJGwwJGgw&queueittoken=e_saftynetqueue2021v3~ts_1771614708~ce_true~rt_safetynet~h_0b1976a70c8922449152b1865071611d569082e855a6a3f6c75249cdcd228100",
+        "onSaleDate": "",
+        "discountCode": "",
+        "discountPercentage": ""
+      }
+    ]
+  }
+]
