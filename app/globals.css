@@ -35,6 +35,15 @@ html, body {
   color: var(--foreground);
 }
 
+/* Smooth scaling hero for all desktop sizes (640px+) - scales smoothly between 50vh and 80vh based on viewport width */
+/* Formula: clamp(min, preferred, max) where preferred = 8vw + 40vh scales with both width and height */
+/* Portrait and small viewport cases use Tailwind classes that will override this */
+@media (min-width: 640px) {
+  .hero-desktop-smooth:not([class*="16vh"]):not([class*="85vh"]) {
+    height: clamp(50vh, 15vw + 50vh, 100vh);
+  }
+}
+
 
 @keyframes pulseGlow {
   0%, 100% {

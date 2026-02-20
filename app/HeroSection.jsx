@@ -119,7 +119,7 @@ const HeroSection = () => {
         <section className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
             {/* Desktop Video Background */}
             {!isMobile && (
-                <div className={`absolute z-0 hidden sm:block bg-black ${isPortraitOrientation ? 'sm:h-[16vh] md:h-[20vh] lg:h-[25vh] xl:h-[28vh] 2xl:h-[31vh]' : isSmallViewportHeight ? 'sm:h-[85vh] md:h-[90vh] lg:h-[92vh] xl:h-[95vh] 2xl:h-[77vh]' : 'sm:h-[39vh] md:h-[51vh] lg:h-[62vh] xl:h-[70vh] 2xl:h-[77vh]'} ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', top: 0, left: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
+                <div className={`absolute z-0 hidden sm:block bg-black hero-desktop-smooth ${isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', top: 0, left: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
                     <video
                         ref={desktopVideoRef}
                         autoPlay
@@ -188,7 +188,7 @@ const HeroSection = () => {
             <div className="relative w-full" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
-                    <div className={`relative w-full h-[137vw] ${isPortraitOrientation ? 'sm:h-[16vh] md:h-[20vh] lg:h-[25vh] xl:h-[28vh] 2xl:h-[31vh]' : isSmallViewportHeight ? 'sm:h-[85vh] md:h-[90vh] lg:h-[92vh] xl:h-[95vh] 2xl:h-[77vh]' : 'sm:h-[39vh] md:h-[51vh] lg:h-[62vh] xl:h-[70vh] 2xl:h-[77vh]'} sm:aspect-auto overflow-hidden`} style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
+                    <div className={`relative w-full h-[125vw] hero-desktop-smooth ${isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} sm:aspect-auto overflow-hidden`} style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                         {/* Mobile Video Background */}
                         {isMobile && (
                             <div className={`absolute inset-0 z-0 sm:hidden bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
