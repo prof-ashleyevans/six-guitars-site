@@ -35,6 +35,40 @@ html, body {
   color: var(--foreground);
 }
 
+/* Smooth scaling hero for all desktop sizes (640px+) - scales between 50vh and 100vh (same as last commit) */
+/* Portrait and small viewport cases use Tailwind classes that will override this */
+@media (min-width: 640px) {
+  .hero-desktop-smooth:not([class*="16vh"]):not([class*="85vh"]) {
+    height: clamp(50vh, 15vw + 50vh, 100vh);
+  }
+}
+
+/* 641-768px: same as rest of desktop (revert any previous custom styling for this range) */
+@media (min-width: 641px) and (max-width: 768px) {
+  section .hero-desktop-smooth,
+  .hero-desktop-smooth {
+    height: clamp(50vh, 15vw + 50vh, 100vh) !important;
+    min-height: unset !important;
+  }
+  /* Hero video: fill entire hero container without excessive zoom */
+  #hero-section .hero-desktop-smooth {
+    overflow: hidden !important;
+  }
+  #hero-section .hero-desktop-smooth video {
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+  #hero-section .hero-desktop-icon-row {
+    bottom: 3% !important;
+    transform: none !important;
+  }
+}
+
+
 
 @keyframes pulseGlow {
   0%, 100% {

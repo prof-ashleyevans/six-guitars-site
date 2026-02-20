@@ -148,6 +148,11 @@ export default function AudienceReviews() {
         loadReviews();
     }, []);
 
+    // Hide section until reviews are successfully loaded from Airtable
+    if (loading || reviews.length === 0) {
+        return null;
+    }
+
     return (
         <section id="audience-reviews" className="relative pt-16 pb-0 sm:pb-16 px-4 bg-black text-white overflow-hidden">
             {/* Dark overlay */}
@@ -175,13 +180,7 @@ export default function AudienceReviews() {
                 <div ref={sectionContentRef} tabIndex={-1} className="relative z-10 bg-black/30 py-24 px-4 sm:px-6 lg:px-8" style={{ outline: 'none' }}>
                     <h2 className="text-3xl font-bold text-center text-white mb-12">Audience Feedback</h2>
                     
-                    {loading ? (
-                        <div className="text-center text-white/70">Loading reviews...</div>
-                    ) : reviews.length === 0 ? (
-                        <div className="text-center text-white/70">No reviews available at this time.</div>
-                    ) : (
-                        <>
-                            <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-7xl mx-auto space-y-6">
+                    <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 max-w-7xl mx-auto space-y-6">
                                 {displayedReviews.map((review, index) => (
                                     <div 
                                         key={review.id} 
@@ -229,17 +228,15 @@ export default function AudienceReviews() {
                         </div>
                         
                         {/* See More button - mobile only (portrait and landscape) */}
-                        {hasMoreReviews && (
-                            <div className="flex justify-center mt-8" style={{ display: isMobile ? 'flex' : 'none' }}>
-                                <button
-                                    onClick={handleSeeMore}
-                                    className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 px-8 rounded-md transition-colors duration-200"
-                                >
-                                    See More
-                                </button>
-                            </div>
-                        )}
-                    </>
+                    {hasMoreReviews && (
+                        <div className="flex justify-center mt-8" style={{ display: isMobile ? 'flex' : 'none' }}>
+                            <button
+                                onClick={handleSeeMore}
+                                className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-3 px-8 rounded-md transition-colors duration-200"
+                            >
+                                See More
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
