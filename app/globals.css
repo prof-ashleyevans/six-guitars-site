@@ -43,8 +43,8 @@ html, body {
   }
 }
 
-/* 640-768px: apply same hero sizing at 640px as 641px to prevent load flash (long then shrink) */
-@media (min-width: 640px) and (max-width: 768px) {
+/* 640-1061px: apply same hero sizing at 640px as 641px to prevent load flash (long then shrink) */
+@media (min-width: 640px) and (max-width: 1061px) {
   section .hero-desktop-smooth,
   .hero-desktop-smooth {
     height: clamp(50vh, 15vw + 50vh, 100vh) !important;
