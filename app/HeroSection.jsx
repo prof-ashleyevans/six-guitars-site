@@ -116,7 +116,7 @@ const HeroSection = () => {
     }, []);
 
     return (
-        <section className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
+        <section id="hero-section" className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
             {/* Desktop Video Background */}
             {!isMobile && (
                 <div className={`absolute z-0 hidden sm:block bg-black hero-desktop-smooth ${isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', top: 0, left: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
