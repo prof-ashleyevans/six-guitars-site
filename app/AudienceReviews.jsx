@@ -148,7 +148,7 @@ export default function AudienceReviews() {
         loadReviews();
     }, []);
 
-    // Hide section until reviews are successfully loaded from Airtable
+    // Hide section when Airtable can't provide reviews (still loading or empty/failed)
     if (loading || reviews.length === 0) {
         return null;
     }

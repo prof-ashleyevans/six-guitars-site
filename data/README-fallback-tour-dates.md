@@ -86,7 +86,7 @@ You can manage tour dates in the browser at **`/admin`** (e.g. `https://yoursite
 2. Open `/admin`, sign in with that password, then add, edit, or delete shows. Changes are saved to the same data the site uses when Airtable is down.
 3. **Use only the admin list (no Airtable):** Set `USE_LOCAL_SHOWS=true`. The public site will then always show the shows from the admin dashboard instead of calling Airtable.
 
-**On Vercel:** The serverless filesystem is read-only in production, so admin edits in the browser won’t persist there. Use the admin dashboard locally (or on a host with writable disk), then commit and push the updated `data/tour-dates-fallback.json` so the site shows the new dates.
+**On Vercel:** The serverless filesystem is read-only, so admin edits in the browser won’t persist there. Use the admin locally (when re-enabled), then commit and push the updated `data/tour-dates-fallback.json`.
 
 ---
 

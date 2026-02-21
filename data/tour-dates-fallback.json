@@ -1,5 +1,24 @@
 [
   {
+    "groupKey": "2026-03-04|Mesa Arts Center",
+    "date": "2026-03-04",
+    "day": "Tuesday",
+    "venue": "Mesa Arts Center",
+    "location": "Mesa AZ",
+    "performances": [
+      {
+        "id": "fallback-mesa-2025",
+        "time": "7:00 PM",
+        "fullBand": true,
+        "ticketAvail": "available",
+        "ticketLink": "https://www.mesaartscenter.com/show-details/6-guitars-presented-by-chase-padgett-music-comedy-characters",
+        "onSaleDate": "",
+        "discountCode": "",
+        "discountPercentage": ""
+      }
+    ]
+  },
+  {
     "groupKey": "2026-03-12|Scottsdale Center for the Performing Arts",
     "date": "2026-03-12",
     "day": "Wednesday",

@@ -31,7 +31,11 @@ export default function HeroCTA() {
 
     const formatDate = (dateStr) => {
         if (!dateStr) return '';
-        const date = new Date(dateStr);
+        const str = String(dateStr).trim();
+        const isoMatch = str.match(/^(\d{4})-(\d{2})-(\d{2})/);
+        const date = isoMatch
+            ? new Date(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3]))
+            : new Date(dateStr);
         return date.toLocaleDateString(undefined, {
             month: 'short',
             day: 'numeric',
