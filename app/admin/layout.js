@@ -1,12 +1,11 @@
+import { redirect } from 'next/navigation';
+
 export const metadata = {
     title: 'Admin – 6 Guitars',
     description: 'Manage tour dates',
 };
 
-export default function AdminLayout({ children }) {
-    return (
-        <div className="min-h-screen bg-gray-100 text-gray-900">
-            {children}
-        </div>
-    );
+/** Admin dashboard is disabled for now. Redirect to home. Re-enable by restoring the layout to render {children}. */
+export default function AdminLayout() {
+    redirect('/');
 }

@@ -83,13 +83,17 @@ function formatLocation(location) {
 
 function parseDate(dateStr) {
     if (!dateStr) return null;
-    
+
     let date;
-    
-    if (dateStr.includes('T') || dateStr.includes('-')) {
-        date = new Date(dateStr);
-    } else if (dateStr.includes('/')) {
-        const parts = dateStr.split('/');
+    const str = String(dateStr).trim();
+
+    // YYYY-MM-DD (with optional time part): parse date part as local so it doesn't roll back a day in US timezones
+    const isoMatch = str.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (isoMatch) {
+        const [, y, m, d] = isoMatch.map(Number);
+        date = new Date(y, m - 1, d);
+    } else if (str.includes('/')) {
+        const parts = str.split('/');
         const month = parseInt(parts[0], 10) - 1;
         const day = parseInt(parts[1], 10);
         const year = parseInt(parts[2], 10);
@@ -97,7 +101,7 @@ function parseDate(dateStr) {
     } else {
         date = new Date(dateStr);
     }
-    
+
     if (isNaN(date.getTime())) return null;
     return date;
 }
