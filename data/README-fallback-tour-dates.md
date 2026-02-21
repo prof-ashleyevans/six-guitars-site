@@ -93,3 +93,17 @@ You can manage tour dates in the browser at **`/admin`** (e.g. `https://yoursite
 ## Critic reviews fallback
 
 When Airtable is down or returns no critic reviews, the site uses **`data/reviews-fallback.json`**. Each object needs: `id`, `name`, `quote`, `status` (use `5` to show 5 stars), and `logo` (path like `/images/edmonton-sun-logo.jpg`). When Airtable is working again, the API will serve from Airtable automatically—no code change needed.
+
+---
+
+## Audience reviews fallback
+
+When Airtable is down or returns no audience reviews, the site uses **`data/audience-reviews-fallback.json`** and photos in **`public/images/audience_reviews/`** (e.g. `review1.png`, `review2.png`). Each fallback object has: `id`, `name`, `quote`, `photo` (path like `/images/audience_reviews/review1.png`).
+
+**To refresh the backup** (download current reviews and photos from Airtable): from the project root, with `.env.local` containing your Airtable variables, run:
+
+```bash
+npm run download-audience-assets
+```
+
+This fetches all “6G” audience reviews from Airtable, downloads each photo into `public/images/audience_reviews/`, and overwrites `data/audience-reviews-fallback.json`. Run it periodically (e.g. when you add new reviews in Airtable) so the fallback stays in sync.
