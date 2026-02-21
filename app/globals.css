@@ -68,7 +68,17 @@ html, body {
   }
 }
 
-
+/* Mobile phone in desktop mode (portrait): show full hero, not zoomed */
+@media (min-width: 640px) and (orientation: portrait) and (max-height: 900px) {
+  #hero-section .hero-desktop-smooth {
+    height: 80vh !important;
+    min-height: 80vh !important;
+  }
+  #hero-section .hero-desktop-smooth video {
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+}
 
 @keyframes pulseGlow {
   0%, 100% {
