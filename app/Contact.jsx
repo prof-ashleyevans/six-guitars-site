@@ -11,9 +11,10 @@ export default function Contact() {
 
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [subscribe, setSubscribe] = useState(false); // unchecked by default
+    const [subscribeMessage, setSubscribeMessage] = useState('');
+    const [showMessageField, setShowMessageField] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleMessageSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
@@ -21,6 +22,13 @@ export default function Contact() {
         const name = formData.get('name');
         const email = formData.get('email');
         const message = formData.get('message');
+
+        // Validate required fields
+        if (!name || !email || !message) {
+            alert('Please fill out all fields.');
+            setLoading(false);
+            return;
+        }
 
         try {
             // Send to Formspree
@@ -32,17 +40,55 @@ export default function Contact() {
 
             if (!res.ok) throw new Error('Formspree failed');
 
-            // Also send to Brevo if subscribed
-            if (subscribe) {
-                await fetch('/api/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email }),
-                });
-            }
-
             setSubmitted(true);
         } catch (error) {
+            alert('Oops! Something went wrong. Please try again later.');
+        }
+
+        setLoading(false);
+    };
+
+    const handleSubscribe = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const form = e.target.closest('form');
+        const formData = new FormData(form);
+        const name = formData.get('name');
+        const email = formData.get('email');
+
+        // Validate required fields
+        if (!name || !email) {
+            alert('Please enter your name and email.');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                console.error('Subscribe error:', data);
+                alert(`Error: ${data.error || 'Failed to subscribe'}`);
+                setLoading(false);
+                return;
+            }
+
+            // Check if already subscribed
+            if (data.alreadySubscribed) {
+                setSubscribeMessage('You are already subscribed!');
+            } else {
+                setSubscribeMessage('Successfully subscribed!');
+            }
+            setTimeout(() => setSubscribeMessage(''), 3000);
+        } catch (error) {
+            console.error('Subscribe exception:', error);
             alert('Oops! Something went wrong. Please try again later.');
         }
 
@@ -107,45 +153,73 @@ export default function Contact() {
                         </p>
                     ) : (
                         <form
-                            onSubmit={handleSubmit}
+                            onSubmit={handleMessageSubmit}
                             className="space-y-3 mt-8 w-[90%] max-w-[280px] sm:max-w-md mx-auto text-center"
                         >
                             <input
                                 type="text"
                                 name="name"
                                 placeholder="Your Name"
+                                required
                                 className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
                             />
                             <input
                                 type="email"
                                 name="email"
                                 placeholder="Your Email"
+                                required
                                 className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
                             />
-                            <textarea
-                                name="message"
-                                rows={5}
-                                placeholder="Your Message"
-                                className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
-                            />
-                            <label className="flex items-center justify-center space-x-2 text-sm sm:text-base text-white">
-                                <input
-                                    type="checkbox"
-                                    checked={subscribe}
-                                    onChange={() => setSubscribe(!subscribe)}
-                                    className="accent-yellow-400"
+                            
+                            {/* Conditionally show message field */}
+                            {showMessageField && (
+                                <textarea
+                                    name="message"
+                                    rows={5}
+                                    placeholder="Your Message"
+                                    required
+                                    className="w-full px-4 py-2 bg-black/60 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-300"
                                 />
-                                <span className="text-white">Subscribe to Chase Padgett's email list</span>
-                            </label>
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className={`${
-                                    loading ? 'opacity-50 cursor-not-allowed' : ''
-                                } bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md`}
-                            >
-                                {loading ? 'Sending...' : 'Send Message'}
-                            </button>
+                            )}
+                            
+                            {/* Buttons */}
+                            {!showMessageField ? (
+                                // Initial state: show both action buttons
+                                <div className="flex gap-3 justify-center flex-col sm:flex-row">
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowMessageField(true)}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md flex-1 sm:flex-initial"
+                                    >
+                                        Send Chase a Message
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={handleSubscribe}
+                                        disabled={loading}
+                                        className={`${
+                                            loading ? 'opacity-50 cursor-not-allowed' : ''
+                                        } bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-md flex-1 sm:flex-initial`}
+                                    >
+                                        Subscribe to Email List
+                                    </button>
+                                </div>
+                            ) : (
+                                // Message field is showing: show submit button
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className={`${
+                                        loading ? 'opacity-50 cursor-not-allowed' : ''
+                                    } bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md w-full`}
+                                >
+                                    {loading ? 'Sending...' : 'Submit Message'}
+                                </button>
+                            )}
+                            
+                            {subscribeMessage && (
+                                <p className="text-green-500 text-sm">{subscribeMessage}</p>
+                            )}
                         </form>
 
                     )}

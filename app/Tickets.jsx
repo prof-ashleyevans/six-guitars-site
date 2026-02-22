@@ -139,8 +139,8 @@ function TicketButton({ performance, show, onNotifyClick, compact = false }) {
     );
 
     const baseClasses = compact
-        ? `${config.bgColor} ${config.hoverColor} px-5 py-2 flex items-center justify-center gap-1 rounded-md transition text-sm text-white text-center font-bold`
-        : `${config.bgColor} ${config.hoverColor} px-5 py-2 sm:px-8 sm:py-3 min-w-[140px] max-w-[140px] flex items-center justify-center gap-1 rounded-md transition text-sm sm:text-lg text-white text-center whitespace-nowrap font-bold`;
+        ? `${config.bgColor} ${config.hoverColor} px-5 py-2 flex items-center justify-center gap-1 rounded-md transition text-base text-white text-center font-bold`
+        : `${config.bgColor} ${config.hoverColor} px-6 py-3 sm:px-10 sm:py-4 min-w-[160px] max-w-[180px] flex items-center justify-center gap-1 rounded-md transition text-base sm:text-xl text-white text-center whitespace-nowrap font-bold`;
 
     // Handle "Notify Me" button
     if (config.isNotify) {
@@ -195,18 +195,18 @@ function SingleShowCard({ show, onNotifyClick }) {
     const dayShort = show.day || formatDayOfWeek(show.date, true);
 
     return (
-        <div className="bg-white/10 rounded-xl py-4 px-6">
+        <div className="bg-white/10 rounded-xl py-3 px-5">
             {/* Mobile Layout - Stacked */}
-            <div className="flex flex-col gap-3 md:hidden text-center">
+            <div className="flex flex-col gap-2 md:hidden text-center">
                 {/* Date & Day */}
-                <div className="flex items-center justify-center gap-3">
+                <div className="flex items-center justify-center gap-2">
                     <span className="text-xl font-bold">{formatMonthDay(show.date)}</span>
                     <span className="text-gray-400 uppercase">{dayShort}</span>
                 </div>
                 
-                {/* Location */}
+                {/* Location (city, state) */}
                 <div>
-                    <span className="text-yellow-400 font-bold uppercase">{formatLocation(show.location)}</span>
+                    <span className="text-yellow-400 text-2xl font-bold uppercase">{formatLocation(show.location)}</span>
                 </div>
                 
                 {/* Venue */}
@@ -230,14 +230,14 @@ function SingleShowCard({ show, onNotifyClick }) {
             </div>
 
             {/* Desktop Layout - Single Line */}
-            <div className="hidden md:flex md:items-center md:gap-4 lg:gap-6 xl:gap-8">
+            <div className="hidden md:flex md:items-center md:gap-3 lg:gap-5 xl:gap-6">
                 {/* Date & Day Stacked */}
                 <div className="flex flex-col w-[70px] lg:w-[80px]">
                     <span className="text-lg lg:text-xl font-bold">{formatMonthDay(show.date)}</span>
                     <span className="text-gray-400 text-sm uppercase">{dayShort}</span>
                 </div>
                 
-                {/* Location */}
+                {/* Location (city, state) - enlarged */}
                 <span className="text-yellow-400 text-lg lg:text-xl font-bold uppercase w-[180px] lg:w-[200px] xl:w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
                 
                 {/* Venue */}
@@ -275,17 +275,17 @@ function GroupedShowCard({ show, onNotifyClick }) {
     const dayShort = show.day || formatDayOfWeek(show.date, true);
 
     return (
-        <div className="bg-white/10 rounded-xl py-5 px-6">
+        <div className="bg-white/10 rounded-xl py-4 px-5">
             {/* Mobile Layout */}
             <div className="md:hidden">
                 {/* Header - Stacked */}
-                <div className="flex flex-col gap-1 text-center mb-4">
-                    <div className="flex items-center justify-center gap-3">
+                <div className="flex flex-col gap-1 text-center mb-3">
+                    <div className="flex items-center justify-center gap-2">
                         <span className="text-2xl font-bold">{formatMonthDay(show.date)}</span>
                         <span className="text-lg text-gray-400 uppercase">{dayShort}</span>
                     </div>
                     <div>
-                        <span className="text-lg text-yellow-400 font-bold uppercase">{formatLocation(show.location)}</span>
+                        <span className="text-2xl text-yellow-400 font-bold uppercase">{formatLocation(show.location)}</span>
                     </div>
                     <div>
                         <span className="text-lg">{show.venue}</span>
@@ -293,9 +293,9 @@ function GroupedShowCard({ show, onNotifyClick }) {
                 </div>
 
                 {/* Performance Rows */}
-                <div className="space-y-4">
+                <div className="space-y-3">
                     {show.performances.map((perf, idx) => (
-                        <div key={idx} className="flex flex-col gap-2 text-center border-t border-white/10 pt-4">
+                        <div key={idx} className="flex flex-col gap-2 text-center border-t border-white/10 pt-3">
                             <div className="text-lg">
                                 {perf.fullBand && <span className="text-yellow-400 mr-2">⭐</span>}
                                 {perf.time}
@@ -312,7 +312,7 @@ function GroupedShowCard({ show, onNotifyClick }) {
             {/* Desktop Layout */}
             <div className="hidden md:block">
                 {/* Header Row - same spacing as SingleShowCard */}
-                <div className="flex items-center gap-4 lg:gap-6 xl:gap-8 mb-4">
+                <div className="flex items-center gap-3 lg:gap-5 xl:gap-6 mb-3">
                     {/* Date & Day Stacked */}
                     <div className="flex flex-col w-[70px] lg:w-[80px]">
                         <span className="text-lg lg:text-xl font-bold">{formatMonthDay(show.date)}</span>
@@ -324,9 +324,9 @@ function GroupedShowCard({ show, onNotifyClick }) {
                 </div>
 
                 {/* Performance Rows */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                     {show.performances.map((perf, idx) => (
-                        <div key={idx} className="flex items-center gap-4 lg:gap-6 xl:gap-8">
+                        <div key={idx} className="flex items-center gap-3 lg:gap-5 xl:gap-6">
                             {/* Spacer for Date/Day */}
                             <span className="w-[70px] lg:w-[80px]"></span>
                             
