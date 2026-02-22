@@ -23,15 +23,30 @@ export default async function handler(req, res) {
             }),
         });
 
-        const responseData = await response.json();
         console.log('📬 Brevo response status:', response.status);
-        console.log('📬 Brevo response:', responseData);
+
+        // Try to parse JSON response, handle empty/invalid responses
+        let responseData;
+        const contentType = response.headers.get('content-type');
+        const responseText = await response.text();
+        
+        console.log('📬 Brevo response text:', responseText);
+        
+        try {
+            responseData = responseText ? JSON.parse(responseText) : {};
+        } catch (parseError) {
+            console.error('JSON parse error:', parseError);
+            responseData = { message: responseText };
+        }
+
+        console.log('📬 Brevo response data:', responseData);
 
         // Handle duplicate contact - check multiple possible error indicators
         if (
             (response.status === 400 && responseData.code === 'duplicate_parameter') ||
             (response.status === 400 && responseData.message?.toLowerCase().includes('contact already exist')) ||
-            (responseData.code === 'duplicate_parameter')
+            (responseData.code === 'duplicate_parameter') ||
+            (responseText.toLowerCase().includes('already exist'))
         ) {
             console.log('✅ Contact already exists:', email);
             return res.status(200).json({ message: 'Already subscribed', alreadySubscribed: true });
@@ -44,7 +59,7 @@ export default async function handler(req, res) {
                 error: 'Brevo failed', 
                 details: responseData,
                 statusCode: response.status,
-                message: responseData.message 
+                message: responseData.message || responseText
             });
         }
 
