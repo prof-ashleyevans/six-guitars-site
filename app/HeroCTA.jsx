@@ -87,6 +87,9 @@ export default function HeroCTA() {
                         if (window.gtag) {
                             window.gtag('event', 'hero_cta_click', { cta_variant: ctaVariant });
                         }
+                        if (window.dataLayer) {
+                            window.dataLayer.push({ event: 'hero_cta_click', cta_variant: ctaVariant });
+                        }
                     }}
                 >
                     <Image
