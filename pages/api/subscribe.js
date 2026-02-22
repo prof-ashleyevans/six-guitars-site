@@ -27,15 +27,31 @@ export default async function handler(req, res) {
         console.log('📬 Brevo response status:', response.status);
         console.log('📬 Brevo response:', responseData);
 
+        // Handle duplicate contact - check multiple possible error indicators
+        if (
+            (response.status === 400 && responseData.code === 'duplicate_parameter') ||
+            (response.status === 400 && responseData.message?.toLowerCase().includes('contact already exist')) ||
+            (responseData.code === 'duplicate_parameter')
+        ) {
+            console.log('✅ Contact already exists:', email);
+            return res.status(200).json({ message: 'Already subscribed', alreadySubscribed: true });
+        }
+
         if (!response.ok) {
             console.error('❌ Brevo error:', responseData);
-            return res.status(500).json({ error: 'Brevo failed', details: responseData });
+            // Return more details for debugging
+            return res.status(500).json({ 
+                error: 'Brevo failed', 
+                details: responseData,
+                statusCode: response.status,
+                message: responseData.message 
+            });
         }
 
         console.log('✅ Successfully subscribed:', email);
         return res.status(200).json({ message: 'Subscribed' });
     } catch (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Server error' });
+        console.error('Server error:', err);
+        return res.status(500).json({ error: 'Server error', details: err.message });
     }
 }
