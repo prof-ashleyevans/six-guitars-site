@@ -60,23 +60,18 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
         <head>
-            {/* Google Tag Manager */}
+            {/* Google Tag Manager (Stape first-party) */}
             <script dangerouslySetInnerHTML={{
-                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P6N74BM3');`
+                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://vewvlvfs.usb.stape.io/9dqhtvewvlvfs.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','4d3fl=GgJLKyI6SCZFKEFYNDpWUAVbREJH');`
             }} />
             {/* End Google Tag Manager */}
         </head>
         <body
             className={`${geistSans.variable} ${geistMono.variable} ${rockFont.variable} ${classicalFont.variable} ${jazzFont.variable} ${bluesFont.variable} ${folkFont.variable} ${countryFont.variable} ${text_font.variable} ${bebasFont.variable} ${montserratFont.variable} ${alumniPinstripeFont.variable} ${barlowLightFont.variable}   antialiased`}
         >
-        {/* Google Tag Manager (noscript) */}
+        {/* Google Tag Manager (noscript) - Stape first-party */}
         <noscript>
-            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P6N74BM3"
-                    height="0" width="0" style={{display: 'none', visibility: 'hidden'}}></iframe>
+            <iframe src="https://vewvlvfs.usb.stape.io/ns.html?id=GTM-P6N74BM3" height="0" width="0" style={{display: 'none', visibility: 'hidden'}}></iframe>
         </noscript>
         {/* End Google Tag Manager (noscript) */}
         {children}
