@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import NotifyMeModal from './NotifyMeModal';
@@ -273,6 +273,7 @@ function SingleShowCard({ show, onNotifyClick }) {
 
 function GroupedShowCard({ show, onNotifyClick }) {
     const dayShort = show.day || formatDayOfWeek(show.date, true);
+    const hasDiscount = show.performances.some((p) => p.discountCode || p.discountPercentage);
 
     return (
         <div className="bg-white/10 rounded-xl py-4 px-5">
@@ -309,52 +310,58 @@ function GroupedShowCard({ show, onNotifyClick }) {
                 </div>
             </div>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-                {/* Header Row - same spacing as SingleShowCard */}
-                <div className="flex items-center gap-3 lg:gap-5 xl:gap-6 mb-3">
-                    {/* Date & Day Stacked */}
-                    <div className="flex flex-col w-[70px] lg:w-[80px]">
-                        <span className="text-lg lg:text-xl font-bold">{formatMonthDay(show.date)}</span>
-                        <span className="text-gray-400 text-sm uppercase">{dayShort}</span>
-                    </div>
-                    
-                    <span className="text-yellow-400 text-lg lg:text-xl font-bold uppercase w-[180px] lg:w-[200px] xl:w-[220px] whitespace-nowrap">{formatLocation(show.location)}</span>
-                    <span className="text-lg lg:text-xl flex-1 min-w-[150px]">{show.venue}</span>
+            {/* Desktop Layout - same column widths/gaps as SingleShowCard; only add discount column when present (so time/button align with single rows) */}
+            <div
+                className={`hidden md:grid gap-y-2 gap-x-3 lg:gap-x-5 xl:gap-x-6 ${
+                    hasDiscount
+                        ? 'grid-cols-[70px_180px_minmax(150px,1fr)_90px_120px_auto] lg:grid-cols-[80px_200px_minmax(150px,1fr)_100px_140px_auto] xl:grid-cols-[80px_220px_minmax(150px,1fr)_100px_140px_auto]'
+                        : 'grid-cols-[70px_180px_minmax(150px,1fr)_90px_auto] lg:grid-cols-[80px_200px_minmax(150px,1fr)_100px_auto] xl:grid-cols-[80px_220px_minmax(150px,1fr)_100px_auto]'
+                }`}
+            >
+                {/* Date – same width as single: w-[70px] lg:w-[80px] */}
+                <div
+                    className="flex flex-col justify-center"
+                    style={{ gridRow: `1 / span ${show.performances.length}` }}
+                >
+                    <span className="text-lg lg:text-xl font-bold">{formatMonthDay(show.date)}</span>
+                    <span className="text-gray-400 text-sm uppercase">{dayShort}</span>
                 </div>
+                {/* Location – same as single: w-[180px] lg:w-[200px] xl:w-[220px] */}
+                <span
+                    className="text-yellow-400 text-lg lg:text-xl font-bold uppercase whitespace-nowrap flex items-center"
+                    style={{ gridRow: `1 / span ${show.performances.length}` }}
+                >
+                    {formatLocation(show.location)}
+                </span>
+                {/* Venue – same as single: flex-1 min-w-[150px] */}
+                <span
+                    className="text-lg lg:text-xl flex items-center min-w-0"
+                    style={{ gridRow: `1 / span ${show.performances.length}` }}
+                >
+                    {show.venue}
+                </span>
 
-                {/* Performance Rows */}
-                <div className="space-y-2">
-                    {show.performances.map((perf, idx) => (
-                        <div key={idx} className="flex items-center gap-3 lg:gap-5 xl:gap-6">
-                            {/* Spacer for Date/Day */}
-                            <span className="w-[70px] lg:w-[80px]"></span>
-                            
-                            {/* Time - aligned below Location */}
-                            <span className="text-lg lg:text-xl w-[180px] lg:w-[200px] xl:w-[220px]">
-                                {perf.time}
-                                {perf.fullBand && <span className="text-yellow-400 ml-1">⭐</span>}
-                            </span>
-
-                            {/* Spacer to align with venue */}
-                            <span className="flex-1 min-w-[150px]"></span>
-
-                            {/* Discount - only show if exists */}
-                            {(perf.discountCode || perf.discountPercentage) ? (
-                                <div className="text-center text-sm w-[120px] lg:w-[140px]">
+                {/* Time + discount (if any) + button – same widths as single; times stack vertically */}
+                {show.performances.map((perf, idx) => (
+                    <Fragment key={idx}>
+                        <span className="text-lg lg:text-xl flex items-center">
+                            {perf.time}
+                            {perf.fullBand && <span className="text-yellow-400 ml-1">⭐</span>}
+                        </span>
+                        {hasDiscount && (
+                            (perf.discountCode || perf.discountPercentage) ? (
+                                <div className="text-center text-sm flex items-center">
                                     <DiscountMessage performance={perf} />
                                 </div>
                             ) : (
-                                <span className="w-[120px] lg:w-[140px]"></span>
-                            )}
-
-                            {/* Button */}
-                            <div className="flex justify-end">
-                                <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
-                            </div>
+                                <span />
+                            )
+                        )}
+                        <div className="flex items-center justify-end">
+                            <TicketButton performance={perf} show={show} onNotifyClick={onNotifyClick} />
                         </div>
-                    ))}
-                </div>
+                    </Fragment>
+                ))}
             </div>
         </div>
     );
