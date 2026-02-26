@@ -154,11 +154,10 @@ function TicketButton({ performance, show, onNotifyClick, compact = false }) {
         );
     }
 
-    // Handle regular ticket links
+    // Handle regular ticket links (all variants: Get Tickets, Limited Avail, Going Fast, etc.)
     if (config.clickable && link) {
-        const trackingClass = config.text === 'Get Tickets' ? 'track-get-tickets' : '';
         return (
-            <a href={fullLink} target="_blank" rel="noopener noreferrer" className={`${baseClasses} ${trackingClass}`.trim()}>
+            <a href={fullLink} target="_blank" rel="noopener noreferrer" className={`${baseClasses} track-get-tickets`}>
                 {buttonContent}
             </a>
         );
