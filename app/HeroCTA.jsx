@@ -18,6 +18,7 @@ export default function HeroCTA() {
     const [nextShow, setNextShow] = useState(null);
     const [loading, setLoading] = useState(true);
     const [ctaVariant, setCtaVariant] = useState('A');
+    const [showTrailer, setShowTrailer] = useState(false);
 
     useEffect(() => {
         setCtaVariant(getHeroCtaVariant());
@@ -74,7 +75,7 @@ export default function HeroCTA() {
 
     return (
         <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden relative z-20" style={{ marginTop: 0 }}>
-            <div className="max-w-md mx-auto">
+            <div className="max-w-md mx-auto space-y-3">
                 {/* Hero CTA Button (A/B: Get Tour Dates vs See Tour Dates) */}
                 <a
                     id="hero-get-tour-dates"
@@ -103,7 +104,64 @@ export default function HeroCTA() {
                     />
                     <span>{HERO_CTA_VARIANTS[ctaVariant]}</span>
                 </a>
+
+                {/* Mobile trailer button directly under Get Tour Dates - same size, yellow variant, with play icon */}
+                <button
+                    type="button"
+                    onClick={() => setShowTrailer(true)}
+                    className="block w-full bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg shadow-xl font-bold text-2xl transition-all flex items-center justify-center gap-3"
+                >
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
+                        <svg
+                            className="w-4 h-4"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </span>
+                    <span>Watch Trailer</span>
+                </button>
             </div>
+
+            {showTrailer && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[999]"
+                    onClick={() => setShowTrailer(false)}
+                >
+                    <div
+                        className="flex flex-col items-center gap-4 w-[90%] max-w-3xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="relative w-full aspect-video">
+                            <button
+                                type="button"
+                                className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
+                                onClick={() => setShowTrailer(false)}
+                                aria-label="Close trailer"
+                            >
+                                ×
+                            </button>
+                            <iframe
+                                src="https://player.vimeo.com/video/1047706165?autoplay=1"
+                                title="6 Guitars Trailer"
+                                allow="autoplay; fullscreen; picture-in-picture"
+                                allowFullScreen
+                                className="w-full h-full rounded-lg"
+                            />
+                        </div>
+                        {/* Clear back button under the modal */}
+                        <button
+                            type="button"
+                            onClick={() => setShowTrailer(false)}
+                            className="w-full max-w-xs bg-white text-black font-bold py-2 rounded-md border border-white hover:bg-yellow-300 transition"
+                        >
+                            Back
+                        </button>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }

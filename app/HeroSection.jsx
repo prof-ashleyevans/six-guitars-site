@@ -43,6 +43,8 @@ const HeroSection = () => {
     const [videoLoaded, setVideoLoaded] = useState(false);
     const [desktopVideoError, setDesktopVideoError] = useState(false);
     const [desktopVideoLoaded, setDesktopVideoLoaded] = useState(false);
+    const [viewportWidth, setViewportWidth] = useState(0);
+    const [showTrailer, setShowTrailer] = useState(false);
     const videoRef = useRef(null);
     const desktopVideoRef = useRef(null);
     
@@ -50,6 +52,7 @@ const HeroSection = () => {
         const checkMobile = () => setIsMobile(window.innerWidth < 640);
         const checkViewport = () => {
             checkMobile();
+            setViewportWidth(window.innerWidth);
             // Detect small viewport height (like phone landscape) - less than 600px height
             setIsSmallViewportHeight(window.innerHeight < 600 && window.innerWidth >= 640);
             // Detect mobile portrait (narrow + tall) - use less zoomed video
@@ -115,10 +118,16 @@ const HeroSection = () => {
         AOS.init({ duration: 1800, once: true });
     }, []);
 
+    // Decide which hero video to use:
+    // Use the mobile hero video for all viewports up to and including 798px,
+    // and the desktop hero video only above 798px.
+    const useMobileHeroVideo = viewportWidth <= 798 || isMobile;
+    const useDesktopHeroVideo = !useMobileHeroVideo;
+
     return (
         <section id="hero-section" className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
             {/* Desktop Video Background */}
-            {!isMobile && (
+            {useDesktopHeroVideo && (
                 <div className={`absolute z-0 hidden sm:block bg-black hero-desktop-smooth ${isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', top: 0, left: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
                     <video
                         ref={desktopVideoRef}
@@ -190,8 +199,8 @@ const HeroSection = () => {
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                     <div className={`relative w-full h-[125vw] hero-desktop-smooth ${isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} sm:aspect-auto overflow-hidden`} style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                         {/* Mobile Video Background */}
-                        {isMobile && (
-                            <div className={`absolute inset-0 z-0 sm:hidden bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
+                        {useMobileHeroVideo && (
+                            <div className={`absolute inset-0 z-0 bg-black ${isMobile ? 'sm:hidden' : ''} ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
                                 <video
                                     ref={videoRef}
                                     autoPlay
@@ -274,17 +283,75 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* Icon Row - Desktop only */}
-                <div className="hidden sm:block absolute bottom-[3%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                {/* Icon Row - Desktop only (raised to make room for trailer button) */}
+                <div className="hidden sm:block absolute bottom-[18%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                     <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                         <IconRow isSmallViewportHeight={isSmallViewportHeight} />
                     </div>
                 </div>
 
             </div>
+
+            {/* Hero trailer button - desktop only (at bottom of hero, below raised icon row) */}
+            <div className="hidden sm:block absolute bottom-[4%] left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
+                <button
+                    type="button"
+                    onClick={() => setShowTrailer(true)}
+                    className="px-8 py-4 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
+                >
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
+                        <svg
+                            className="w-4 h-4"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </span>
+                    <span>Watch Trailer</span>
+                </button>
+            </div>
+
+            {/* Trailer Modal (reuses About trailer video) */}
+            {showTrailer && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[999]"
+                    onClick={() => setShowTrailer(false)}
+                >
+                    <div
+                        className="flex flex-col items-center gap-4 w-[90%] max-w-3xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="relative w-full aspect-video">
+                            <button
+                                type="button"
+                                className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
+                                onClick={() => setShowTrailer(false)}
+                                aria-label="Close trailer"
+                            >
+                                ×
+                            </button>
+                            <iframe
+                                src="https://player.vimeo.com/video/1047706165?autoplay=1"
+                                title="6 Guitars Trailer"
+                                allow="autoplay; fullscreen; picture-in-picture"
+                                allowFullScreen
+                                className="w-full h-full rounded-lg"
+                            />
+                        </div>
+                        {/* Clear Back button under modal on desktop */}
+                        <button
+                            type="button"
+                            onClick={() => setShowTrailer(false)}
+                            className="w-full max-w-xs bg-white text-black font-bold py-2 rounded-md border border-white hover:bg-yellow-300 transition"
+                        >
+                            Back
+                        </button>
+                    </div>
+                </div>
+            )}
         </section>
-
-
     );
 };
 
