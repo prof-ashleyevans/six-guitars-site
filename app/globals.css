@@ -43,16 +43,14 @@ html, body {
   }
 }
 
-/* 640-1061px: apply same hero sizing at 640px as 641px to prevent load flash (long then shrink) */
-@media (min-width: 640px) and (max-width: 1061px) {
-  section .hero-desktop-smooth,
-  .hero-desktop-smooth {
-    height: clamp(50vh, 15vw + 50vh, 100vh) !important;
-    min-height: unset !important;
+/* 640–798px: slightly taller hero and force background video to fill it */
+@media (min-width: 640px) and (max-width: 798px) {
+  .hero-desktop-smooth:not([class*="16vh"]):not([class*="85vh"]) {
+    min-height: 80vh;
   }
-  /* Hero video: fill entire hero container without excessive zoom */
+  /* Ensure desktop hero video covers entire hero container */
   #hero-section .hero-desktop-smooth {
-    overflow: hidden !important;
+    overflow: hidden;
   }
   #hero-section .hero-desktop-smooth video {
     width: 100% !important;
@@ -62,9 +60,23 @@ html, body {
     object-fit: cover !important;
     object-position: center center !important;
   }
-  #hero-section .hero-desktop-icon-row {
-    bottom: 3% !important;
-    transform: none !important;
+}
+
+/* 799px+ small-desktop window: ensure desktop hero video also fills hero */
+@media (min-width: 799px) and (max-width: 1061px) {
+  .hero-desktop-smooth:not([class*="16vh"]):not([class*="85vh"]) {
+    min-height: 80vh;
+  }
+  #hero-section .hero-desktop-smooth {
+    overflow: hidden;
+  }
+  #hero-section .hero-desktop-smooth video {
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
 }
 
