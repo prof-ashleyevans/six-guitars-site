@@ -284,7 +284,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Icon Row - Desktop only (raised to make room for trailer button) */}
-                <div className="hidden sm:block absolute bottom-[18%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                <div className="hero-desktop-icon-row hidden sm:block absolute bottom-[18%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                     <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                         <IconRow isSmallViewportHeight={isSmallViewportHeight} />
                     </div>
@@ -292,12 +292,12 @@ const HeroSection = () => {
 
             </div>
 
-            {/* Hero trailer button - desktop only (at bottom of hero, below raised icon row) */}
-            <div className="hidden sm:block absolute bottom-[4%] left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
+            {/* Hero trailer button - desktop only (at very bottom of hero, below raised icon row) */}
+            <div className="hero-desktop-watch-trailer-wrapper hidden sm:block absolute bottom-[4%] left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
                 <button
                     type="button"
                     onClick={() => setShowTrailer(true)}
-                    className="px-8 py-4 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
+                    className="hero-desktop-watch-trailer px-8 py-4 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
                 >
                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
                         <svg
