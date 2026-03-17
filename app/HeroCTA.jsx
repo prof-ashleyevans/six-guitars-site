@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import IconRow from '@/app/IconRow';
 
 const HERO_CTA_STORAGE_KEY = 'hero-cta-variant';
 const HERO_CTA_VARIANTS = { A: 'Get Tour Dates', B: 'See Tour Dates' };
@@ -109,7 +110,7 @@ export default function HeroCTA() {
                 <button
                     type="button"
                     onClick={() => setShowTrailer(true)}
-                    className="block w-full bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg shadow-xl font-bold text-2xl transition-all flex items-center justify-center gap-3"
+                    className="hero-mobile-watch-trailer block w-full bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg shadow-xl font-bold text-2xl transition-all flex items-center justify-center gap-3"
                 >
                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
                         <svg
@@ -123,6 +124,11 @@ export default function HeroCTA() {
                     </span>
                     <span>Watch Trailer</span>
                 </button>
+
+                {/* Mobile icon row lives with the CTAs so they move together on rotate */}
+                <div className="mt-4">
+                    <IconRow />
+                </div>
             </div>
 
             {showTrailer && (

@@ -62,23 +62,8 @@ html, body {
   }
 }
 
-/* 640–1061px: push desktop icon row closer to bottom and scale it/button down so it doesn't overlap logo */
-@media (min-width: 640px) and (max-width: 1061px) {
-  #hero-section .hero-desktop-icon-row {
-    bottom: 10% !important;
-    transform: translateY(8px) scale(0.85);
-    transform-origin: center bottom;
-  }
-  #hero-section .hero-desktop-watch-trailer-wrapper {
-    bottom: 0% !important; /* sit just below the icon row */
-  }
-  #hero-section .hero-desktop-watch-trailer {
-    transform: scale(0.85);
-    transform-origin: center bottom;
-    padding: 0.6rem 1.8rem;
-    font-size: 0.95rem;
-  }
-}
+/* Desktop tweaks previously scoped to 640–1061px were removed to simplify layout.
+   Desktop positioning is now controlled directly in HeroSection via Tailwind classes. */
 
 /* <640px, landscape mobile: make hero much taller and ensure mobile video fills it so icon row / buttons sit lower */
 @media (max-width: 639px) and (orientation: landscape) {
@@ -95,6 +80,12 @@ html, body {
     top: 0 !important;
     object-fit: cover !important;
     object-position: center center !important;
+  }
+  /* Slightly shorten the mobile Watch Trailer button in this orientation */
+  .hero-mobile-watch-trailer {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 1rem;
   }
 }
 

@@ -15,7 +15,6 @@ import Footer from "@/app/Footer";
 import CharacterGridSection from "@/app/CharacterGridSection";
 import FAQ from "@/app/FAQ";
 import AudienceReviews from "@/app/AudienceReviews";
-import IconRow from "@/app/IconRow";
 import HeroCTA from "@/app/HeroCTA";
 // import Experimental from "@/app/Experimental"; // Hidden for now
 
@@ -26,9 +25,6 @@ export default function Home() {
             <HeaderNav />
 
             <HeroSection />
-            <div className="sm:hidden bg-transparent pb-0 relative z-10" style={{ marginTop: '-150px' }}>
-                <IconRow />
-            </div>
             <HeroCTA />
 
             <Reviews />
