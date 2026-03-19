@@ -263,8 +263,8 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* Icon Row - Desktop only (absolute inside hero) */}
-                <div className="hero-desktop-icon-row hidden sm:block absolute bottom-[6%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                {/* Icon Row - show below hero on small desktop widths (>=640 and <768) */}
+                <div className="hero-desktop-icon-row hidden sm:block relative w-full z-30 min-h-[clamp(120px,15vh,200px)] sm:mt-6 md:absolute md:bottom-[6%] md:left-0 md:mt-0" style={{ marginBottom: 0, paddingBottom: 0 }}>
                     <div className="w-full flex flex-col items-center px-4 pointer-events-auto pt-[clamp(50px,8vh,90px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                         <div className="w-full">
                             <IconRow isSmallViewportHeight={isSmallViewportHeight} />

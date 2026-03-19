@@ -90,7 +90,7 @@ html, body {
 }
 
 /* 640–798px, landscape mobile: make hero taller and push icon row down so it doesn't cover logo */
-@media (min-width: 640px) and (max-width: 798px) and (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 798px) and (orientation: landscape) {
   .hero-desktop-smooth:not([class*="16vh"]):not([class*="85vh"]) {
     min-height: 90vh;
   }
@@ -119,7 +119,7 @@ html, body {
 }
 
 /* Mobile phone in desktop mode (portrait): show full hero, not zoomed */
-@media (min-width: 640px) and (orientation: portrait) and (max-height: 900px) {
+@media (min-width: 640px) and (max-width: 900px) and (orientation: portrait) and (max-height: 900px) {
   #hero-section .hero-desktop-smooth {
     height: 120vh !important;
     min-height: 120vh !important;
@@ -132,7 +132,7 @@ html, body {
 }
 
 /* Mobile phone in desktop mode (landscape): make hero taller */
-@media (min-width: 640px) and (orientation: landscape) and (max-height: 900px) {
+@media (min-width: 640px) and (max-width: 900px) and (orientation: landscape) and (max-height: 900px) {
   #hero-section .hero-desktop-smooth {
     height: 165vh !important;
     min-height: 165vh !important;
