@@ -65,8 +65,8 @@ html, body {
 /* 640–798px PC portrait: make hero taller (landscape remains tuned elsewhere) */
 @media (pointer: fine) and (hover: hover) and (min-width: 640px) and (max-width: 900px) and (orientation: portrait) {
   #hero-section .hero-desktop-smooth {
-    height: 170vh !important;
-    min-height: 170vh !important;
+    height: 150vh !important;
+    min-height: 150vh !important;
   }
 }
 
