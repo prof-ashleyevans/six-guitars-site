@@ -37,14 +37,9 @@ const characterImages = [
 const HeroSection = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isSmallViewportHeight, setIsSmallViewportHeight] = useState(false);
-    const [isMobilePortrait, setIsMobilePortrait] = useState(false);
     const [isPortraitOrientation, setIsPortraitOrientation] = useState(false);
     const [videoError, setVideoError] = useState(false);
-    const [videoLoaded, setVideoLoaded] = useState(false);
     const [desktopVideoError, setDesktopVideoError] = useState(false);
-    const [desktopVideoLoaded, setDesktopVideoLoaded] = useState(false);
-    const [viewportWidth, setViewportWidth] = useState(0);
-    const [showTrailer, setShowTrailer] = useState(false);
     const videoRef = useRef(null);
     const desktopVideoRef = useRef(null);
     
@@ -52,11 +47,8 @@ const HeroSection = () => {
         const checkMobile = () => setIsMobile(window.innerWidth < 640);
         const checkViewport = () => {
             checkMobile();
-            setViewportWidth(window.innerWidth);
             // Detect small viewport height (like phone landscape) - less than 600px height
             setIsSmallViewportHeight(window.innerHeight < 600 && window.innerWidth >= 640);
-            // Detect mobile portrait (narrow + tall) - use less zoomed video
-            setIsMobilePortrait(window.innerWidth < 640 && window.innerHeight > window.innerWidth);
         };
         checkViewport();
         window.addEventListener('resize', checkViewport);
@@ -78,7 +70,6 @@ const HeroSection = () => {
             
             // Try to play when video can play
             const handleCanPlay = () => {
-                setVideoLoaded(true);
                 video.play().catch((error) => {
                     console.log('Video autoplay prevented (normal on some browsers):', error);
                     // Don't set error - video loaded successfully, just can't autoplay
@@ -99,7 +90,6 @@ const HeroSection = () => {
             
             // Try to play when video can play
             const handleCanPlay = () => {
-                setDesktopVideoLoaded(true);
                 video.play().catch((error) => {
                     console.log('Desktop video autoplay prevented (normal on some browsers):', error);
                     // Don't set error - video loaded successfully, just can't autoplay
@@ -119,66 +109,13 @@ const HeroSection = () => {
     }, []);
 
     // Decide which hero video to use:
-    // Use the mobile hero video for all viewports up to and including 798px,
-    // and the desktop hero video only above 798px.
-    const useMobileHeroVideo = viewportWidth <= 798 || isMobile;
-    const useDesktopHeroVideo = !useMobileHeroVideo;
+    // Use the mobile hero video only for the actual mobile breakpoint.
+    // Everything larger than mobile uses the PC (desktop) hero video.
+    const useMobileHeroVideo = isMobile;
+    const useDesktopHeroVideo = !isMobile;
 
     return (
         <section id="hero-section" className="relative w-full overflow-hidden" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0, height: 'auto' }}>
-            {/* Desktop Video Background */}
-            {useDesktopHeroVideo && (
-                <div className={`absolute z-0 hidden sm:block bg-black hero-desktop-smooth ${isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} ${desktopVideoError ? 'hidden' : ''}`} style={{ width: '100%', top: 0, left: 0, margin: 0, marginBottom: 0, padding: 0, paddingBottom: 0 }}>
-                    <video
-                        ref={desktopVideoRef}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        className={`w-full h-full ${isPortraitOrientation ? 'object-contain' : 'object-cover'}`}
-                        style={{ 
-                            objectPosition: 'top center',
-                            width: '100%',
-                            height: '100%',
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            margin: 0,
-                            padding: 0,
-                            zIndex: desktopVideoError ? -1 : 1
-                        }}
-                        onError={(e) => {
-                            console.error('Desktop video error:', e);
-                            setDesktopVideoError(true);
-                        }}
-                        onLoadedData={() => {
-                            setDesktopVideoLoaded(true);
-                        }}
-                        onCanPlay={() => {
-                            setDesktopVideoLoaded(true);
-                            if (desktopVideoRef.current) {
-                                desktopVideoRef.current.play().catch((err) => {
-                                    console.log('Desktop video autoplay prevented, but video loaded:', err);
-                                });
-                            }
-                        }}
-                        onEnded={() => {
-                            // Seamless loop - immediately restart without lag
-                            if (desktopVideoRef.current) {
-                                desktopVideoRef.current.currentTime = 0;
-                                desktopVideoRef.current.play().catch(() => {
-                                    // Ignore play errors on loop
-                                });
-                            }
-                        }}
-                    >
-                        <source src="/videos/Hero Loop 1920x720.mp4" type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            )}
-
             {/* Background Image - Desktop fallback only */}
             {!isMobile && desktopVideoError && (
                 <div className="absolute inset-0 z-0 hidden sm:block">
@@ -197,10 +134,56 @@ const HeroSection = () => {
             <div className="relative w-full" style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
                 {/* Grid with just the Hero Image Row */}
                 <div className="grid w-full" style={{ gridTemplateRows: 'auto', marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
-                    <div className={`relative w-full h-[125vw] hero-desktop-smooth ${isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} sm:aspect-auto overflow-hidden`} style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
+                    <div className={`relative w-full h-[125vw] hero-desktop-smooth ${!isMobile && isPortraitOrientation ? 'sm:h-[16vh]' : isSmallViewportHeight ? 'sm:h-[85vh]' : ''} sm:aspect-auto overflow-hidden`} style={{ marginTop: 0, marginBottom: 0, paddingTop: 0, paddingBottom: 0 }}>
+                        {/* Desktop Video Background (PC hero video fills the whole container) */}
+                        {useDesktopHeroVideo && (
+                            <div className={`absolute inset-0 z-0 bg-black ${desktopVideoError ? 'hidden' : ''}`}>
+                                <video
+                                    ref={desktopVideoRef}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    preload="auto"
+                                    className="w-full h-full object-cover"
+                                    style={{
+                                        objectPosition: 'top center',
+                                        width: '100%',
+                                        height: '100%',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                    }}
+                                    onError={(e) => {
+                                        console.error('Desktop video error:', e);
+                                        setDesktopVideoError(true);
+                                    }}
+                                    onCanPlay={() => {
+                                        if (desktopVideoRef.current) {
+                                            desktopVideoRef.current.play().catch((err) => {
+                                                console.log('Desktop video autoplay prevented, but video loaded:', err);
+                                            });
+                                        }
+                                    }}
+                                    onEnded={() => {
+                                        // Seamless loop - immediately restart without lag
+                                        if (desktopVideoRef.current) {
+                                            desktopVideoRef.current.currentTime = 0;
+                                            desktopVideoRef.current.play().catch(() => {
+                                                // Ignore play errors on loop
+                                            });
+                                        }
+                                    }}
+                                >
+                                    <source src="/videos/Hero Loop 1920x720.mp4" type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        )}
+
                         {/* Mobile Video Background */}
                         {useMobileHeroVideo && (
-                            <div className={`absolute inset-0 z-0 bg-black ${isMobile ? 'sm:hidden' : ''} ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
+                            <div className={`absolute inset-0 z-0 bg-black ${videoError ? 'hidden' : ''}`} style={{ width: '100%', height: '100%' }}>
                                 <video
                                     ref={videoRef}
                                     autoPlay
@@ -208,11 +191,11 @@ const HeroSection = () => {
                                     muted
                                     playsInline
                                     preload="auto"
-                                    className={`w-full h-full ${isMobilePortrait ? 'object-contain' : 'object-cover'}`}
+                                    className="w-full h-full object-cover"
                                     style={{ 
                                         objectPosition: 'top center',
                                         width: '100%',
-                                        height: isMobilePortrait ? '100%' : '105%',
+                                        height: '100%',
                                         position: 'absolute',
                                         top: 0,
                                         left: 0,
@@ -222,11 +205,7 @@ const HeroSection = () => {
                                         console.error('Video error:', e);
                                         setVideoError(true);
                                     }}
-                                    onLoadedData={() => {
-                                        setVideoLoaded(true);
-                                    }}
                                     onCanPlay={() => {
-                                        setVideoLoaded(true);
                                         if (videoRef.current) {
                                             videoRef.current.play().catch((err) => {
                                                 console.log('Autoplay prevented, but video loaded:', err);
@@ -283,72 +262,15 @@ const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* Icon Row + Watch Trailer - Desktop only (both share same absolute container) */}
+                {/* Icon Row - Desktop only (absolute inside hero) */}
                 <div className="hero-desktop-icon-row hidden sm:block absolute bottom-[8%] left-0 w-full z-30 min-h-[clamp(120px,15vh,200px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                     <div className="w-full px-4 pointer-events-auto pt-[clamp(40px,8vh,80px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
                         <IconRow isSmallViewportHeight={isSmallViewportHeight} />
-                    </div>
-                    <div className="hero-desktop-watch-trailer-wrapper w-full flex justify-center mt-4 pointer-events-auto">
-                        <button
-                            type="button"
-                            onClick={() => setShowTrailer(true)}
-                            className="hero-desktop-watch-trailer px-8 py-4 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
-                        >
-                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
-                                <svg
-                                    className="w-4 h-4"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    aria-hidden="true"
-                                >
-                                    <path d="M8 5v14l11-7z" />
-                                </svg>
-                            </span>
-                            <span>Watch Trailer</span>
-                        </button>
                     </div>
                 </div>
 
             </div>
 
-            {/* Trailer Modal (reuses About trailer video) */}
-            {showTrailer && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[999]"
-                    onClick={() => setShowTrailer(false)}
-                >
-                    <div
-                        className="flex flex-col items-center gap-4 w-[90%] max-w-3xl"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="relative w-full aspect-video">
-                            <button
-                                type="button"
-                                className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
-                                onClick={() => setShowTrailer(false)}
-                                aria-label="Close trailer"
-                            >
-                                ×
-                            </button>
-                            <iframe
-                                src="https://player.vimeo.com/video/1047706165?autoplay=1"
-                                title="6 Guitars Trailer"
-                                allow="autoplay; fullscreen; picture-in-picture"
-                                allowFullScreen
-                                className="w-full h-full rounded-lg"
-                            />
-                        </div>
-                        {/* Clear Back button under modal on desktop */}
-                        <button
-                            type="button"
-                            onClick={() => setShowTrailer(false)}
-                            className="w-full max-w-xs bg-white text-black font-bold py-2 rounded-md border border-white hover:bg-yellow-300 transition"
-                        >
-                            Back
-                        </button>
-                    </div>
-                </div>
-            )}
         </section>
     );
 };
