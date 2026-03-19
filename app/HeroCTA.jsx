@@ -76,8 +76,9 @@ export default function HeroCTA() {
                         nextShow?.ticketAvail?.toLowerCase() === 'going fast';
 
     return (
-        <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden relative z-20 -mt-6">
-            <div className="max-w-md mx-auto space-y-3">
+        <>
+            <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden relative z-20 -mt-6">
+                <div className="max-w-md mx-auto space-y-3">
                 {/* Hero CTA Button (A/B: Get Tour Dates vs See Tour Dates) */}
                 <a
                     id="hero-get-tour-dates"
@@ -131,45 +132,47 @@ export default function HeroCTA() {
                     <IconRow />
                 </div>
 
-                {/* Trailer Modal */}
-                {showTrailer && (
-                    <div
-                        className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[999]"
-                        onClick={() => setShowTrailer(false)}
-                    >
-                        <div
-                            className="flex flex-col items-center gap-4 w-[90%] max-w-3xl"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <div className="relative w-full aspect-video">
-                                <button
-                                    type="button"
-                                    className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
-                                    onClick={() => setShowTrailer(false)}
-                                    aria-label="Close trailer"
-                                >
-                                    ×
-                                </button>
-                                <iframe
-                                    src="https://player.vimeo.com/video/1047706165?autoplay=1"
-                                    title="6 Guitars Trailer"
-                                    allow="autoplay; fullscreen; picture-in-picture"
-                                    allowFullScreen
-                                    className="w-full h-full rounded-lg"
-                                />
-                            </div>
+                </div>
+            </section>
 
+            {/* Keep modal outside sm:hidden container so orientation changes don't hide it */}
+            {showTrailer && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[999]"
+                    onClick={() => setShowTrailer(false)}
+                >
+                    <div
+                        className="flex flex-col items-center gap-4 w-[90%] max-w-3xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="relative w-full aspect-video">
                             <button
                                 type="button"
+                                className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
                                 onClick={() => setShowTrailer(false)}
-                                className="w-full max-w-xs bg-white text-black font-bold py-2 rounded-md border border-white hover:bg-yellow-300 transition"
+                                aria-label="Close trailer"
                             >
-                                Back
+                                ×
                             </button>
+                            <iframe
+                                src="https://player.vimeo.com/video/1047706165?autoplay=1"
+                                title="6 Guitars Trailer"
+                                allow="autoplay; fullscreen; picture-in-picture"
+                                allowFullScreen
+                                className="w-full h-full rounded-lg"
+                            />
                         </div>
+
+                        <button
+                            type="button"
+                            onClick={() => setShowTrailer(false)}
+                            className="w-full max-w-xs bg-white text-black font-bold py-2 rounded-md border border-white hover:bg-yellow-300 transition"
+                        >
+                            Back
+                        </button>
                     </div>
-                )}
-            </div>
-        </section>
+                </div>
+            )}
+        </>
     );
 }
