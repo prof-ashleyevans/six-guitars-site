@@ -272,7 +272,7 @@ const HeroSection = () => {
                         <button
                             type="button"
                             onClick={() => setShowTrailer(true)}
-                            className="hidden md:flex mt-4 px-6 py-3 translate-y-1 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition items-center gap-3"
+                            className="mt-4 px-6 py-3 translate-y-1 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
                         >
                             <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
                                 <svg
@@ -288,25 +288,6 @@ const HeroSection = () => {
                         </button>
                     </div>
                 </div>
-
-                {/* For sm widths, keep the icon row below the hero but pin the trailer button on the hero */}
-                <button
-                    type="button"
-                    onClick={() => setShowTrailer(true)}
-                    className="hidden sm:flex md:hidden absolute left-1/2 bottom-[6%] -translate-x-1/2 z-40 px-6 py-3 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
-                >
-                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
-                        <svg
-                            className="w-4 h-4"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                    </span>
-                    <span>Watch Trailer</span>
-                </button>
 
             </div>
 
