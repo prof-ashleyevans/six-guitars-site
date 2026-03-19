@@ -62,6 +62,14 @@ html, body {
   }
 }
 
+/* 640–798px PC portrait: make hero taller (landscape remains tuned elsewhere) */
+@media (pointer: fine) and (hover: hover) and (min-width: 640px) and (max-width: 798px) and (orientation: portrait) {
+  #hero-section .hero-desktop-smooth {
+    height: 140vh !important;
+    min-height: 140vh !important;
+  }
+}
+
 /* Desktop tweaks previously scoped to 640–1061px were removed to simplify layout.
    Desktop positioning is now controlled directly in HeroSection via Tailwind classes. */
 
