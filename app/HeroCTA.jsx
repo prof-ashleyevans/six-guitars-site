@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import IconRow from '@/app/IconRow';
 
@@ -20,6 +20,9 @@ export default function HeroCTA() {
     const [loading, setLoading] = useState(true);
     const [ctaVariant, setCtaVariant] = useState('A');
     const [showTrailer, setShowTrailer] = useState(false);
+    const [trailerNeedsTap, setTrailerNeedsTap] = useState(false);
+    const trailerIframeRef = useRef(null);
+    const trailerPlayerRef = useRef(null);
 
     useEffect(() => {
         setCtaVariant(getHeroCtaVariant());
@@ -74,6 +77,57 @@ export default function HeroCTA() {
     const isAvailable = nextShow?.ticketAvail?.toLowerCase() === 'available' || 
                         nextShow?.ticketAvail?.toLowerCase() === 'limited avail' ||
                         nextShow?.ticketAvail?.toLowerCase() === 'going fast';
+
+    const ensureVimeoApi = () => {
+        if (typeof window === 'undefined') return Promise.reject(new Error('No window'));
+        if (window.Vimeo && window.Vimeo.Player) return Promise.resolve();
+        return new Promise((resolve, reject) => {
+            const existing = document.getElementById('vimeo-player-api');
+            if (existing) {
+                existing.addEventListener('load', () => resolve(), { once: true });
+                existing.addEventListener('error', () => reject(new Error('Failed to load Vimeo API')), { once: true });
+                return;
+            }
+            const script = document.createElement('script');
+            script.id = 'vimeo-player-api';
+            script.src = 'https://player.vimeo.com/api/player.js';
+            script.async = true;
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error('Failed to load Vimeo API'));
+            document.body.appendChild(script);
+        });
+    };
+
+    const forcePlayWithSound = async () => {
+        if (!trailerIframeRef.current) return;
+        await ensureVimeoApi();
+        if (!trailerPlayerRef.current) {
+            trailerPlayerRef.current = new window.Vimeo.Player(trailerIframeRef.current);
+        }
+        const player = trailerPlayerRef.current;
+        await player.setMuted(false).catch(() => {});
+        await player.setVolume(1).catch(() => {});
+        await player.play();
+    };
+
+    useEffect(() => {
+        let cancelled = false;
+        if (!showTrailer) {
+            setTrailerNeedsTap(false);
+            return;
+        }
+        (async () => {
+            try {
+                await forcePlayWithSound();
+                if (!cancelled) setTrailerNeedsTap(false);
+            } catch {
+                if (!cancelled) setTrailerNeedsTap(true);
+            }
+        })();
+        return () => {
+            cancelled = true;
+        };
+    }, [showTrailer]);
 
     return (
         <>
@@ -155,12 +209,29 @@ export default function HeroCTA() {
                                 ×
                             </button>
                             <iframe
-                                src="https://player.vimeo.com/video/1047706165?autoplay=1"
+                                ref={trailerIframeRef}
+                                src="https://player.vimeo.com/video/1047706165?autoplay=1&muted=0&playsinline=1&controls=1"
                                 title="6 Guitars Trailer"
                                 allow="autoplay; fullscreen; picture-in-picture"
                                 allowFullScreen
                                 className="w-full h-full rounded-lg"
                             />
+                            {trailerNeedsTap && (
+                                <button
+                                    type="button"
+                                    onClick={async () => {
+                                        try {
+                                            await forcePlayWithSound();
+                                            setTrailerNeedsTap(false);
+                                        } catch {
+                                            // Keep button visible if browser still blocks playback with sound.
+                                        }
+                                    }}
+                                    className="absolute inset-0 m-auto h-12 w-56 bg-yellow-400 hover:bg-yellow-500 text-black font-bold rounded-md shadow-xl"
+                                >
+                                    Tap for Sound
+                                </button>
+                            )}
                         </div>
 
                         <button
