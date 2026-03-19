@@ -148,7 +148,7 @@ const HeroSection = () => {
                                     preload="auto"
                                     className="w-full h-full object-cover"
                                     style={{
-                                        objectPosition: 'center center',
+                                        objectPosition: 'top center',
                                         width: '100%',
                                         height: '100%',
                                         position: 'absolute',
@@ -260,37 +260,19 @@ const HeroSection = () => {
                             </div>
                             );
                         })}
-                        {/* Icon Row - show below hero on small desktop widths (>=640 and <768) */}
-                        <div className="hero-desktop-icon-row hidden sm:block relative w-full z-30 min-h-[clamp(120px,15vh,200px)] sm:mt-6 md:absolute md:bottom-[6%] md:left-0 md:mt-0" style={{ marginBottom: 0, paddingBottom: 0 }}>
-                            <div className="w-full flex flex-col items-center px-4 pointer-events-auto pt-[clamp(50px,8vh,90px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
-                                <div className="w-full">
-                                    <IconRow isSmallViewportHeight={isSmallViewportHeight} />
-                                </div>
-                                <button
-                                    type="button"
-                                    onClick={() => setShowTrailer(true)}
-                                    className="hidden md:flex mt-4 px-6 py-3 translate-y-1 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition items-center gap-3"
-                                >
-                                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
-                                        <svg
-                                            className="w-4 h-4"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            aria-hidden="true"
-                                        >
-                                            <path d="M8 5v14l11-7z" />
-                                        </svg>
-                                    </span>
-                                    <span>Watch Trailer</span>
-                                </button>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        {/* For sm widths, keep the icon row below the hero but pin the trailer button on the hero */}
+                {/* Icon Row - show below hero on small desktop widths (>=640 and <768) */}
+                <div className="hero-desktop-icon-row hidden sm:block relative w-full z-30 min-h-[clamp(120px,15vh,200px)] sm:mt-6 md:absolute md:bottom-[6%] md:left-0 md:mt-0" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                    <div className="w-full flex flex-col items-center px-4 pointer-events-auto pt-[clamp(50px,8vh,90px)]" style={{ marginBottom: 0, paddingBottom: 0 }}>
+                        <div className="w-full">
+                            <IconRow isSmallViewportHeight={isSmallViewportHeight} />
+                        </div>
                         <button
                             type="button"
                             onClick={() => setShowTrailer(true)}
-                            className="hidden sm:flex md:hidden absolute left-1/2 bottom-[6%] -translate-x-1/2 z-40 px-6 py-3 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
+                            className="hidden md:flex mt-4 px-6 py-3 translate-y-1 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition items-center gap-3"
                         >
                             <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
                                 <svg
@@ -306,6 +288,25 @@ const HeroSection = () => {
                         </button>
                     </div>
                 </div>
+
+                {/* For sm widths, keep the icon row below the hero but pin the trailer button on the hero */}
+                <button
+                    type="button"
+                    onClick={() => setShowTrailer(true)}
+                    className="hidden sm:flex md:hidden absolute left-1/2 bottom-[6%] -translate-x-1/2 z-40 px-6 py-3 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
+                >
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
+                        <svg
+                            className="w-4 h-4"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </span>
+                    <span>Watch Trailer</span>
+                </button>
 
             </div>
 
