@@ -76,7 +76,7 @@ export default function HeroCTA() {
                         nextShow?.ticketAvail?.toLowerCase() === 'going fast';
 
     return (
-        <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden relative z-20" style={{ marginTop: 0 }}>
+        <section className="bg-black text-white pt-0 pb-3 px-4 sm:hidden relative z-20 -mt-6">
             <div className="max-w-md mx-auto space-y-3">
                 {/* Hero CTA Button (A/B: Get Tour Dates vs See Tour Dates) */}
                 <a
@@ -111,7 +111,7 @@ export default function HeroCTA() {
                 <button
                     type="button"
                     onClick={() => setShowTrailer(true)}
-                    className="hero-mobile-watch-trailer block w-full bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg shadow-xl flex items-center justify-center gap-3 font-bold text-2xl sm:text-3xl transition-all mt-3"
+                    className="hero-mobile-watch-trailer block w-full bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg shadow-xl flex items-center justify-center gap-3 font-bold text-2xl sm:text-3xl transition-all mt-0"
                 >
                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
                         <svg
