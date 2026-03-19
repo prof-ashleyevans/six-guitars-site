@@ -289,6 +289,25 @@ const HeroSection = () => {
                     </div>
                 </div>
 
+                {/* When the icon row is hidden (short PC height), keep Watch Trailer pinned at the bottom */}
+                <button
+                    type="button"
+                    onClick={() => setShowTrailer(true)}
+                    className="hero-pc-watch-trailer-short hidden absolute left-1/2 bottom-[2%] -translate-x-1/2 z-40 px-6 py-3 rounded-md bg-yellow-400 hover:bg-yellow-500 text-black font-bold text-xl tracking-wide shadow-xl transition flex items-center gap-3"
+                >
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-black/80 text-yellow-400">
+                        <svg
+                            className="w-4 h-4"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                        >
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </span>
+                    <span>Watch Trailer</span>
+                </button>
+
             </div>
 
             {showTrailer && (

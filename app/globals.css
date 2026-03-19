@@ -118,6 +118,24 @@ html, body {
   }
 }
 
+/* Desktop/tablet: hide icon row when viewport is too short */
+@media (min-width: 640px) and (max-height: 659px) {
+  #hero-section .hero-desktop-icon-row {
+    display: none !important;
+  }
+  #hero-section .hero-pc-watch-trailer-short {
+    display: flex !important;
+  }
+  #hero-icon-row-below {
+    display: block !important;
+  }
+}
+
+/* Default: hide icon-row replacement block (shown only for short PC heights) */
+#hero-icon-row-below {
+  display: none;
+}
+
 /* Mobile phone in desktop mode (portrait): show full hero, not zoomed */
 @media (min-width: 640px) and (orientation: portrait) and (max-height: 900px) {
   #hero-section .hero-desktop-smooth {

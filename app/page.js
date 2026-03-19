@@ -16,6 +16,7 @@ import CharacterGridSection from "@/app/CharacterGridSection";
 import FAQ from "@/app/FAQ";
 import AudienceReviews from "@/app/AudienceReviews";
 import HeroCTA from "@/app/HeroCTA";
+import HeroIconRowBelow from "@/app/HeroIconRowBelow";
 // import Experimental from "@/app/Experimental"; // Hidden for now
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
             <HeaderNav />
 
             <HeroSection />
+            <HeroIconRowBelow />
             <HeroCTA />
 
             <Reviews />
