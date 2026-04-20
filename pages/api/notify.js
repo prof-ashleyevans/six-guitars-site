@@ -45,6 +45,7 @@ export default async function handler(req, res) {
                         email,
                         attributes: {
                             FIRSTNAME: name,
+                            SOURCE: 'ONLINE',
                             SHOW_NAME: showName,
                             SHOW_DATE: showDate,
                             SHOW_TIME: showTime,
