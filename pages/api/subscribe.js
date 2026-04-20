@@ -17,7 +17,10 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 email,
-                attributes: { FIRSTNAME: name },
+                attributes: {
+                    FIRSTNAME: name,
+                    SOURCE: 'ONLINE',
+                },
                 listIds: [parseInt(process.env.BREVO_LIST_ID)],
                 updateEnabled: true,
             }),
