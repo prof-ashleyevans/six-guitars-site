@@ -33,8 +33,8 @@ export default function HeroCTA() {
             .then((res) => res.json())
             .then((data) => {
                 if (Array.isArray(data) && data.length > 0) {
-                    // Get the first upcoming show
-                    const show = data[0];
+                    // Prefer the first current/upcoming show (past shows may appear first in the list)
+                    const show = data.find((s) => !s.isPast) || data[0];
                     const perf = show.performances?.[0];
                     if (perf) {
                         setNextShow({

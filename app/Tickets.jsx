@@ -422,7 +422,7 @@ export default function Tickets() {
                 {loading ? (
                     <p className="text-center text-gray-400">Loading shows...</p>
                 ) : shows.length === 0 ? (
-                    <p className="text-center text-gray-400">No upcoming shows available.</p>
+                    <p className="text-center text-gray-400">No shows available.</p>
                 ) : (
                     <div className="space-y-4">
                         {shows.map((show, index) => (
